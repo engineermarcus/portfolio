@@ -3,20 +3,19 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Neiman Marcus — Systems Builder</title>
+<title>Engineer Marcus — Software Engineer</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=JetBrains+Mono:wght@400;500;700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
   :root{
-    --bg:#0b0e0f;
-    --surface:#13181a;
-    --surface-2:#1a2123;
-    --line:#262e30;
-    --text:#e7eae9;
-    --text-dim:#8d9a9c;
-    --accent:#5eead4;
-    --accent-dim:#2c5450;
-    --warn:#f2a65a;
+    --bg:#0f172a;
+    --surface:#161e33;
+    --surface-2:#1e293b;
+    --line:#2a3650;
+    --text:#e2e8f0;
+    --text-dim:#94a3b8;
+    --accent:#5b8def;
+    --accent-soft:#1f3a66;
   }
   *{box-sizing:border-box; margin:0; padding:0;}
   html{scroll-behavior:smooth;}
@@ -24,116 +23,112 @@
     background:var(--bg);
     color:var(--text);
     font-family:'Inter', sans-serif;
-    line-height:1.55;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
   }
-  ::selection{background:var(--accent); color:#06201d;}
-  a{color:inherit;}
+  ::selection{background:var(--accent); color:#0f172a;}
+  a{color:inherit; text-decoration:none;}
 
-  .wrap{max-width:920px; margin:0 auto; padding:0 24px;}
+  .wrap{max-width:880px; margin:0 auto; padding:0 24px;}
 
-  /* ---------- NAV ---------- */
+  /* NAV */
   header.nav{
     position:sticky; top:0; z-index:10;
-    background:rgba(11,14,15,0.85);
+    background:rgba(15,23,42,0.92);
     backdrop-filter:blur(8px);
     border-bottom:1px solid var(--line);
   }
   .nav-inner{
-    max-width:920px; margin:0 auto; padding:14px 24px;
+    max-width:880px; margin:0 auto; padding:18px 24px;
     display:flex; justify-content:space-between; align-items:center;
-    font-family:'JetBrains Mono', monospace;
-    font-size:13px;
   }
-  .nav-inner .id{color:var(--accent);}
-  .nav-links{display:flex; gap:22px; color:var(--text-dim);}
+  .nav-inner .id{
+    font-family:'JetBrains Mono', monospace;
+    font-size:14px;
+    font-weight:500;
+    color:var(--text);
+  }
+  .nav-links{display:flex; gap:28px; font-size:14px; color:var(--text-dim);}
+  .nav-links a{transition:color .15s ease;}
   .nav-links a:hover{color:var(--text);}
 
-  /* ---------- HERO ---------- */
-  .hero{padding:90px 0 60px;}
-  .prompt-line{
+  /* HERO */
+  .hero{padding:100px 0 70px;}
+  .eyebrow{
     font-family:'JetBrains Mono', monospace;
     font-size:13px;
-    color:var(--text-dim);
-    margin-bottom:18px;
+    color:var(--accent);
+    font-weight:500;
+    letter-spacing:0.04em;
+    text-transform:uppercase;
+    margin-bottom:20px;
   }
-  .prompt-line .accent{color:var(--accent);}
-  .cursor{
-    display:inline-block; width:8px; height:16px;
-    background:var(--accent); margin-left:4px;
-    animation:blink 1.1s steps(1) infinite;
-    vertical-align:middle;
-  }
-  @keyframes blink{50%{opacity:0;}}
   h1.title{
-    font-family:'Space Grotesk', sans-serif;
     font-weight:700;
-    font-size:clamp(34px, 6vw, 54px);
-    line-height:1.08;
-    letter-spacing:-0.01em;
-    margin-bottom:18px;
+    font-size:clamp(32px, 5.5vw, 50px);
+    line-height:1.15;
+    letter-spacing:-0.02em;
+    margin-bottom:20px;
+    color:var(--text);
   }
-  h1.title .grad{
-    background:linear-gradient(90deg, var(--accent), var(--warn));
-    -webkit-background-clip:text;
-    background-clip:text;
-    color:transparent;
-  }
+  h1.title .accent{color:var(--accent);}
   .hero p.lede{
     font-size:17px;
     color:var(--text-dim);
-    max-width:600px;
-    margin-bottom:28px;
+    max-width:580px;
+    margin-bottom:32px;
   }
   .hero-meta{
-    display:flex; flex-wrap:wrap; gap:10px 28px;
-    font-family:'JetBrains Mono', monospace;
-    font-size:12.5px;
+    display:flex; flex-wrap:wrap; gap:8px 28px;
+    font-size:14px;
     color:var(--text-dim);
     border-top:1px solid var(--line);
-    padding-top:18px;
+    padding-top:20px;
   }
-  .hero-meta b{color:var(--text); font-weight:500;}
+  .hero-meta b{color:var(--text); font-weight:600;}
+  .hero-meta a{color:var(--accent);}
+  .hero-meta a:hover{text-decoration:underline;}
 
-  /* ---------- SECTION HEADERS ---------- */
-  section{padding:50px 0;}
+  /* SECTIONS */
+  section{padding:56px 0;}
   .section-head{
     display:flex; align-items:baseline; gap:12px;
-    margin-bottom:28px;
+    margin-bottom:8px;
   }
   .section-head .tag{
     font-family:'JetBrains Mono', monospace;
     font-size:12px;
     color:var(--accent);
-    border:1px solid var(--accent-dim);
-    padding:3px 8px;
-    border-radius:3px;
-  }
-  .section-head h2{
-    font-family:'Space Grotesk', sans-serif;
-    font-size:24px;
+    background:var(--accent-soft);
+    padding:3px 9px;
+    border-radius:4px;
     font-weight:500;
   }
-  .section-sub{color:var(--text-dim); font-size:14.5px; margin:-16px 0 28px;}
+  .section-head h2{
+    font-size:22px;
+    font-weight:600;
+    color:var(--text);
+  }
+  .section-sub{color:var(--text-dim); font-size:14.5px; margin:0 0 28px;}
 
-  /* ---------- PROJECT LIST (git-log style) ---------- */
+  /* PROJECT CARDS */
   .repo{
     border:1px solid var(--line);
     background:var(--surface);
-    border-radius:6px;
-    padding:18px 20px;
+    border-radius:8px;
+    padding:20px 22px;
     margin-bottom:14px;
-    transition:border-color .15s ease, transform .15s ease;
+    transition:border-color .15s ease, background .15s ease;
   }
-  .repo:hover{border-color:var(--accent-dim); transform:translateX(2px);}
+  .repo:hover{border-color:var(--accent); background:var(--surface-2);}
   .repo-top{
     display:flex; justify-content:space-between; align-items:baseline; gap:12px;
     flex-wrap:wrap;
     margin-bottom:8px;
   }
   .repo-name{
-    font-family:'JetBrains Mono', monospace;
-    font-size:15.5px;
-    font-weight:700;
+    font-size:16px;
+    font-weight:600;
     color:var(--text);
   }
   .repo-name .ns{color:var(--text-dim); font-weight:400;}
@@ -141,37 +136,39 @@
     font-family:'JetBrains Mono', monospace;
     font-size:11.5px;
     color:var(--accent);
+    background:var(--accent-soft);
+    padding:2px 8px;
+    border-radius:4px;
     white-space:nowrap;
   }
   .repo-desc{color:var(--text-dim); font-size:14.5px; max-width:680px;}
   .repo-stack{
-    margin-top:10px;
-    font-family:'JetBrains Mono', monospace;
-    font-size:11px;
+    margin-top:12px;
+    font-size:12px;
     color:var(--text-dim);
     display:flex; flex-wrap:wrap; gap:8px;
   }
   .repo-stack span{
     border:1px solid var(--line);
-    padding:2px 7px;
-    border-radius:3px;
+    padding:3px 9px;
+    border-radius:4px;
   }
 
-  /* ---------- FOOTER ---------- */
+  /* FOOTER */
   footer{
     border-top:1px solid var(--line);
     padding:40px 0 60px;
-    font-family:'JetBrains Mono', monospace;
-    font-size:13px;
+    font-size:14px;
     color:var(--text-dim);
     display:flex; justify-content:space-between; flex-wrap:wrap; gap:12px;
   }
-  footer a{color:var(--accent); text-decoration:none;}
+  footer a{color:var(--accent);}
   footer a:hover{text-decoration:underline;}
 
   @media(max-width:600px){
-    .nav-links{gap:14px; font-size:12px;}
-    .hero{padding:60px 0 40px;}
+    .nav-links{gap:16px; font-size:13px;}
+    .hero{padding:70px 0 50px;}
+    .repo-top{flex-direction:column; align-items:flex-start; gap:6px;}
   }
 </style>
 </head>
@@ -179,20 +176,20 @@
 
 <header class="nav">
   <div class="nav-inner">
-    <span class="id">neiman@engineermarcus</span>
+    <span class="id">engineer@marcus</span>
     <nav class="nav-links">
-      <a href="#build">build</a>
-      <a href="#client">client</a>
-      <a href="#learn">learning</a>
-      <a href="https://github.com/engineermarcus">github</a>
+      <a href="#build">Build</a>
+      <a href="#client">Client Work</a>
+      <a href="#learn">Learning</a>
+      <a href="https://github.com/engineermarcus">GitHub</a>
     </nav>
   </div>
 </header>
 
 <div class="wrap">
   <section class="hero">
-    <div class="prompt-line"><span class="accent">$</span> whoami<span class="cursor"></span></div>
-    <h1 class="title">Neiman Marcus<br><span class="grad">— builds systems, not slides.</span></h1>
+    <div class="eyebrow">Software Engineer</div>
+    <h1 class="title">Engineer Marcus<br><span class="accent">builds systems, not slides.</span></h1>
     <p class="lede">Engineer working across backend infrastructure, automation tooling, and client web products. Comfortable owning a project end to end: design, build, deploy, maintain.</p>
     <div class="hero-meta">
       <span><b>15+</b> public repos</span>
@@ -389,7 +386,7 @@
   </section>
 
   <footer>
-    <span>Built with intent, shipped with curl.</span>
+    <span>Built with intent.</span>
     <span><a href="https://github.com/engineermarcus">View full profile on GitHub →</a></span>
   </footer>
 </div>
