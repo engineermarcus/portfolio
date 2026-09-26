@@ -1,35 +1,44 @@
 # Neiman Marcus — Portfolio
 
-A single-page developer portfolio: infrastructure tooling, client work, and learning references pulled from [github.com/engineermarcus](https://github.com/engineermarcus).
+Modern developer portfolio highlighting autonomous AI agents, cloud dev environments, headless automation, and client platforms pulled from [github.com/engineermarcus](https://github.com/engineermarcus).
 
-## Live site
+- **Live Site**: [https://engineermarcus.github.io/portfolio](https://engineermarcus.github.io/portfolio)
+- **Hugging Face Space Backend**: [https://huggingface.co/spaces/jarvisandfriend/agent](https://huggingface.co/spaces/jarvisandfriend/agent)
+- **Architecture Documentation**: See [PORTFOLIO_DOCS.md](PORTFOLIO_DOCS.md)
 
-Enable GitHub Pages on this repo (Settings → Pages → Deploy from `main` / root) to serve it at:
+## Highlights
 
-```
-https://engineermarcus.github.io/portfolio
-```
+- ⚡ **Interactive Engineering Demos Hub**: Directly embedded on the site:
+  1. **Marcus AI Portfolio Agent** — Conversational knowledge assistant backed by Qwen 2.5.
+  2. **Cloud Terminal (`cybernetics`)** — Live browser-based Linux shell emulator.
+  3. **Autonomous Agent Pipeline** — Interactive multi-agent step-by-step workflow simulator.
+  4. **Multi-Source Synthesizer (`cyberlink`)** — Real-time research aggregation demo.
+- 🏆 **Verified GitHub Achievements**: Displays Quickdraw, Pull Shark, and YOLO badges.
+- 📂 **32+ Public Repositories**: Filterable by AI & Agents, Infrastructure, Automation, and Client Work.
+- 🖥️ **Backend & Container**: Standalone FastAPI + Docker backend in `backend/` deployed to Hugging Face Spaces.
 
-## Structure
+## Repository Structure
 
 ```
 portfolio/
-└── index.html   # entire site — markup, styles, and content in one file
+├── index.html            # Complete website: UI, demos, animations, and scripts
+├── PORTFOLIO_DOCS.md     # In-depth architectural & deployment guide
+├── backend/              # Standalone Python backend (FastAPI + Qwen 2.5)
+│   ├── server.py
+│   ├── requirements.txt
+│   └── Dockerfile
+└── hf_space/             # Deployment payload for Hugging Face Spaces
 ```
 
-## Stack
+## Running the Backend Locally
 
-Plain HTML/CSS, no build step. Fonts loaded from Google Fonts (Space Grotesk, JetBrains Mono, Inter).
+```bash
+cd backend
+pip install -r requirements.txt
+python server.py
+```
 
-## Sections
-
-- **Infrastructure & Tools** — self-initiated systems: cloud dev environments, automation, networking, AI tooling
-- **Client & Product Work** — shipped projects, including a live e-commerce build
-- **Learning & Reference** — public curricula and notes
-
-## Updating
-
-Edit `index.html` directly — each project is a `.repo` block with a name, language tag, description, and stack list. Copy an existing block to add a new project.
+Runs on `http://localhost:7860` with `/api/chat`, `/api/status`, and `/api/projects`.
 
 ## License
 

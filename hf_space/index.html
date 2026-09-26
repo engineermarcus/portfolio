@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Neiman Marcus — AI Agent & Automation Backend</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header>
+    <div class="header-inner">
+      <div class="brand">
+        <img class="avatar" src="https://avatars.githubusercontent.com/u/192362430?v=4" alt="Marcus Avatar">
+        <div>
+          <div class="brand-title">neiman-marcus / agent-backend</div>
+        </div>
+        <span class="brand-badge">Agent Online</span>
+      </div>
+      <div class="header-links">
+        <a href="https://engineermarcus.github.io/portfolio" target="_blank">Portfolio ↗</a>
+        <a href="https://github.com/engineermarcus" target="_blank">GitHub ↗</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <div class="hero-box">
+      <div class="hero-tag">Autonomous Knowledge Engine</div>
+      <h1 class="hero-title">Marcus AI Portfolio Assistant</h1>
+      <p class="hero-desc">
+        Interactive conversational backend trained on Neiman Marcus's full engineering stack, 32+ public GitHub repositories, autonomous workflows, and system architectures. Ask anything about his projects, achievements, or tech stack.
+      </p>
+
+      <div class="quick-prompts">
+        <div class="chip" data-prompt="What are Marcus's core AI and automation projects?">⚡ Core AI Projects</div>
+        <div class="chip" data-prompt="Explain how moviebox-api runs Playwright inside Termux Android">📱 Magpie CLI & Termux</div>
+        <div class="chip" data-prompt="Tell me about the Paystack Payment Gateway & client work">💳 Paystack Gateway</div>
+        <div class="chip" data-prompt="What GitHub achievements does Marcus hold?">🏆 GitHub Achievements</div>
+        <div class="chip" data-prompt="How can I contact or hire Marcus?">📬 Contact & Hire</div>
+      </div>
+    </div>
+
+    <div class="chat-container">
+      <div class="chat-header">
+        <span>● Qwen2.5-Coder Engine</span>
+        <span>Latency: ~12ms · Context: Injected</span>
+      </div>
+
+      <div class="chat-history" id="chatHistory">
+        <div class="message agent">
+          <div class="message-avatar">⚡</div>
+          <div class="message-content">
+            Greetings! I am Neiman Marcus's autonomous portfolio agent. I can guide you through his <strong>32+ repositories</strong>, AI agent architectures, cloud developer environments, or client production backends. Click one of the prompt chips above or ask your own question!
+          </div>
+        </div>
+      </div>
+
+      <div class="chat-footer">
+        <input type="text" class="chat-input" id="chatInput" placeholder="Ask about AI agents, Termux pipelines, Paystack, or systems...">
+        <button class="send-btn" id="sendBtn">Send ➔</button>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    Deployed on Hugging Face Spaces · Connected to Neiman Marcus Portfolio
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
