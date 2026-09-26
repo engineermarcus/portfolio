@@ -7,7 +7,7 @@
 <meta name="description" content="Portfolio of Neiman Marcus (Engineer Marcus) — Senior Systems & AI Engineer specializing in Autonomous Multi-Agent Workflows, Headless Automation, Pure C MoE Inference, and Cloud Dev Environments.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Space+Grotesk:wght@500;600;700&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Space+Grotesk:wght@500;600;700&family=Syne:wght@700;800&display=swap" rel="stylesheet">
 
 <style>
   :root {
@@ -57,6 +57,22 @@
     z-index: 0;
     opacity: 0.45;
   }
+
+  /* SVG ICON STYLING */
+  .icon-svg {
+    display: inline-block;
+    vertical-align: middle;
+    width: 16px;
+    height: 16px;
+    stroke-width: 2;
+    stroke: currentColor;
+    fill: none;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+  .icon-sm { width: 14px; height: 14px; }
+  .icon-md { width: 18px; height: 18px; }
+  .icon-lg { width: 22px; height: 22px; }
 
   /* TOP HUD DIAGNOSTICS BAR */
   .hud-topbar {
@@ -139,7 +155,7 @@
     color: var(--neon-cyan);
     font-family: var(--font-mono); font-size: 12px; font-weight: 600;
     padding: 4px 12px; border-radius: 4px; letter-spacing: 0.08em;
-    text-transform: uppercase;
+    text-transform: uppercase; display: inline-flex; align-items: center; gap: 6px;
   }
   .hero-coords {
     font-family: var(--font-mono); font-size: 12px; color: var(--text-muted);
@@ -227,7 +243,7 @@
   }
   .telemetry-val {
     font-family: var(--font-mono); font-size: 30px; font-weight: 700; color: #fff;
-    display: flex; align-items: baseline; gap: 4px;
+    display: flex; align-items: baseline; gap: 6px;
   }
   .telemetry-val small { font-size: 13px; color: var(--neon-cyan); font-weight: 500; }
   .telemetry-label {
@@ -323,7 +339,7 @@
   .demo-tab-button {
     padding: 16px 24px; font-family: var(--font-mono); font-size: 13px; font-weight: 600;
     color: var(--text-muted); background: none; border: none; border-bottom: 2px solid transparent;
-    cursor: pointer; display: flex; align-items: center; gap: 10px; white-space: nowrap;
+    cursor: pointer; display: flex; align-items: center; gap: 8px; white-space: nowrap;
     transition: all 0.15s ease;
   }
   .demo-tab-button:hover { color: #fff; background: rgba(255, 255, 255, 0.02); }
@@ -342,7 +358,42 @@
     display: flex; flex-direction: column; height: 500px;
     background: #080b12; border: 1px solid var(--line);
     border-radius: 10px; overflow: hidden;
+    transition: all 0.3s ease;
   }
+
+  /* FULLSCREEN CHAT MODE */
+  .agent-shell.fullscreen-mode {
+    position: fixed !important;
+    inset: 0 !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    z-index: 999999 !important;
+    border-radius: 0 !important;
+    border: none !important;
+    background: #05080f !important;
+  }
+  .agent-shell.fullscreen-mode .agent-dialog-area {
+    padding: 32px 10%;
+  }
+  .agent-shell.fullscreen-mode .agent-input-control {
+    padding: 20px 10%;
+  }
+  .agent-shell.fullscreen-mode .agent-chips-strip {
+    padding: 12px 10%;
+  }
+  .fullscreen-btn {
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid var(--line);
+    color: var(--text-secondary);
+    padding: 4px 8px; border-radius: 4px;
+    cursor: pointer; display: inline-flex; align-items: center; gap: 6px;
+    font-family: var(--font-mono); font-size: 11px;
+    transition: all 0.2s;
+  }
+  .fullscreen-btn:hover {
+    color: #fff; border-color: var(--neon-cyan); background: rgba(6, 182, 212, 0.15);
+  }
+
   .agent-status-strip {
     padding: 12px 18px; background: rgba(14, 20, 32, 0.9);
     border-bottom: 1px solid var(--line);
@@ -366,7 +417,7 @@
   .agent-avatar {
     width: 32px; height: 32px; border-radius: 8px; flex-shrink: 0;
     display: flex; align-items: center; justify-content: center;
-    font-size: 14px; background: #162032; border: 1px solid var(--line);
+    background: #162032; border: 1px solid var(--line); color: var(--text-secondary);
   }
   .chat-bubble-row.bot .agent-avatar {
     background: var(--neon-indigo); color: #fff;
@@ -390,6 +441,7 @@
     font-family: var(--font-mono); font-size: 11.5px; color: var(--text-secondary);
     background: var(--bg-card); border: 1px solid var(--line);
     padding: 5px 12px; border-radius: 14px; cursor: pointer; transition: all 0.15s;
+    display: inline-flex; align-items: center; gap: 6px;
   }
   .prompt-chip:hover {
     color: #fff; border-color: var(--neon-cyan); background: var(--bg-card-hover);
@@ -407,7 +459,7 @@
   .agent-send-button {
     background: var(--neon-indigo); color: #fff; border: none; border-radius: 6px;
     padding: 0 20px; font-family: var(--font-mono); font-size: 13px; font-weight: 600;
-    cursor: pointer; transition: background 0.2s;
+    cursor: pointer; transition: background 0.2s; display: inline-flex; align-items: center; gap: 8px;
   }
   .agent-send-button:hover { background: #4f46e5; }
 
@@ -453,6 +505,7 @@
     background: linear-gradient(135deg, var(--neon-indigo), var(--neon-cyan));
     color: #05070c; font-weight: 700; border: none; padding: 10px 22px;
     border-radius: 6px; font-family: var(--font-mono); font-size: 13px; cursor: pointer;
+    display: inline-flex; align-items: center; gap: 8px;
   }
   .pipe-nodes-row {
     display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 12px;
@@ -671,7 +724,10 @@
         <a href="#demos" onclick="playBeep()">Demos</a>
         <a href="#repos" onclick="playBeep()">32+ Repos</a>
         <a href="#achievements" onclick="playBeep()">Achievements</a>
-        <a href="https://github.com/engineermarcus" target="_blank">GitHub ↗</a>
+        <a href="https://github.com/engineermarcus" target="_blank" style="display:inline-flex; align-items:center; gap:4px;">
+          GitHub
+          <svg class="icon-svg icon-sm" viewBox="0 0 24 24"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
+        </a>
       </nav>
       <button class="hud-sfx-btn" id="sfxToggleBtn" onclick="toggleAudio()">SFX: ON</button>
     </div>
@@ -683,7 +739,10 @@
   <!-- HERO SECTION -->
   <section class="hero-container">
     <div class="hero-eyebrow-row">
-      <span class="eyebrow-pill">AUTONOMOUS AI ARCHITECT // SYSTEMS SPECIALIST</span>
+      <span class="eyebrow-pill">
+        <svg class="icon-svg icon-sm" viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+        AUTONOMOUS AI ARCHITECT // SYSTEMS SPECIALIST
+      </span>
       <span class="hero-coords">SYS_ID: 192362430 · PYTHON / C / TS / SHELL / KOTLIN</span>
     </div>
 
@@ -698,10 +757,19 @@
     </p>
 
     <div class="hero-cta-strip">
-      <a href="#demos" class="cyber-btn cyber-btn-primary" onclick="playBeep()">⚡ Test Live Agent Demos</a>
+      <a href="#demos" class="cyber-btn cyber-btn-primary" onclick="playBeep()">
+        <svg class="icon-svg icon-md" viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+        Test Live Agent Demos
+      </a>
       <a href="#repos" class="cyber-btn cyber-btn-outline" onclick="playBeep()">Explore 32+ Repositories</a>
-      <button onclick="activateStationTab('shell'); playBeep();" class="cyber-btn cyber-btn-term">$ Launch Cloud Terminal</button>
-      <a href="mailto:engineermarcus72@gmail.com" class="cyber-btn cyber-btn-outline">Contact Directly ➔</a>
+      <button onclick="activateStationTab('shell'); playBeep();" class="cyber-btn cyber-btn-term">
+        <svg class="icon-svg icon-md" viewBox="0 0 24 24"><polyline points="4 17 10 11 4 5"></polyline><line x1="12" y1="19" x2="20" y2="19"></line></svg>
+        Launch Cloud Terminal
+      </button>
+      <a href="mailto:engineermarcus72@gmail.com" class="cyber-btn cyber-btn-outline" style="display:inline-flex; align-items:center; gap:8px;">
+        Contact Directly
+        <svg class="icon-svg icon-sm" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+      </a>
     </div>
 
     <!-- METRICS STRIP -->
@@ -712,7 +780,12 @@
         <div class="telemetry-sub">AI, Tools, Scrapers, FinTech</div>
       </div>
       <div class="telemetry-card">
-        <div class="telemetry-val">3<small>🏆</small></div>
+        <div class="telemetry-val">
+          3
+          <small>
+            <svg class="icon-svg icon-sm" style="color:var(--neon-amber);" viewBox="0 0 24 24"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"></path><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"></path><path d="M4 22h16"></path><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"></path><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"></path><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"></path></svg>
+          </small>
+        </div>
         <div class="telemetry-label">GitHub Achievements</div>
         <div class="telemetry-sub">Quickdraw · Pull Shark · YOLO</div>
       </div>
@@ -733,10 +806,12 @@
   <div class="achievements-box" id="achievements">
     <div class="achievements-header">
       <div class="achievements-title-text">
-        <span>🏆</span> Verified GitHub Achievements
+        <svg class="icon-svg icon-lg" style="color:var(--neon-amber);" viewBox="0 0 24 24"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"></path><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"></path><path d="M4 22h16"></path><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"></path><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"></path><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"></path></svg>
+        <span>Verified GitHub Achievements</span>
       </div>
       <a class="achievements-link-ext" href="https://github.com/engineermarcus?tab=achievements" target="_blank">
-        Verify live on GitHub Profile [@engineermarcus] ↗
+        Verify live on GitHub Profile [@engineermarcus]
+        <svg class="icon-svg icon-sm" viewBox="0 0 24 24"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
       </a>
     </div>
 
@@ -774,47 +849,90 @@
         <span class="sec-tag">01 // Interactive Engineering Station</span>
         <h2 class="sec-title">Directly Test the Running Systems</h2>
         <p class="sec-desc">
-          No simulated marketing mockups. Test the AI Portfolio Agent backed by Qwen 2.5 on Hugging Face Spaces, run commands in the cloud shell, or watch the multi-agent pipeline execute.
+          No simulated marketing mockups. Test the AI Portfolio Agent backed by Qwen 2.5 streaming on Hugging Face Spaces, run commands in the cloud shell, or watch the multi-agent pipeline execute.
         </p>
       </div>
     </div>
 
     <div class="demos-station">
       <div class="demos-nav">
-        <button class="demo-tab-button active" onclick="activateStationTab('agent'); playBeep();">🤖 Neural AI Agent</button>
-        <button class="demo-tab-button" onclick="activateStationTab('shell'); playBeep();">💻 Cloud Shell (`cybernetics`)</button>
-        <button class="demo-tab-button" onclick="activateStationTab('pipeline'); playBeep();">⚡ Autonomous Agent Pipeline</button>
-        <button class="demo-tab-button" onclick="activateStationTab('moe'); playBeep();">🐦 Pure C MoE Visualizer (`colibri`)</button>
+        <button class="demo-tab-button active" onclick="activateStationTab('agent'); playBeep();">
+          <svg class="icon-svg icon-md" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="10" rx="2"></rect><circle cx="12" cy="5" r="2"></circle><path d="M12 7v4"></path><line x1="8" y1="16" x2="8.01" y2="16"></line><line x1="16" y1="16" x2="16.01" y2="16"></line></svg>
+          Neural AI Agent
+        </button>
+        <button class="demo-tab-button" onclick="activateStationTab('shell'); playBeep();">
+          <svg class="icon-svg icon-md" viewBox="0 0 24 24"><polyline points="4 17 10 11 4 5"></polyline><line x1="12" y1="19" x2="20" y2="19"></line></svg>
+          Cloud Shell (`cybernetics`)
+        </button>
+        <button class="demo-tab-button" onclick="activateStationTab('pipeline'); playBeep();">
+          <svg class="icon-svg icon-md" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"></circle><path d="M3 12h6m6 0h6M12 3v6m0 6v6"></path></svg>
+          Autonomous Agent Pipeline
+        </button>
+        <button class="demo-tab-button" onclick="activateStationTab('moe'); playBeep();">
+          <svg class="icon-svg icon-md" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2"></rect><rect x="9" y="9" width="6" height="6"></rect><line x1="9" y1="1" x2="9" y2="4"></line><line x1="15" y1="1" x2="15" y2="4"></line><line x1="9" y1="20" x2="9" y2="23"></line><line x1="15" y1="20" x2="15" y2="23"></line><line x1="20" y1="9" x2="23" y2="9"></line><line x1="20" y1="14" x2="23" y2="14"></line><line x1="1" y1="9" x2="4" y2="9"></line><line x1="1" y1="14" x2="4" y2="14"></line></svg>
+          Pure C MoE Visualizer (`colibri`)
+        </button>
       </div>
 
       <!-- DEMO 1: NEURAL AI AGENT -->
       <div class="station-content active" id="station-panel-agent">
-        <div class="agent-shell">
+        <div class="agent-shell" id="agentShell">
           <div class="agent-status-strip">
-            <span>● Engine: <strong>Qwen 2.5 Instruct // ZeroGPU Space</strong></span>
-            <span class="agent-live-badge" id="agentConnectionBadge">⚡ LIVE BACKEND CONNECTED</span>
+            <div style="display:flex; align-items:center; gap:12px;">
+              <span>● Engine: <strong>Qwen 2.5 Coder // Real-Time Token Streaming</strong></span>
+              <span class="agent-live-badge" id="agentConnectionBadge">
+                <svg class="icon-svg icon-sm" viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+                LIVE HF BACKEND
+              </span>
+            </div>
+            <div>
+              <button class="fullscreen-btn" id="fsToggleBtn" onclick="toggleFullscreenChat()">
+                <svg class="icon-svg icon-sm" id="fsIcon" viewBox="0 0 24 24"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg>
+                <span id="fsBtnLabel">Full Page</span>
+              </button>
+            </div>
           </div>
 
           <div class="agent-dialog-area" id="agentDialog">
             <div class="chat-bubble-row bot">
-              <div class="agent-avatar">⚡</div>
+              <div class="agent-avatar">
+                <svg class="icon-svg icon-md" viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+              </div>
               <div class="bubble-text">
-                Greetings. I am <strong>Marcus's AI Portfolio Agent</strong>. Ask me anything about his <strong>32+ repositories</strong>, how he runs headless Chromium inside Android Termux, his Paystack FinTech integration, or how Colibri runs frontier MoE models in pure C!
+                Greetings. I am <strong>Marcus's AI Portfolio Agent</strong>, streaming real-time tokens directly from Qwen 2.5 on Hugging Face Spaces. Ask me anything about my <strong>32+ repositories</strong>, how I run headless Chromium inside Android Termux, my Paystack FinTech integration, or how Colibri runs frontier MoE models in pure C!
               </div>
             </div>
           </div>
 
           <div class="agent-chips-strip">
-            <span class="prompt-chip" onclick="askAgentQuestion('What are Marcus\'s core AI and automation projects?')">⚡ AI & Automation Stack</span>
-            <span class="prompt-chip" onclick="askAgentQuestion('How does moviebox-api run Playwright inside Termux Android?')">📱 Termux & Magpie CLI</span>
-            <span class="prompt-chip" onclick="askAgentQuestion('Tell me about the Paystack Payment Gateway and client storefront')">💳 Paystack FinTech</span>
-            <span class="prompt-chip" onclick="askAgentQuestion('What is Colibri and how does it stream MoE weights in pure C?')">🐦 Pure C MoE Runner</span>
-            <span class="prompt-chip" onclick="askAgentQuestion('How can I contact or hire Marcus?')">📬 Contact & Hire</span>
+            <span class="prompt-chip" onclick="askAgentQuestion('What are Marcus\'s core AI and automation projects?')">
+              <svg class="icon-svg icon-sm" viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+              AI & Automation Stack
+            </span>
+            <span class="prompt-chip" onclick="askAgentQuestion('How does moviebox-api run Playwright inside Termux Android?')">
+              <svg class="icon-svg icon-sm" viewBox="0 0 24 24"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect><line x1="12" y1="18" x2="12.01" y2="18"></line></svg>
+              Termux & Magpie CLI
+            </span>
+            <span class="prompt-chip" onclick="askAgentQuestion('Tell me about the Paystack Payment Gateway and client storefront')">
+              <svg class="icon-svg icon-sm" viewBox="0 0 24 24"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect><line x1="1" y1="10" x2="23" y2="10"></line></svg>
+              Paystack FinTech
+            </span>
+            <span class="prompt-chip" onclick="askAgentQuestion('What is Colibri and how does it stream MoE weights in pure C?')">
+              <svg class="icon-svg icon-sm" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2"></rect><rect x="9" y="9" width="6" height="6"></rect><line x1="9" y1="1" x2="9" y2="4"></line><line x1="15" y1="1" x2="15" y2="4"></line><line x1="9" y1="20" x2="9" y2="23"></line><line x1="15" y1="20" x2="15" y2="23"></line><line x1="20" y1="9" x2="23" y2="9"></line><line x1="20" y1="14" x2="23" y2="14"></line><line x1="1" y1="9" x2="4" y2="9"></line><line x1="1" y1="14" x2="4" y2="14"></line></svg>
+              Pure C MoE Runner
+            </span>
+            <span class="prompt-chip" onclick="askAgentQuestion('How can I contact or hire Marcus?')">
+              <svg class="icon-svg icon-sm" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+              Contact & Hire
+            </span>
           </div>
 
           <div class="agent-input-control">
             <input type="text" class="agent-input-box" id="agentInputBox" placeholder="Ask about AI agents, Termux pipelines, Paystack, or systems..." onkeydown="if(event.key==='Enter')dispatchAgentMessage()">
-            <button class="agent-send-button" onclick="dispatchAgentMessage()">Ask Agent ➔</button>
+            <button class="agent-send-button" onclick="dispatchAgentMessage()">
+              <span>Ask Agent</span>
+              <svg class="icon-svg icon-sm" viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+            </button>
           </div>
         </div>
       </div>
@@ -862,7 +980,10 @@ Try <span style="color:var(--neon-cyan)">'projects'</span>, <span style="color:v
               <option value="paystack">Scenario 2: Paystack Webhook Verification & Order Settlement</option>
               <option value="rag">Scenario 3: Multi-Source RAG Context Retrieval & Document QA</option>
             </select>
-            <button class="pipe-trigger-btn" onclick="executeAgentPipeline(); playBeep();">▶ Run Workflow Flow</button>
+            <button class="pipe-trigger-btn" onclick="executeAgentPipeline(); playBeep();">
+              <svg class="icon-svg icon-sm" viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+              Run Workflow Flow
+            </button>
           </div>
 
           <div class="pipe-nodes-row">
@@ -909,7 +1030,10 @@ Try <span style="color:var(--neon-cyan)">'projects'</span>, <span style="color:v
                 Demonstrating dynamic top-k routing & disk memory mapping for frontier MoE models (85GB weights on 8GB RAM).
               </div>
             </div>
-            <button class="pipe-trigger-btn" onclick="simulateMoeRouting(); playBeep();">⚡ Fire Token Query</button>
+            <button class="pipe-trigger-btn" onclick="simulateMoeRouting(); playBeep();">
+              <svg class="icon-svg icon-sm" viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+              Fire Token Query
+            </button>
           </div>
 
           <div class="moe-matrix-container" id="moeMatrix">
@@ -974,12 +1098,15 @@ Try <span style="color:var(--neon-cyan)">'projects'</span>, <span style="color:v
           </p>
           <div class="repo-schema-box">
             <span class="repo-schema-label">Architectural Flow</span>
-            Planner ➔ Tool Dispatcher ➔ Execution Sandbox ➔ Self-Reflector
+            Planner &rarr; Tool Dispatcher &rarr; Execution Sandbox &rarr; Self-Reflector
           </div>
         </div>
         <div class="repo-meta-footer">
           <div class="repo-tech-stack"><span class="stack-chip">Python</span><span class="stack-chip">Tool Calling</span><span class="stack-chip">State Machines</span></div>
-          <a class="repo-action-link" href="https://github.com/engineermarcus/agents" target="_blank">View Repo ↗</a>
+          <a class="repo-action-link" href="https://github.com/engineermarcus/agents" target="_blank">
+            View Repo
+            <svg class="icon-svg icon-sm" viewBox="0 0 24 24"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
+          </a>
         </div>
       </div>
 
@@ -999,12 +1126,15 @@ Try <span style="color:var(--neon-cyan)">'projects'</span>, <span style="color:v
           </p>
           <div class="repo-schema-box">
             <span class="repo-schema-label">Architectural Flow</span>
-            Ingest ➔ Chunking ➔ Vector Indexing ➔ Context-Injected LLM
+            Ingest &rarr; Chunking &rarr; Vector Indexing &rarr; Context-Injected LLM
           </div>
         </div>
         <div class="repo-meta-footer">
           <div class="repo-tech-stack"><span class="stack-chip">Python</span><span class="stack-chip">Vector Store</span><span class="stack-chip">FastAPI</span></div>
-          <a class="repo-action-link" href="https://github.com/engineermarcus/rag-qa-system" target="_blank">View Repo ↗</a>
+          <a class="repo-action-link" href="https://github.com/engineermarcus/rag-qa-system" target="_blank">
+            View Repo
+            <svg class="icon-svg icon-sm" viewBox="0 0 24 24"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
+          </a>
         </div>
       </div>
 
@@ -1024,12 +1154,15 @@ Try <span style="color:var(--neon-cyan)">'projects'</span>, <span style="color:v
           </p>
           <div class="repo-schema-box">
             <span class="repo-schema-label">Architectural Flow</span>
-            Zero-Dep C ➔ NVMe mmap ➔ Top-K Router ➔ Cache Pager
+            Zero-Dep C &rarr; NVMe mmap &rarr; Top-K Router &rarr; Cache Pager
           </div>
         </div>
         <div class="repo-meta-footer">
           <div class="repo-tech-stack"><span class="stack-chip">Pure C</span><span class="stack-chip">Zero Deps</span><span class="stack-chip">MoE Architecture</span></div>
-          <a class="repo-action-link" href="https://github.com/engineermarcus/colibri" target="_blank">View Repo ↗</a>
+          <a class="repo-action-link" href="https://github.com/engineermarcus/colibri" target="_blank">
+            View Repo
+            <svg class="icon-svg icon-sm" viewBox="0 0 24 24"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
+          </a>
         </div>
       </div>
 
@@ -1049,12 +1182,15 @@ Try <span style="color:var(--neon-cyan)">'projects'</span>, <span style="color:v
           </p>
           <div class="repo-schema-box">
             <span class="repo-schema-label">Architectural Flow</span>
-            WebSockets ➔ PCM Audio Stream ➔ Vision Frames ➔ Sub-200ms Turnaround
+            WebSockets &rarr; PCM Audio Stream &rarr; Vision Frames &rarr; Sub-200ms Turnaround
           </div>
         </div>
         <div class="repo-meta-footer">
           <div class="repo-tech-stack"><span class="stack-chip">JavaScript</span><span class="stack-chip">WebSockets</span><span class="stack-chip">Audio/Vision</span></div>
-          <a class="repo-action-link" href="https://github.com/engineermarcus/gemini-live-api-examples" target="_blank">View Repo ↗</a>
+          <a class="repo-action-link" href="https://github.com/engineermarcus/gemini-live-api-examples" target="_blank">
+            View Repo
+            <svg class="icon-svg icon-sm" viewBox="0 0 24 24"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
+          </a>
         </div>
       </div>
 
@@ -1074,12 +1210,15 @@ Try <span style="color:var(--neon-cyan)">'projects'</span>, <span style="color:v
           </p>
           <div class="repo-schema-box">
             <span class="repo-schema-label">Architectural Flow</span>
-            Node.js Daemon ➔ Encrypted P2P Tunnel ➔ Webpty / Xterm ➔ AI Voice Bridge
+            Node.js Daemon &rarr; Encrypted P2P Tunnel &rarr; Webpty / Xterm &rarr; AI Voice Bridge
           </div>
         </div>
         <div class="repo-meta-footer">
           <div class="repo-tech-stack"><span class="stack-chip">Node.js</span><span class="stack-chip">Cloud Tunneling</span><span class="stack-chip">xterm.js</span></div>
-          <a class="repo-action-link" href="https://github.com/engineermarcus/cybernetics" target="_blank">View Repo ↗</a>
+          <a class="repo-action-link" href="https://github.com/engineermarcus/cybernetics" target="_blank">
+            View Repo
+            <svg class="icon-svg icon-sm" viewBox="0 0 24 24"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
+          </a>
         </div>
       </div>
 
@@ -1099,12 +1238,15 @@ Try <span style="color:var(--neon-cyan)">'projects'</span>, <span style="color:v
           </p>
           <div class="repo-schema-box">
             <span class="repo-schema-label">Architectural Flow</span>
-            WireGuard Mesh ➔ Tailscale Daemon ➔ Static Device Mapping ➔ Shell Sync
+            WireGuard Mesh &rarr; Tailscale Daemon &rarr; Static Device Mapping &rarr; Shell Sync
           </div>
         </div>
         <div class="repo-meta-footer">
           <div class="repo-tech-stack"><span class="stack-chip">Shell</span><span class="stack-chip">Tailscale</span><span class="stack-chip">WireGuard</span></div>
-          <a class="repo-action-link" href="https://github.com/engineermarcus/tcp" target="_blank">View Repo ↗</a>
+          <a class="repo-action-link" href="https://github.com/engineermarcus/tcp" target="_blank">
+            View Repo
+            <svg class="icon-svg icon-sm" viewBox="0 0 24 24"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
+          </a>
         </div>
       </div>
 
@@ -1124,12 +1266,15 @@ Try <span style="color:var(--neon-cyan)">'projects'</span>, <span style="color:v
           </p>
           <div class="repo-schema-box">
             <span class="repo-schema-label">Architectural Flow</span>
-            Termux/Proot ➔ Playwright Chromium ➔ Heuristic Scorer ➔ Async httpx
+            Termux/Proot &rarr; Playwright Chromium &rarr; Heuristic Scorer &rarr; Async httpx
           </div>
         </div>
         <div class="repo-meta-footer">
           <div class="repo-tech-stack"><span class="stack-chip">Python</span><span class="stack-chip">Playwright</span><span class="stack-chip">httpx</span><span class="stack-chip">Termux</span></div>
-          <a class="repo-action-link" href="https://github.com/engineermarcus/moviebox-api" target="_blank">View Repo ↗</a>
+          <a class="repo-action-link" href="https://github.com/engineermarcus/moviebox-api" target="_blank">
+            View Repo
+            <svg class="icon-svg icon-sm" viewBox="0 0 24 24"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
+          </a>
         </div>
       </div>
 
@@ -1149,12 +1294,15 @@ Try <span style="color:var(--neon-cyan)">'projects'</span>, <span style="color:v
           </p>
           <div class="repo-schema-box">
             <span class="repo-schema-label">Architectural Flow</span>
-            Async Router ➔ Stream Resolver ➔ Watchdog Daemon ➔ Cache Storage
+            Async Router &rarr; Stream Resolver &rarr; Watchdog Daemon &rarr; Cache Storage
           </div>
         </div>
         <div class="repo-meta-footer">
           <div class="repo-tech-stack"><span class="stack-chip">Python</span><span class="stack-chip">AsyncIO</span><span class="stack-chip">FastAPI</span></div>
-          <a class="repo-action-link" href="https://github.com/engineermarcus/magpie-stream-api-v3" target="_blank">View Repo ↗</a>
+          <a class="repo-action-link" href="https://github.com/engineermarcus/magpie-stream-api-v3" target="_blank">
+            View Repo
+            <svg class="icon-svg icon-sm" viewBox="0 0 24 24"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
+          </a>
         </div>
       </div>
 
@@ -1174,12 +1322,15 @@ Try <span style="color:var(--neon-cyan)">'projects'</span>, <span style="color:v
           </p>
           <div class="repo-schema-box">
             <span class="repo-schema-label">Architectural Flow</span>
-            Express API ➔ Paystack Webhook HMAC ➔ Order State Machine ➔ Render PaaS
+            Express API &rarr; Paystack Webhook HMAC &rarr; Order State Machine &rarr; Render PaaS
           </div>
         </div>
         <div class="repo-meta-footer">
           <div class="repo-tech-stack"><span class="stack-chip">Express.js</span><span class="stack-chip">Paystack API</span><span class="stack-chip">Render</span></div>
-          <a class="repo-action-link" href="https://github.com/engineermarcus/marcus-enterprises" target="_blank">View Repo ↗</a>
+          <a class="repo-action-link" href="https://github.com/engineermarcus/marcus-enterprises" target="_blank">
+            View Repo
+            <svg class="icon-svg icon-sm" viewBox="0 0 24 24"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
+          </a>
         </div>
       </div>
 
@@ -1199,12 +1350,15 @@ Try <span style="color:var(--neon-cyan)">'projects'</span>, <span style="color:v
           </p>
           <div class="repo-schema-box">
             <span class="repo-schema-label">Architectural Flow</span>
-            Kotlin Coroutines ➔ Android Jetpack ➔ MVVM Pattern ➔ Background Services
+            Kotlin Coroutines &rarr; Android Jetpack &rarr; MVVM Pattern &rarr; Background Services
           </div>
         </div>
         <div class="repo-meta-footer">
           <div class="repo-tech-stack"><span class="stack-chip">Kotlin</span><span class="stack-chip">Android SDK</span><span class="stack-chip">Coroutines</span></div>
-          <a class="repo-action-link" href="https://github.com/engineermarcus/cuckoo" target="_blank">View Repo ↗</a>
+          <a class="repo-action-link" href="https://github.com/engineermarcus/cuckoo" target="_blank">
+            View Repo
+            <svg class="icon-svg icon-sm" viewBox="0 0 24 24"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
+          </a>
         </div>
       </div>
 
@@ -1224,12 +1378,15 @@ Try <span style="color:var(--neon-cyan)">'projects'</span>, <span style="color:v
           </p>
           <div class="repo-schema-box">
             <span class="repo-schema-label">Architectural Flow</span>
-            React SPA ➔ RESTful Python Gateway ➔ Token Auth ➔ State Store
+            React SPA &rarr; RESTful Python Gateway &rarr; Token Auth &rarr; State Store
           </div>
         </div>
         <div class="repo-meta-footer">
           <div class="repo-tech-stack"><span class="stack-chip">React</span><span class="stack-chip">Python API</span><span class="stack-chip">Token Auth</span></div>
-          <a class="repo-action-link" href="https://github.com/engineermarcus/infinity-pool-app" target="_blank">View Repo ↗</a>
+          <a class="repo-action-link" href="https://github.com/engineermarcus/infinity-pool-app" target="_blank">
+            View Repo
+            <svg class="icon-svg icon-sm" viewBox="0 0 24 24"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
+          </a>
         </div>
       </div>
 
@@ -1249,12 +1406,15 @@ Try <span style="color:var(--neon-cyan)">'projects'</span>, <span style="color:v
           </p>
           <div class="repo-schema-box">
             <span class="repo-schema-label">Curriculum Depth</span>
-            Language Internals ➔ Concurrency / AsyncIO ➔ Metaprogramming ➔ Microservices
+            Language Internals &rarr; Concurrency / AsyncIO &rarr; Metaprogramming &rarr; Microservices
           </div>
         </div>
         <div class="repo-meta-footer">
           <div class="repo-tech-stack"><span class="stack-chip">Python 3.12+</span><span class="stack-chip">Architecture</span><span class="stack-chip">Reference</span></div>
-          <a class="repo-action-link" href="https://github.com/engineermarcus/python-full-course" target="_blank">View Repo ↗</a>
+          <a class="repo-action-link" href="https://github.com/engineermarcus/python-full-course" target="_blank">
+            View Repo
+            <svg class="icon-svg icon-sm" viewBox="0 0 24 24"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
+          </a>
         </div>
       </div>
 
@@ -1405,7 +1565,35 @@ Try <span style="color:var(--neon-cyan)">'projects'</span>, <span style="color:v
     if (audioEnabled) playBeep(1000, 0.06);
   }
 
-  // 3. STATION TABS
+  // 3. FULLSCREEN CHAT TOGGLE
+  let isChatFullscreen = false;
+  function toggleFullscreenChat() {
+    const shell = document.getElementById('agentShell');
+    const label = document.getElementById('fsBtnLabel');
+    const icon = document.getElementById('fsIcon');
+    isChatFullscreen = !isChatFullscreen;
+
+    if (isChatFullscreen) {
+      shell.classList.add('fullscreen-mode');
+      label.textContent = 'Exit (Esc)';
+      icon.innerHTML = '<polyline points="4 14 10 14 10 20"></polyline><polyline points="20 10 14 10 14 4"></polyline><line x1="14" y1="10" x2="21" y2="3"></line><line x1="3" y1="21" x2="10" y2="14"></line>';
+      document.body.style.overflow = 'hidden';
+    } else {
+      shell.classList.remove('fullscreen-mode');
+      label.textContent = 'Full Page';
+      icon.innerHTML = '<polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line>';
+      document.body.style.overflow = '';
+    }
+    playBeep(900, 0.05);
+  }
+
+  window.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && isChatFullscreen) {
+      toggleFullscreenChat();
+    }
+  });
+
+  // 4. STATION TABS
   function activateStationTab(tabId) {
     document.querySelectorAll('.demo-tab-button').forEach(btn => btn.classList.remove('active'));
     document.querySelectorAll('.station-content').forEach(p => p.classList.remove('active'));
@@ -1423,115 +1611,112 @@ Try <span style="color:var(--neon-cyan)">'projects'</span>, <span style="color:v
     if (tabId === 'moe') btns[3].classList.add('active');
   }
 
-  // 4. DEMO 1: AI AGENT INTERACTION (Connects to HF Space API with instant local fallback)
+  // 5. DEMO 1: AI AGENT INTERACTION (REAL-TIME SSE TOKEN STREAMING)
   const agentDialog = document.getElementById('agentDialog');
   const agentInputBox = document.getElementById('agentInputBox');
 
-  function appendDialogMsg(role, text) {
+  function appendDialogMsg(role, text = '') {
     const row = document.createElement('div');
     row.className = 'chat-bubble-row ' + role;
 
     const av = document.createElement('div');
     av.className = 'agent-avatar';
-    av.textContent = role === 'user' ? '👤' : '⚡';
+    if (role === 'user') {
+      av.innerHTML = '<svg class="icon-svg icon-md" viewBox="0 0 24 24"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>';
+    } else {
+      av.innerHTML = '<svg class="icon-svg icon-md" viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>';
+    }
 
     const bubble = document.createElement('div');
     bubble.className = 'bubble-text';
-    
-    let html = text
-      .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
-      .replace(/`(.*?)`/g, '<code>$1</code>')
-      .replace(/\n/g, '<br>');
-    bubble.innerHTML = html;
+    bubble.innerHTML = renderMarkdown(text);
 
     row.appendChild(av);
     row.appendChild(bubble);
     agentDialog.appendChild(row);
     agentDialog.scrollTop = agentDialog.scrollHeight;
+    return bubble;
   }
 
-  function resolveLocalKnowledge(query) {
-    const q = query.toLowerCase();
-    if (q.includes('moviebox') || q.includes('magpie') || q.includes('termux')) {
-      return "The **moviebox-api (Magpie CLI)** is one of Marcus's flagship automation tools: it executes directly inside **Termux on Android** using an Ubuntu proot container. It launches headless Playwright Chromium to bypass aggressive Cloudflare anti-bot checks, scores candidate streams with a heuristic bitrate matrix, and streams 1080p HEVC chunks down via httpx with live terminal progress meters and Internet Archive sync.";
-    }
-    if (q.includes('paystack') || q.includes('store') || q.includes('client') || q.includes('am2pm')) {
-      return "**Marcus Enterprises** is an enterprise payment gateway wrapping Paystack, deployed on Render. It processes real retail commerce for **AM2PM Liquor Store** in Kileleshwa, Nairobi, managing checkout sessions, HMAC-SHA512 cryptographic webhook verification, and automated status polling.";
-    }
-    if (q.includes('colibri') || q.includes('c ') || q.includes('moe')) {
-      return "**Colibri** is Marcus's pure C inference runner for frontier Mixture-of-Experts (MoE) models. Engineered with zero external dependencies, it streams active expert weights directly from NVMe SSDs into RAM, enabling massive MoE models (85GB+) to execute on standard hardware without GPU VRAM saturation.";
-    }
-    if (q.includes('achievement') || q.includes('badge')) {
-      return "Marcus holds 3 official GitHub Achievements:\n- 🎯 **Quickdraw**: Solved and closed issue/PR within 5 minutes.\n- 🦈 **Pull Shark**: Merged pull requests across repositories.\n- ⚡ **YOLO**: Merged PRs without review, demonstrating rapid agile delivery.";
-    }
-    if (q.includes('ai') || q.includes('agent') || q.includes('rag') || q.includes('automation')) {
-      return "Marcus's AI architecture centers on **Autonomous Agentic Workflows**:\n1. State-machine multi-agent coordination with structured JSON tool-calling.\n2. Compact local model execution (Qwen 2.5 1B-7B and pure C MoE).\n3. Grounded Retrieval-Augmented Generation (`rag-qa-system`) to eliminate hallucinations.\n4. Realtime multimodal streaming agents with Gemini Live.";
-    }
-    if (q.includes('contact') || q.includes('hire') || q.includes('email')) {
-      return "You can reach Marcus directly at **engineermarcus72@gmail.com** or connect on GitHub at [github.com/engineermarcus](https://github.com/engineermarcus). He is available for senior engineering contracts and full-time AI roles.";
-    }
-    return "Marcus has published 32+ open-source and client repositories across Python, TypeScript, C, Shell, and Kotlin. Key works include **agents**, **cybernetics & positron**, **moviebox-api**, **colibri**, and **marcus-enterprises**!";
+  function renderMarkdown(raw) {
+    return raw
+      .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+      .replace(/`(.*?)`/g, '<code>$1</code>')
+      .replace(/\n/g, '<br>');
   }
 
   async function queryAgentBackend(question) {
     appendDialogMsg('user', question);
 
-    const typingRow = document.createElement('div');
-    typingRow.className = 'chat-bubble-row bot';
-    typingRow.id = 'agentTyping';
-    typingRow.innerHTML = '<div class="agent-avatar">⚡</div><div class="bubble-text"><em>Neural engine reasoning...</em></div>';
-    agentDialog.appendChild(typingRow);
-    agentDialog.scrollTop = agentDialog.scrollHeight;
+    // Create an empty bot bubble that will stream tokens directly
+    const botBubble = appendDialogMsg('bot', '<em>Connecting to Qwen 2.5 on Hugging Face...</em>');
 
     const t0 = performance.now();
-    let reply = '';
-    let modelName = 'Qwen 2.5 Coder (Hugging Face Space)';
+    let partialText = '';
+    let isStreamActive = false;
 
     try {
-      // Direct call to Hugging Face Space Gradio 5 API
+      // Step 1: POST to Gradio call endpoint
       const postRes = await fetch('https://jarvisandfriend-agent.hf.space/gradio_api/call/predict', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ data: [question] })
       });
 
-      if (postRes.ok) {
-        const postData = await postRes.json();
-        const eventId = postData.event_id;
+      if (!postRes.ok) throw new Error('POST failed: ' + postRes.status);
+      const postData = await postRes.json();
+      const eventId = postData.event_id;
+      if (!eventId) throw new Error('No event_id returned');
 
-        if (eventId) {
-          const streamRes = await fetch(`https://jarvisandfriend-agent.hf.space/gradio_api/call/predict/${eventId}`);
-          if (streamRes.ok) {
-            const streamText = await streamRes.text();
-            for (const line of streamText.split('\n')) {
-              if (line.startsWith('data:')) {
-                try {
-                  const parsed = JSON.parse(line.slice(5).trim());
-                  if (Array.isArray(parsed) && parsed[0]) {
-                    reply = parsed[0];
-                    break;
-                  }
-                } catch (pe) {}
-              }
+      // Step 2: Stream response body chunk-by-chunk via SSE
+      const streamRes = await fetch(`https://jarvisandfriend-agent.hf.space/gradio_api/call/predict/${eventId}`);
+      if (!streamRes.ok) throw new Error('Stream GET failed: ' + streamRes.status);
+
+      const reader = streamRes.body.getReader();
+      const decoder = new TextDecoder('utf-8');
+      let buffer = '';
+
+      while (true) {
+        const { done, value } = await reader.read();
+        if (done) break;
+
+        buffer += decoder.decode(value, { stream: true });
+        const lines = buffer.split('\n');
+        buffer = lines.pop(); // keep remainder
+
+        for (const line of lines) {
+          const trimmed = line.trim();
+          if (trimmed.startsWith('data:')) {
+            const jsonPart = trimmed.slice(5).trim();
+            if (jsonPart) {
+              try {
+                const parsed = JSON.parse(jsonPart);
+                if (Array.isArray(parsed) && parsed[0]) {
+                  partialText = parsed[0];
+                  botBubble.innerHTML = renderMarkdown(partialText);
+                  agentDialog.scrollTop = agentDialog.scrollHeight;
+                  isStreamActive = true;
+                }
+              } catch (err) {}
             }
           }
         }
       }
     } catch (e) {
-      console.warn('Live HF space fetch error:', e);
-    }
-
-    if (!reply) {
-      reply = resolveLocalKnowledge(question);
-      modelName = 'Local Fallback Engine';
+      console.warn('Real-time streaming error:', e);
     }
 
     const elapsed = Math.round(performance.now() - t0);
-    const typingEl = document.getElementById('agentTyping');
-    if (typingEl) typingEl.remove();
 
-    appendDialogMsg('bot', reply + `<br><small style="color:var(--neon-cyan); font-family:var(--font-mono); font-size:11px;">[Latency: ${elapsed}ms · Model: ${modelName} · ZeroGPU]</small>`);
-    playBeep(900, 0.05);
+    if (isStreamActive && partialText) {
+      botBubble.innerHTML = renderMarkdown(partialText) + `<br><small style="color:var(--neon-cyan); font-family:var(--font-mono); font-size:11px;">[Latency: ${elapsed}ms · Model: Qwen 2.5 Coder · Stream: Active · ZeroGPU]</small>`;
+      playBeep(900, 0.05);
+    } else {
+      // Fallback only if offline
+      botBubble.innerHTML = renderMarkdown(
+        "Marcus is a senior software engineer specializing in Python, AI multi-agent workflows, pure C MoE inference, and headless scrapers inside Android Termux proot. GitHub: github.com/engineermarcus (32+ repos)."
+      ) + `<br><small style="color:var(--neon-amber); font-family:var(--font-mono); font-size:11px;">[Local Fallback Mode]</small>`;
+    }
   }
 
   function dispatchAgentMessage() {
@@ -1545,7 +1730,7 @@ Try <span style="color:var(--neon-cyan)">'projects'</span>, <span style="color:v
     queryAgentBackend(q);
   }
 
-  // 5. DEMO 2: CYBERNETICS CLOUD TERMINAL
+  // 6. DEMO 2: CYBERNETICS CLOUD TERMINAL
   const termScreen = document.getElementById('termScreen');
   const termInput = document.getElementById('termInput');
   const termInputLine = document.getElementById('termInputLine');
@@ -1554,11 +1739,11 @@ Try <span style="color:var(--neon-cyan)">'projects'</span>, <span style="color:v
     help: "Available commands:\n  help          - Show this command reference\n  bio           - Display Marcus's technical biography & stats\n  projects      - List key repositories\n  achievements  - Display verified GitHub badges\n  run-agent     - Execute a simulated autonomous multi-agent loop\n  magpie        - Simulate Magpie Termux media crawler\n  paystack      - Simulate Paystack FinTech transaction test\n  moe           - Benchmark pure C Colibri MoE expert streaming\n  contact       - Show contact details\n  clear         - Clear terminal display",
     bio: "Neiman Marcus (Engineer Marcus)\nRole: Senior Systems & AI Agent Engineer\nLocation: Nairobi, Kenya / Remote\nPrimary Languages: Python, TypeScript, JavaScript, Shell, Kotlin, C\nPhilosophy: 'Builds systems, not slides.' 32+ public GitHub repos.",
     projects: "Selected Repositories:\n  1. [AI] agents               - Autonomous multi-agent workflows\n  2. [AI] rag-qa-system        - Vector search & document QA\n  3. [AI] colibri              - Pure C frontier MoE inference\n  4. [SYS] cybernetics/positron- Cloud Linux shell & IDE via npm\n  5. [AUTO] moviebox-api (Magpie)- Playwright scraper inside Termux\n  6. [PROD] marcus-enterprises - Paystack gateway powering AM2PM Store\n  7. [MOB] cuckoo              - Native Android Kotlin application",
-    achievements: "GitHub Achievements for @engineermarcus:\n  🎯 Quickdraw   - Closed issue/PR within 5 min\n  🦈 Pull Shark  - Multi-repo merged PRs\n  ⚡ YOLO        - Direct merged PRs without review",
+    achievements: "GitHub Achievements for @engineermarcus:\n  [Quickdraw]   - Closed issue/PR within 5 min\n  [Pull Shark]  - Multi-repo merged PRs\n  [YOLO]        - Direct merged PRs without review",
     contact: "Email: engineermarcus72@gmail.com\nGitHub: https://github.com/engineermarcus\nHF Space: https://huggingface.co/spaces/jarvisandfriend/agent",
     magpie: "[MAGPIE] Initializing Playwright Chromium inside Termux proot...\n[MAGPIE] Resolving video streams... [Scoring candidates]\n[MAGPIE] Best source found: 1080p HEVC (Score 98.4)\n[MAGPIE] Streaming chunks via httpx: [====================] 100% 1.4GB\n[MAGPIE] Archive sync completed successfully.",
     paystack: "[PAYSTACK] POST /transaction/initialize\n[PAYSTACK] Paystack response: 200 OK (ref: pstk_892374892)\n[PAYSTACK] Simulating customer payment...\n[PAYSTACK] Webhook received: charge.success\n[PAYSTACK] HMAC signature verified.\n[PAYSTACK] Order fulfilled for AM2PM Liquor Store.",
-    moe: "[COLIBRI] Opening deepseek-v4-flash index (PUWAER/REAP-150B)...\n[COLIBRI] NVMe Direct I/O active. Paged experts 14, 27 into L3 cache.\n[COLIBRI] Generation benchmark: 82.4 tokens/sec on 0 GPU VRAM.\n[COLIBRI] Status: OPERATIONAL ✓",
+    moe: "[COLIBRI] Opening deepseek-v4-flash index (PUWAER/REAP-150B)...\n[COLIBRI] NVMe Direct I/O active. Paged experts 14, 27 into L3 cache.\n[COLIBRI] Generation benchmark: 82.4 tokens/sec on 0 GPU VRAM.\n[COLIBRI] Status: OPERATIONAL",
     "run-agent": "[AGENT] Objective: 'Optimize prompt & execute data extraction'\n[AGENT] Step 1: Decomposing goal into 3 sub-tasks\n[AGENT] Step 2: Calling tool 'web_search_adapter'\n[AGENT] Step 3: Tool returned 4 results; verifying hallucination score: 0.02\n[AGENT] Step 4: Synthesizing final artifact... Done!"
   };
 
@@ -1595,7 +1780,7 @@ Try <span style="color:var(--neon-cyan)">'projects'</span>, <span style="color:v
     }
   });
 
-  // 6. DEMO 3: PIPELINE SIMULATION
+  // 7. DEMO 3: PIPELINE SIMULATION
   function executeAgentPipeline() {
     const sc = document.getElementById('pipeScenario').value;
     const stages = [1, 2, 3, 4, 5];
@@ -1612,7 +1797,7 @@ Try <span style="color:var(--neon-cyan)">'projects'</span>, <span style="color:v
         "[00:01] GOAL: Headless media extraction requested for high-res stream inside Termux container.",
         "[00:02] TOOL: Spawning headless Chromium instance via Playwright inside Ubuntu proot...",
         "[00:03] DATA: Ingesting candidates; scoring bitrates & latency metrics; selecting optimal source.",
-        "[00:04] VALIDATION: Cloudflare challenge detected ➔ Auto-solving via browser fingerprint rotation.",
+        "[00:04] VALIDATION: Cloudflare challenge detected -> Auto-solving via browser fingerprint rotation.",
         "[00:05] ARTIFACT: 1080p stream established. Async httpx chunk pipe streaming at 18.4 MB/s."
       ];
     } else if (sc === 'paystack') {
@@ -1648,7 +1833,7 @@ Try <span style="color:var(--neon-cyan)">'projects'</span>, <span style="color:v
     });
   }
 
-  // 7. DEMO 4: MOE MATRIX GENERATION & BENCHMARK
+  // 8. DEMO 4: MOE MATRIX GENERATION & BENCHMARK
   const moeMatrix = document.getElementById('moeMatrix');
   function buildMoeMatrix() {
     moeMatrix.innerHTML = '';
@@ -1664,7 +1849,6 @@ Try <span style="color:var(--neon-cyan)">'projects'</span>, <span style="color:v
 
   function simulateMoeRouting() {
     document.querySelectorAll('.expert-node').forEach(n => n.classList.remove('paged'));
-    // pick 2 to 4 random experts
     const count = Math.floor(Math.random() * 3) + 2;
     const selected = [];
     while (selected.length < count) {
@@ -1681,7 +1865,7 @@ Try <span style="color:var(--neon-cyan)">'projects'</span>, <span style="color:v
     playBeep(1100, 0.05);
   }
 
-  // 8. REPOSITORY FILTERING & LIVE SEARCH
+  // 9. REPOSITORY FILTERING & LIVE SEARCH
   function applyFilter(cat) {
     document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
     event.target.classList.add('active');

@@ -3,25 +3,19 @@ title: Neiman Marcus AI Agent
 emoji: ⚡
 colorFrom: indigo
 colorTo: blue
-sdk: static
+sdk: gradio
+app_file: app.py
 pinned: false
-tags:
-- agent
-- qwen
-- portfolio
-- automation
-- python
+hardware: zero-a10g
 ---
 
 # Neiman Marcus — Portfolio AI Agent
 
-Interactive AI Agent & conversational knowledge engine for **Neiman Marcus** ([@engineermarcus](https://github.com/engineermarcus)).
+Interactive Qwen 2.5 AI Agent and OpenAI-compatible API backend for **Neiman Marcus** ([@engineermarcus](https://github.com/engineermarcus)).
 
 - **Live Portfolio**: [https://engineermarcus.github.io/portfolio](https://engineermarcus.github.io/portfolio)
-- **Primary Focus**: AI Agents, Systems Engineering, Headless Automation, Backend Infrastructure.
-- **Engine**: Qwen 2.5 Coder & Instruct architecture.
-
-### Included in this Repository:
-1. `index.html`, `style.css`, `app.js` — Interactive Agent UI with real-time Qwen chat and telemetry.
-2. `server.py` & `app.py` — Standalone FastAPI and Gradio backends with `/api/chat`, `/api/projects`, and `/api/status`.
-3. `Dockerfile` & `requirements.txt` — Ready-to-deploy container configuration for any cloud host.
+- **Base API URL**: `https://jarvisandfriend-agent.hf.space`
+- **Endpoints**:
+  * `POST /v1/chat/completions` (OpenAI format)
+  * `POST /api/chat` (JSON format)
+  * `GET /health` (Status & metrics)
