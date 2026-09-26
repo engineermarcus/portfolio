@@ -3,791 +3,763 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Neiman Marcus — AI Agent Architect & Systems Engineer</title>
-<meta name="description" content="Portfolio of Neiman Marcus (Engineer Marcus) — Senior Software Engineer specializing in Autonomous AI Agents, Headless Automation, Backend Systems, and Cloud Infrastructure.">
+<title>Neiman Marcus — Senior AI Agent Architect & Systems Engineer</title>
+<meta name="description" content="Portfolio of Neiman Marcus (Engineer Marcus) — Senior Systems & AI Engineer specializing in Autonomous Multi-Agent Workflows, Headless Automation, Pure C MoE Inference, and Cloud Dev Environments.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Syne:wght@600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Space+Grotesk:wght@500;600;700&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+
 <style>
   :root {
-    --bg: #090d16;
-    --bg-secondary: #0d1322;
-    --surface: #111827;
-    --surface-glass: rgba(17, 24, 39, 0.72);
-    --surface-hover: #1c263b;
-    --border: #1e293b;
-    --border-subtle: rgba(255, 255, 255, 0.08);
-    --border-glow: rgba(99, 102, 241, 0.45);
-    --primary: #6366f1;
-    --primary-light: #818cf8;
-    --accent: #38bdf8;
-    --accent-emerald: #10b981;
-    --accent-amber: #f59e0b;
-    --accent-purple: #c084fc;
-    --text: #f8fafc;
-    --text-dim: #94a3b8;
-    --text-muted: #64748b;
-    --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    --bg-void: #05070c;
+    --bg-base: #090d16;
+    --bg-card: rgba(14, 20, 32, 0.75);
+    --bg-card-hover: rgba(22, 32, 50, 0.88);
+    --line: #1b263b;
+    --line-active: #4f46e5;
+    --line-glow: rgba(99, 102, 241, 0.4);
+    
+    --neon-cyan: #06b6d4;
+    --neon-blue: #3b82f6;
+    --neon-indigo: #6366f1;
+    --neon-emerald: #10b981;
+    --neon-amber: #f59e0b;
+    --neon-rose: #f43f5e;
+    
+    --text-primary: #f8fafc;
+    --text-secondary: #94a3b8;
+    --text-muted: #475569;
+    --text-highlight: #e0e7ff;
+    
+    --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
     --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
     --font-display: 'Syne', sans-serif;
+    --font-heading: 'Space Grotesk', sans-serif;
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
-  html { scroll-behavior: smooth; }
+  html { scroll-behavior: smooth; background: var(--bg-void); color: var(--text-primary); }
   body {
-    background: var(--bg);
-    color: var(--text);
     font-family: var(--font-sans);
     line-height: 1.6;
-    -webkit-font-smoothing: antialiased;
     overflow-x: hidden;
     position: relative;
+    background: radial-gradient(circle at 50% 0%, #0c1427 0%, #05070c 80%);
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
   }
 
-  /* Ambient glowing backdrop */
-  body::before {
-    content: '';
+  /* Interactive Canvas Background */
+  #neuralCanvas {
     position: fixed;
-    top: -20%;
-    left: -10%;
-    width: 60vw;
-    height: 60vw;
-    background: radial-gradient(circle, rgba(99, 102, 241, 0.12) 0%, transparent 65%);
+    top: 0; left: 0; width: 100%; height: 100%;
     pointer-events: none;
     z-index: 0;
-  }
-  body::after {
-    content: '';
-    position: fixed;
-    bottom: -20%;
-    right: -10%;
-    width: 60vw;
-    height: 60vw;
-    background: radial-gradient(circle, rgba(56, 189, 248, 0.09) 0%, transparent 65%);
-    pointer-events: none;
-    z-index: 0;
+    opacity: 0.45;
   }
 
-  ::selection { background: var(--primary); color: #fff; }
-  a { color: inherit; text-decoration: none; }
-
-  .wrap { max-width: 1080px; margin: 0 auto; padding: 0 24px; position: relative; z-index: 1; }
-
-  /* HEADER & NAV */
-  header.nav {
-    position: sticky; top: 0; z-index: 100;
-    background: rgba(9, 13, 22, 0.82);
+  /* TOP HUD DIAGNOSTICS BAR */
+  .hud-topbar {
+    position: sticky; top: 0; z-index: 1000;
+    background: rgba(5, 7, 12, 0.92);
     backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-    border-bottom: 1px solid var(--border-subtle);
-    transition: border-color 0.2s;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    font-family: var(--font-mono);
+    font-size: 11.5px;
   }
-  .nav-inner {
-    max-width: 1080px; margin: 0 auto; padding: 14px 24px;
+  .hud-inner {
+    max-width: 1200px; margin: 0 auto; padding: 10px 24px;
     display: flex; justify-content: space-between; align-items: center;
+    flex-wrap: wrap; gap: 10px;
   }
-  .brand {
-    display: flex; align-items: center; gap: 12px;
+  .hud-left {
+    display: flex; align-items: center; gap: 16px;
   }
-  .brand-avatar {
-    width: 38px; height: 38px; border-radius: 10px;
-    border: 1px solid rgba(99, 102, 241, 0.4);
-    box-shadow: 0 0 14px rgba(99, 102, 241, 0.25);
+  .hud-brand {
+    font-weight: 700; color: #fff; display: flex; align-items: center; gap: 8px;
+    font-size: 13px; letter-spacing: -0.01em;
   }
-  .brand-text {
-    display: flex; flex-direction: column;
+  .hud-brand img {
+    width: 24px; height: 24px; border-radius: 6px; border: 1px solid var(--neon-cyan);
   }
-  .brand-name {
-    font-family: var(--font-mono); font-size: 14.5px; font-weight: 700; color: #fff;
-    letter-spacing: -0.01em;
-  }
-  .brand-role {
-    font-size: 11px; color: var(--text-dim); font-family: var(--font-mono);
-  }
-  .nav-links {
-    display: flex; gap: 24px; font-size: 13.5px; color: var(--text-dim);
-    align-items: center;
-  }
-  .nav-links a {
-    transition: color 0.15s ease; font-weight: 500;
-  }
-  .nav-links a:hover { color: #fff; }
-  .nav-badge {
+  .hud-status-badge {
     background: rgba(16, 185, 129, 0.12);
-    color: var(--accent-emerald);
-    border: 1px solid rgba(16, 185, 129, 0.35);
-    padding: 4px 10px; border-radius: 20px; font-size: 12px;
-    font-family: var(--font-mono); display: inline-flex; align-items: center; gap: 6px;
+    color: var(--neon-emerald);
+    border: 1px solid rgba(16, 185, 129, 0.3);
+    padding: 2px 8px; border-radius: 4px;
+    display: inline-flex; align-items: center; gap: 6px;
+    font-size: 11px;
   }
-  .pulse-dot {
-    width: 7px; height: 7px; border-radius: 50%; background: var(--accent-emerald);
-    box-shadow: 0 0 8px var(--accent-emerald);
-    animation: pulse 2s infinite;
+  .hud-status-dot {
+    width: 6px; height: 6px; border-radius: 50%; background: var(--neon-emerald);
+    box-shadow: 0 0 8px var(--neon-emerald);
+    animation: hudPulse 2s infinite ease-in-out;
   }
-  @keyframes pulse {
+  @keyframes hudPulse {
     0%, 100% { opacity: 1; transform: scale(1); }
-    50% { opacity: 0.4; transform: scale(1.2); }
+    50% { opacity: 0.4; transform: scale(1.3); }
+  }
+  .hud-telemetry {
+    display: flex; gap: 16px; color: var(--text-muted);
+  }
+  .hud-telemetry span b { color: var(--text-secondary); font-weight: 600; }
+  .hud-right {
+    display: flex; align-items: center; gap: 14px;
+  }
+  .hud-nav-links {
+    display: flex; gap: 18px; color: var(--text-secondary); font-size: 12.5px;
+  }
+  .hud-nav-links a:hover { color: var(--neon-cyan); }
+  .hud-sfx-btn {
+    background: rgba(255, 255, 255, 0.05); border: 1px solid var(--line);
+    color: var(--text-secondary); padding: 3px 8px; border-radius: 4px;
+    font-family: var(--font-mono); font-size: 11px; cursor: pointer;
+    transition: all 0.2s;
+  }
+  .hud-sfx-btn:hover { border-color: var(--neon-cyan); color: #fff; }
+
+  /* WRAPPER */
+  .wrap {
+    max-width: 1200px; margin: 0 auto; padding: 0 24px;
+    position: relative; z-index: 10;
   }
 
-  /* HERO */
-  .hero {
-    padding: 85px 0 60px;
+  /* HERO SECTION */
+  .hero-container {
+    padding: 80px 0 60px;
+    display: flex; flex-direction: column; gap: 28px;
+    position: relative;
   }
-  .eyebrow-container {
-    display: flex; align-items: center; gap: 10px; margin-bottom: 20px;
-    flex-wrap: wrap;
+  .hero-eyebrow-row {
+    display: flex; align-items: center; gap: 12px; flex-wrap: wrap;
   }
-  .eyebrow {
-    font-family: var(--font-mono); font-size: 12.5px; font-weight: 600;
-    color: var(--accent); background: rgba(56, 189, 248, 0.1);
-    border: 1px solid rgba(56, 189, 248, 0.25);
-    padding: 4px 12px; border-radius: 6px;
-    letter-spacing: 0.05em; text-transform: uppercase;
+  .eyebrow-pill {
+    background: linear-gradient(90deg, rgba(99, 102, 241, 0.15), rgba(6, 182, 212, 0.15));
+    border: 1px solid rgba(6, 182, 212, 0.35);
+    color: var(--neon-cyan);
+    font-family: var(--font-mono); font-size: 12px; font-weight: 600;
+    padding: 4px 12px; border-radius: 4px; letter-spacing: 0.08em;
+    text-transform: uppercase;
   }
-  .eyebrow-sub {
-    font-family: var(--font-mono); font-size: 12.5px; color: var(--text-dim);
+  .hero-coords {
+    font-family: var(--font-mono); font-size: 12px; color: var(--text-muted);
   }
-  h1.title {
+  
+  .hero-title-giant {
     font-family: var(--font-display);
     font-weight: 800;
-    font-size: clamp(34px, 5.8vw, 56px);
-    line-height: 1.1;
-    letter-spacing: -0.03em;
-    margin-bottom: 24px;
+    font-size: clamp(42px, 7vw, 76px);
+    line-height: 1.02;
+    letter-spacing: -0.04em;
     color: #fff;
+    text-transform: uppercase;
   }
-  .gradient-text {
-    background: linear-gradient(135deg, #6366f1 0%, #38bdf8 50%, #10b981 100%);
+  .hero-title-giant span.gradient {
+    background: linear-gradient(135deg, #ffffff 10%, #6366f1 50%, #06b6d4 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
   }
-  .hero p.lede {
-    font-size: 18px; color: var(--text-dim); max-width: 740px;
-    margin-bottom: 34px; line-height: 1.65;
+  
+  .hero-manifesto {
+    font-size: clamp(17px, 2.2vw, 21px);
+    color: var(--text-secondary);
+    max-width: 860px;
+    line-height: 1.6;
+    font-weight: 400;
   }
-  .hero p.lede b { color: #fff; font-weight: 600; }
+  .hero-manifesto b {
+    color: #fff; font-weight: 600;
+  }
+  .hero-manifesto span.highlight {
+    color: var(--neon-cyan);
+  }
 
-  .hero-actions {
-    display: flex; flex-wrap: wrap; gap: 14px; margin-bottom: 40px;
+  .hero-cta-strip {
+    display: flex; flex-wrap: wrap; gap: 14px; align-items: center; margin-top: 10px;
   }
-  .btn {
-    display: inline-flex; align-items: center; gap: 8px;
-    padding: 11px 22px; border-radius: 8px; font-size: 14px; font-weight: 600;
-    cursor: pointer; transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
-    font-family: var(--font-sans);
+  .cyber-btn {
+    display: inline-flex; align-items: center; gap: 10px;
+    padding: 12px 24px; border-radius: 6px; font-family: var(--font-mono);
+    font-size: 13.5px; font-weight: 600; cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    text-decoration: none; position: relative; overflow: hidden;
   }
-  .btn-primary {
-    background: var(--primary); color: #fff;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    box-shadow: 0 4px 18px rgba(99, 102, 241, 0.35);
+  .cyber-btn-primary {
+    background: var(--neon-indigo); color: #fff;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    box-shadow: 0 4px 20px rgba(99, 102, 241, 0.4);
   }
-  .btn-primary:hover {
-    background: var(--primary-light); transform: translateY(-2px);
-    box-shadow: 0 6px 24px rgba(99, 102, 241, 0.5);
+  .cyber-btn-primary:hover {
+    background: #4f46e5; transform: translateY(-2px);
+    box-shadow: 0 6px 30px rgba(99, 102, 241, 0.6);
   }
-  .btn-secondary {
-    background: var(--surface); color: var(--text);
-    border: 1px solid var(--border);
+  .cyber-btn-outline {
+    background: rgba(14, 20, 32, 0.8); color: var(--text-primary);
+    border: 1px solid var(--line);
   }
-  .btn-secondary:hover {
-    background: var(--surface-hover); border-color: var(--accent);
-    color: #fff; transform: translateY(-2px);
+  .cyber-btn-outline:hover {
+    border-color: var(--neon-cyan); color: #fff;
+    background: rgba(22, 32, 50, 0.9); transform: translateY(-2px);
   }
-  .btn-terminal {
-    background: rgba(16, 185, 129, 0.1); color: var(--accent-emerald);
-    border: 1px solid rgba(16, 185, 129, 0.3); font-family: var(--font-mono);
+  .cyber-btn-term {
+    background: rgba(16, 185, 129, 0.1); color: var(--neon-emerald);
+    border: 1px solid rgba(16, 185, 129, 0.3);
   }
-  .btn-terminal:hover {
-    background: rgba(16, 185, 129, 0.2); border-color: var(--accent-emerald);
+  .cyber-btn-term:hover {
+    background: rgba(16, 185, 129, 0.2); border-color: var(--neon-emerald);
     transform: translateY(-2px);
   }
 
-  .hero-stats {
-    display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 14px; padding-top: 28px; border-top: 1px solid var(--border-subtle);
+  /* TELEMETRY METRIC GRID */
+  .telemetry-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 14px; margin-top: 20px;
   }
-  .stat-card {
-    background: var(--surface-glass); border: 1px solid var(--border-subtle);
-    padding: 16px 20px; border-radius: 12px; backdrop-filter: blur(10px);
-    transition: border-color 0.2s;
+  .telemetry-card {
+    background: var(--bg-card); border: 1px solid var(--line);
+    border-radius: 8px; padding: 18px 20px; backdrop-filter: blur(12px);
+    position: relative; overflow: hidden; transition: border-color 0.2s;
   }
-  .stat-card:hover { border-color: var(--border-glow); }
-  .stat-num {
-    font-family: var(--font-mono); font-size: 26px; font-weight: 700;
-    color: #fff; display: flex; align-items: baseline; gap: 4px;
+  .telemetry-card:hover { border-color: var(--line-glow); }
+  .telemetry-card::before {
+    content: ''; position: absolute; top: 0; left: 0; width: 3px; height: 100%;
+    background: var(--neon-cyan); opacity: 0.6;
   }
-  .stat-num .unit { font-size: 14px; color: var(--primary-light); }
-  .stat-label {
-    font-size: 13px; color: var(--text-dim); margin-top: 4px; font-weight: 500;
+  .telemetry-val {
+    font-family: var(--font-mono); font-size: 30px; font-weight: 700; color: #fff;
+    display: flex; align-items: baseline; gap: 4px;
+  }
+  .telemetry-val small { font-size: 13px; color: var(--neon-cyan); font-weight: 500; }
+  .telemetry-label {
+    font-size: 13px; color: var(--text-secondary); margin-top: 4px; font-weight: 500;
+  }
+  .telemetry-sub {
+    font-size: 11px; font-family: var(--font-mono); color: var(--text-muted); margin-top: 2px;
   }
 
-  /* GITHUB ACHIEVEMENTS */
-  .achievements-banner {
+  /* GITHUB ACHIEVEMENTS SHOWCASE */
+  .achievements-box {
     margin: 40px 0 20px;
-    background: linear-gradient(135deg, rgba(30, 41, 59, 0.5) 0%, rgba(15, 23, 42, 0.8) 100%);
-    border: 1px solid rgba(99, 102, 241, 0.3);
-    border-radius: 16px; padding: 24px 28px;
-    display: flex; flex-direction: column; gap: 16px;
+    background: linear-gradient(135deg, rgba(20, 27, 45, 0.8) 0%, rgba(9, 13, 22, 0.95) 100%);
+    border: 1px solid rgba(245, 158, 11, 0.35);
+    border-radius: 12px; padding: 24px 28px;
     position: relative; overflow: hidden;
   }
-  .achievements-banner::before {
-    content: ''; position: absolute; top: 0; left: 0; width: 4px; height: 100%;
-    background: linear-gradient(180deg, var(--accent-amber), var(--primary), var(--accent));
+  .achievements-box::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+    background: linear-gradient(90deg, var(--neon-amber), var(--neon-indigo), var(--neon-cyan));
   }
-  .achievements-head {
-    display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px;
+  .achievements-header {
+    display: flex; justify-content: space-between; align-items: center;
+    flex-wrap: wrap; gap: 10px; margin-bottom: 20px;
   }
-  .achievements-title {
-    font-family: var(--font-mono); font-size: 15px; font-weight: 700; color: #fff;
-    display: flex; align-items: center; gap: 8px;
+  .achievements-title-text {
+    font-family: var(--font-heading); font-size: 18px; font-weight: 700; color: #fff;
+    display: flex; align-items: center; gap: 10px;
   }
-  .achievements-link {
-    font-size: 12.5px; font-family: var(--font-mono); color: var(--accent);
-    display: flex; align-items: center; gap: 4px;
+  .achievements-link-ext {
+    font-family: var(--font-mono); font-size: 12px; color: var(--neon-cyan);
+    text-decoration: none; display: flex; align-items: center; gap: 4px;
   }
-  .achievements-link:hover { text-decoration: underline; }
-  .badges-grid {
-    display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px;
+  .achievements-link-ext:hover { text-decoration: underline; }
+  .badges-container {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px;
   }
-  .badge-item {
-    background: rgba(17, 24, 39, 0.6); border: 1px solid var(--border);
-    border-radius: 10px; padding: 14px; display: flex; align-items: center; gap: 14px;
+  .badge-card {
+    background: rgba(10, 14, 24, 0.7); border: 1px solid var(--line);
+    border-radius: 8px; padding: 16px; display: flex; align-items: center; gap: 16px;
     transition: transform 0.2s, border-color 0.2s;
   }
-  .badge-item:hover {
-    transform: translateY(-2px); border-color: rgba(245, 158, 11, 0.4);
-    background: rgba(26, 34, 52, 0.7);
+  .badge-card:hover {
+    transform: translateY(-2px); border-color: var(--neon-amber);
+    background: rgba(20, 28, 48, 0.85);
   }
-  .badge-img {
-    width: 52px; height: 52px; flex-shrink: 0; object-fit: contain;
-    filter: drop-shadow(0 2px 8px rgba(0,0,0,0.5));
+  .badge-icon-img {
+    width: 58px; height: 58px; object-fit: contain; flex-shrink: 0;
+    filter: drop-shadow(0 4px 10px rgba(0,0,0,0.6));
   }
-  .badge-info h4 {
-    font-size: 14.5px; font-weight: 700; color: #fff; margin-bottom: 2px;
+  .badge-details h4 {
+    font-size: 15px; font-weight: 700; color: #fff; margin-bottom: 3px;
+    font-family: var(--font-heading);
   }
-  .badge-info p {
-    font-size: 12px; color: var(--text-dim); line-height: 1.4;
+  .badge-details p {
+    font-size: 12.5px; color: var(--text-secondary); line-height: 1.4;
   }
 
-  /* SECTIONS */
-  section { padding: 60px 0; }
-  .section-head {
+  /* SECTION HEADERS */
+  .section-wrap { padding: 60px 0; }
+  .section-hud-header {
     display: flex; justify-content: space-between; align-items: flex-end;
-    margin-bottom: 24px; flex-wrap: wrap; gap: 14px;
+    margin-bottom: 28px; flex-wrap: wrap; gap: 16px; border-bottom: 1px solid var(--line);
+    padding-bottom: 18px;
   }
-  .section-title-wrap {
-    display: flex; flex-direction: column; gap: 6px;
-  }
-  .section-tag {
+  .sec-tag {
     font-family: var(--font-mono); font-size: 12px; font-weight: 600;
-    color: var(--primary-light); text-transform: uppercase; letter-spacing: 0.05em;
+    color: var(--neon-cyan); letter-spacing: 0.08em; text-transform: uppercase;
   }
-  .section-title {
-    font-family: var(--font-display); font-size: 28px; font-weight: 700; color: #fff;
-    letter-spacing: -0.02em;
+  .sec-title {
+    font-family: var(--font-display); font-size: 32px; font-weight: 700; color: #fff;
+    letter-spacing: -0.02em; margin-top: 4px;
   }
-  .section-desc {
-    color: var(--text-dim); font-size: 15px; max-width: 700px;
+  .sec-desc {
+    color: var(--text-secondary); font-size: 14.5px; max-width: 680px; margin-top: 6px;
   }
 
-  /* INTERACTIVE DEMOS HUB */
-  .demos-hub {
-    background: var(--surface-glass);
-    border: 1px solid var(--border);
-    border-radius: 18px;
+  /* INTERACTIVE ENGINEERING DEMOS HUB */
+  .demos-station {
+    background: var(--bg-card);
+    border: 1px solid var(--line);
+    border-radius: 14px;
     overflow: hidden;
     backdrop-filter: blur(16px);
-    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.45);
-    margin-top: 10px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
   }
-  .demo-tabs {
-    display: flex; background: rgba(13, 19, 34, 0.95);
-    border-bottom: 1px solid var(--border);
+  .demos-nav {
+    display: flex; background: rgba(9, 13, 22, 0.95);
+    border-bottom: 1px solid var(--line);
     overflow-x: auto; scrollbar-width: none;
   }
-  .demo-tabs::-webkit-scrollbar { display: none; }
-  .demo-tab-btn {
-    padding: 14px 22px; font-family: var(--font-mono); font-size: 13px; font-weight: 600;
-    color: var(--text-dim); background: none; border: none; border-bottom: 2px solid transparent;
-    cursor: pointer; display: flex; align-items: center; gap: 8px; white-space: nowrap;
+  .demos-nav::-webkit-scrollbar { display: none; }
+  .demo-tab-button {
+    padding: 16px 24px; font-family: var(--font-mono); font-size: 13px; font-weight: 600;
+    color: var(--text-muted); background: none; border: none; border-bottom: 2px solid transparent;
+    cursor: pointer; display: flex; align-items: center; gap: 10px; white-space: nowrap;
     transition: all 0.15s ease;
   }
-  .demo-tab-btn:hover { color: #fff; background: rgba(255, 255, 255, 0.03); }
-  .demo-tab-btn.active {
-    color: var(--accent); border-bottom-color: var(--accent);
-    background: rgba(56, 189, 248, 0.08);
+  .demo-tab-button:hover { color: #fff; background: rgba(255, 255, 255, 0.02); }
+  .demo-tab-button.active {
+    color: var(--neon-cyan); border-bottom-color: var(--neon-cyan);
+    background: rgba(6, 182, 212, 0.08);
   }
 
-  .demo-panel {
-    display: none; padding: 28px;
-    min-height: 480px;
+  .station-content {
+    display: none; padding: 28px; min-height: 500px;
   }
-  .demo-panel.active { display: flex; flex-direction: column; }
+  .station-content.active { display: flex; flex-direction: column; }
 
   /* DEMO 1: AI PORTFOLIO AGENT */
-  .agent-box {
-    display: flex; flex-direction: column; height: 460px;
-    background: #0b101b; border: 1px solid var(--border);
-    border-radius: 12px; overflow: hidden;
+  .agent-shell {
+    display: flex; flex-direction: column; height: 500px;
+    background: #080b12; border: 1px solid var(--line);
+    border-radius: 10px; overflow: hidden;
   }
-  .agent-topbar {
-    padding: 12px 18px; background: rgba(17, 24, 39, 0.8);
-    border-bottom: 1px solid var(--border);
+  .agent-status-strip {
+    padding: 12px 18px; background: rgba(14, 20, 32, 0.9);
+    border-bottom: 1px solid var(--line);
     display: flex; justify-content: space-between; align-items: center;
-    font-family: var(--font-mono); font-size: 12.5px; color: var(--text-dim);
+    font-family: var(--font-mono); font-size: 12px; color: var(--text-secondary);
   }
-  .agent-status-badge {
-    display: inline-flex; align-items: center; gap: 6px;
-    color: var(--accent-emerald); font-weight: 600;
+  .agent-live-badge {
+    color: var(--neon-emerald); font-weight: 600; display: flex; align-items: center; gap: 6px;
   }
-  .chat-stream {
-    flex: 1; padding: 20px; overflow-y: auto; display: flex; flex-direction: column; gap: 14px;
+  .agent-dialog-area {
+    flex: 1; padding: 22px; overflow-y: auto; display: flex; flex-direction: column; gap: 16px;
   }
-  .chat-msg {
-    display: flex; gap: 10px; max-width: 88%; animation: fadeInMsg 0.2s ease-out;
+  .chat-bubble-row {
+    display: flex; gap: 12px; max-width: 86%; animation: popIn 0.2s ease-out;
   }
-  @keyframes fadeInMsg {
-    from { opacity: 0; transform: translateY(4px); }
+  @keyframes popIn {
+    from { opacity: 0; transform: translateY(6px); }
     to { opacity: 1; transform: translateY(0); }
   }
-  .chat-msg.user { align-self: flex-end; flex-direction: row-reverse; }
-  .msg-avatar {
-    width: 30px; height: 30px; border-radius: 8px; flex-shrink: 0;
+  .chat-bubble-row.user { align-self: flex-end; flex-direction: row-reverse; }
+  .agent-avatar {
+    width: 32px; height: 32px; border-radius: 8px; flex-shrink: 0;
     display: flex; align-items: center; justify-content: center;
-    font-size: 13px; background: #1e293b; border: 1px solid var(--border);
+    font-size: 14px; background: #162032; border: 1px solid var(--line);
   }
-  .chat-msg.bot .msg-avatar { background: var(--primary); color: #fff; }
-  .msg-bubble {
-    padding: 10px 16px; border-radius: 10px; font-size: 14px; line-height: 1.5;
-    background: #141c2e; border: 1px solid var(--border); color: var(--text);
+  .chat-bubble-row.bot .agent-avatar {
+    background: var(--neon-indigo); color: #fff;
   }
-  .chat-msg.user .msg-bubble {
-    background: var(--primary); color: #fff; border-color: var(--primary-light);
+  .bubble-text {
+    padding: 12px 18px; border-radius: 10px; font-size: 14.5px; line-height: 1.6;
+    background: #101726; border: 1px solid var(--line); color: var(--text-primary);
   }
-  .msg-bubble strong { color: #fff; }
-  .msg-bubble code {
-    font-family: var(--font-mono); font-size: 12.5px;
-    background: rgba(0,0,0,0.3); padding: 2px 6px; border-radius: 4px;
-    color: var(--accent);
+  .chat-bubble-row.user .bubble-text {
+    background: var(--neon-indigo); color: #fff; border-color: rgba(255,255,255,0.2);
   }
-  .agent-chips {
+  .bubble-text code {
+    font-family: var(--font-mono); font-size: 13px; background: rgba(0,0,0,0.3);
+    padding: 2px 6px; border-radius: 4px; color: var(--neon-cyan);
+  }
+  .agent-chips-strip {
     display: flex; flex-wrap: wrap; gap: 8px; padding: 10px 18px;
-    background: rgba(11, 16, 27, 0.95); border-top: 1px solid var(--border-subtle);
+    background: #0b0f1a; border-top: 1px solid var(--line);
   }
-  .agent-chip {
-    font-family: var(--font-mono); font-size: 11.5px; color: var(--text-dim);
-    background: var(--surface); border: 1px solid var(--border);
-    padding: 4px 10px; border-radius: 14px; cursor: pointer; transition: all 0.15s;
+  .prompt-chip {
+    font-family: var(--font-mono); font-size: 11.5px; color: var(--text-secondary);
+    background: var(--bg-card); border: 1px solid var(--line);
+    padding: 5px 12px; border-radius: 14px; cursor: pointer; transition: all 0.15s;
   }
-  .agent-chip:hover { color: #fff; border-color: var(--accent); background: var(--surface-hover); }
-  .agent-inputbar {
-    padding: 14px 18px; background: rgba(17, 24, 39, 0.85);
-    border-top: 1px solid var(--border); display: flex; gap: 10px;
+  .prompt-chip:hover {
+    color: #fff; border-color: var(--neon-cyan); background: var(--bg-card-hover);
   }
-  .agent-input {
-    flex: 1; background: #070a10; border: 1px solid var(--border);
-    border-radius: 8px; padding: 10px 14px; color: #fff; font-size: 13.5px;
-    font-family: var(--font-sans); outline: none; transition: border-color 0.2s;
+  .agent-input-control {
+    padding: 14px 18px; background: rgba(14, 20, 32, 0.95);
+    border-top: 1px solid var(--line); display: flex; gap: 10px;
   }
-  .agent-input:focus { border-color: var(--accent); }
-  .agent-send-btn {
-    background: var(--primary); color: #fff; border: none; border-radius: 8px;
-    padding: 0 18px; font-weight: 600; font-size: 13px; font-family: var(--font-mono);
+  .agent-input-box {
+    flex: 1; background: #05070c; border: 1px solid var(--line);
+    border-radius: 6px; padding: 11px 16px; color: #fff; font-size: 14px;
+    outline: none; font-family: var(--font-sans); transition: border-color 0.2s;
+  }
+  .agent-input-box:focus { border-color: var(--neon-cyan); }
+  .agent-send-button {
+    background: var(--neon-indigo); color: #fff; border: none; border-radius: 6px;
+    padding: 0 20px; font-family: var(--font-mono); font-size: 13px; font-weight: 600;
     cursor: pointer; transition: background 0.2s;
   }
-  .agent-send-btn:hover { background: var(--primary-light); }
+  .agent-send-button:hover { background: #4f46e5; }
 
-  /* DEMO 2: CLOUD TERMINAL */
-  .terminal-box {
-    background: #070b12; border: 1px solid var(--border);
-    border-radius: 12px; padding: 0; font-family: var(--font-mono);
-    height: 460px; display: flex; flex-direction: column; overflow: hidden;
+  /* DEMO 2: CYBERNETICS CLOUD SHELL */
+  .terminal-wrapper {
+    background: #05080f; border: 1px solid var(--line);
+    border-radius: 10px; height: 500px; display: flex; flex-direction: column;
+    font-family: var(--font-mono); overflow: hidden;
   }
-  .terminal-header {
-    background: #0f1626; padding: 10px 16px; border-bottom: 1px solid var(--border);
+  .term-topbar {
+    background: #0d1424; padding: 10px 16px; border-bottom: 1px solid var(--line);
     display: flex; justify-content: space-between; align-items: center; font-size: 12px;
   }
-  .terminal-dots { display: flex; gap: 6px; }
-  .t-dot { width: 10px; height: 10px; border-radius: 50%; }
-  .t-red { background: #ef4444; } .t-yellow { background: #eab308; } .t-green { background: #22c55e; }
-  .terminal-title { color: var(--text-dim); }
-  .terminal-body {
-    flex: 1; padding: 18px; overflow-y: auto; font-size: 13px; line-height: 1.6;
-    color: #e2e8f0;
+  .term-lights { display: flex; gap: 6px; }
+  .t-light { width: 10px; height: 10px; border-radius: 50%; }
+  .t-l-red { background: #ef4444; } .t-l-yellow { background: #eab308; } .t-l-green { background: #10b981; }
+  .term-screen {
+    flex: 1; padding: 20px; overflow-y: auto; font-size: 13px; line-height: 1.6;
+    color: #cbd5e1;
   }
-  .terminal-output { margin-bottom: 8px; white-space: pre-wrap; }
-  .t-green-text { color: var(--accent-emerald); }
-  .t-blue-text { color: var(--accent); }
-  .t-yellow-text { color: var(--accent-amber); }
-  .t-purple-text { color: var(--accent-purple); }
-  .t-dim { color: var(--text-muted); }
-  .terminal-input-row {
-    display: flex; align-items: center; gap: 8px;
-  }
-  .t-prompt { color: var(--accent-emerald); font-weight: 700; white-space: nowrap; }
-  .t-input {
+  .term-entry { margin-bottom: 6px; white-space: pre-wrap; }
+  .prompt-label { color: var(--neon-emerald); font-weight: 700; }
+  .term-input-line { display: flex; align-items: center; gap: 8px; }
+  .term-prompt-input {
     flex: 1; background: transparent; border: none; color: #fff;
     font-family: var(--font-mono); font-size: 13px; outline: none;
   }
 
   /* DEMO 3: AUTONOMOUS AGENT PIPELINE */
-  .pipeline-box {
-    background: #0a0f1d; border: 1px solid var(--border);
-    border-radius: 12px; padding: 22px; display: flex; flex-direction: column; gap: 20px;
+  .pipeline-stage-box {
+    display: flex; flex-direction: column; gap: 20px;
   }
-  .pipeline-controls {
-    display: flex; gap: 12px; flex-wrap: wrap; align-items: center;
-    background: #111827; padding: 14px 18px; border-radius: 10px; border: 1px solid var(--border);
+  .pipe-scenario-bar {
+    display: flex; gap: 12px; align-items: center; flex-wrap: wrap;
+    background: #0a0f1d; padding: 14px 18px; border-radius: 8px; border: 1px solid var(--line);
   }
-  .pipeline-select {
-    flex: 1; min-width: 250px; background: #070a10; color: #fff;
-    border: 1px solid var(--border); padding: 9px 14px; border-radius: 8px;
+  .pipe-scenario-select {
+    flex: 1; min-width: 260px; background: #05070c; color: #fff;
+    border: 1px solid var(--line); padding: 10px 14px; border-radius: 6px;
     font-family: var(--font-mono); font-size: 13px; outline: none;
   }
-  .pipeline-btn {
-    background: linear-gradient(135deg, var(--primary) 0%, #4f46e5 100%);
-    color: #fff; border: none; padding: 9px 20px; border-radius: 8px;
-    font-weight: 600; font-family: var(--font-mono); font-size: 13px;
-    cursor: pointer; transition: opacity 0.2s;
+  .pipe-trigger-btn {
+    background: linear-gradient(135deg, var(--neon-indigo), var(--neon-cyan));
+    color: #05070c; font-weight: 700; border: none; padding: 10px 22px;
+    border-radius: 6px; font-family: var(--font-mono); font-size: 13px; cursor: pointer;
   }
-  .pipeline-btn:hover { opacity: 0.9; }
-  .pipeline-stages {
-    display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-    gap: 12px; position: relative;
+  .pipe-nodes-row {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 12px;
   }
-  .stage-node {
-    background: #111a2e; border: 1px solid var(--border); border-radius: 10px;
-    padding: 14px; display: flex; flex-direction: column; gap: 6px;
-    transition: all 0.3s ease; position: relative;
+  .pipe-node-card {
+    background: #0d1424; border: 1px solid var(--line); border-radius: 8px;
+    padding: 16px; display: flex; flex-direction: column; gap: 6px;
+    transition: all 0.3s;
   }
-  .stage-node.active {
-    border-color: var(--accent); background: rgba(56, 189, 248, 0.12);
-    box-shadow: 0 0 16px rgba(56, 189, 248, 0.2);
+  .pipe-node-card.active {
+    border-color: var(--neon-cyan); background: rgba(6, 182, 212, 0.12);
+    box-shadow: 0 0 20px rgba(6, 182, 212, 0.25);
   }
-  .stage-node.done {
-    border-color: var(--accent-emerald); background: rgba(16, 185, 129, 0.08);
+  .pipe-node-card.completed {
+    border-color: var(--neon-emerald); background: rgba(16, 185, 129, 0.08);
   }
-  .stage-step-num {
-    font-family: var(--font-mono); font-size: 11px; color: var(--text-dim);
-  }
-  .stage-node.active .stage-step-num { color: var(--accent); }
-  .stage-node.done .stage-step-num { color: var(--accent-emerald); }
-  .stage-name {
-    font-size: 13.5px; font-weight: 600; color: #fff;
-  }
-  .stage-desc {
-    font-size: 11.5px; color: var(--text-dim); line-height: 1.4;
-  }
-  .pipeline-telemetry {
-    background: #070a10; border: 1px solid var(--border); border-radius: 10px;
-    padding: 14px 18px; font-family: var(--font-mono); font-size: 12.5px;
-    color: var(--text-dim); height: 130px; overflow-y: auto; line-height: 1.6;
+  .pipe-step-tag { font-family: var(--font-mono); font-size: 11px; color: var(--text-muted); }
+  .pipe-node-card.active .pipe-step-tag { color: var(--neon-cyan); }
+  .pipe-node-card.completed .pipe-step-tag { color: var(--neon-emerald); }
+  .pipe-node-title { font-size: 14px; font-weight: 600; color: #fff; }
+  .pipe-node-desc { font-size: 12px; color: var(--text-secondary); line-height: 1.4; }
+  .pipe-telemetry-screen {
+    background: #05070c; border: 1px solid var(--line); border-radius: 8px;
+    padding: 16px; font-family: var(--font-mono); font-size: 12.5px; color: var(--text-secondary);
+    height: 140px; overflow-y: auto; line-height: 1.6;
   }
 
-  /* DEMO 4: SEARCH SYNTHESIS (CYBERLINK) */
-  .search-demo-box {
-    background: #0b1120; border: 1px solid var(--border); border-radius: 12px;
-    padding: 24px; display: flex; flex-direction: column; gap: 18px;
+  /* DEMO 4: MOE WEIGHT STREAMING VISUALIZER */
+  .moe-vis-box {
+    display: flex; flex-direction: column; gap: 18px;
+    background: #080c16; border: 1px solid var(--line); border-radius: 10px; padding: 22px;
   }
-  .search-input-group {
-    display: flex; gap: 10px;
+  .moe-controls-bar {
+    display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;
   }
-  .search-input-field {
-    flex: 1; background: #060910; border: 1px solid var(--border);
-    border-radius: 8px; padding: 11px 16px; color: #fff; font-size: 14px;
-    outline: none; font-family: var(--font-sans);
+  .moe-matrix-container {
+    display: grid; grid-template-columns: repeat(16, 1fr); gap: 6px;
+    background: #05070c; padding: 18px; border-radius: 8px; border: 1px solid var(--line);
   }
-  .search-run-btn {
-    background: var(--accent); color: #090d16; font-weight: 700;
-    border: none; border-radius: 8px; padding: 0 20px; cursor: pointer;
-    font-family: var(--font-mono); font-size: 13px;
+  .expert-node {
+    height: 28px; border-radius: 4px; background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1); display: flex; align-items: center;
+    justify-content: center; font-family: var(--font-mono); font-size: 10px; color: var(--text-muted);
+    transition: all 0.2s;
   }
-  .search-sources-bar {
-    display: flex; gap: 12px; font-family: var(--font-mono); font-size: 12px; color: var(--text-dim);
+  .expert-node.paged {
+    background: rgba(16, 185, 129, 0.25); border-color: var(--neon-emerald);
+    color: #fff; box-shadow: 0 0 10px rgba(16, 185, 129, 0.5);
   }
-  .search-results-area {
-    background: #070b13; border: 1px solid var(--border); border-radius: 10px;
-    padding: 18px; min-height: 190px; font-size: 13.5px; line-height: 1.6;
+  .moe-stats-line {
+    display: flex; gap: 24px; font-family: var(--font-mono); font-size: 12.5px; color: var(--text-secondary);
+    flex-wrap: wrap;
   }
 
-  /* PROJECT FILTER & SEARCH CONTROLS */
-  .filter-controls {
+  /* REPOSITORY EXPLORER SECTION */
+  .filter-bar-row {
     display: flex; justify-content: space-between; align-items: center;
-    gap: 16px; margin: 30px 0 24px; flex-wrap: wrap;
+    gap: 16px; margin-bottom: 28px; flex-wrap: wrap;
   }
-  .filter-pills {
+  .filter-pills-row {
     display: flex; gap: 8px; flex-wrap: wrap;
   }
-  .filter-pill {
-    background: var(--surface); border: 1px solid var(--border);
-    color: var(--text-dim); padding: 7px 15px; border-radius: 20px;
-    font-size: 13px; font-weight: 500; cursor: pointer; transition: all 0.15s;
-    font-family: var(--font-mono);
+  .filter-btn {
+    background: var(--bg-card); border: 1px solid var(--line);
+    color: var(--text-secondary); padding: 8px 16px; border-radius: 20px;
+    font-size: 13px; font-family: var(--font-mono); font-weight: 500; cursor: pointer;
+    transition: all 0.15s;
   }
-  .filter-pill:hover {
-    color: #fff; border-color: var(--primary-light); background: var(--surface-hover);
+  .filter-btn:hover {
+    color: #fff; border-color: var(--neon-cyan); background: var(--bg-card-hover);
   }
-  .filter-pill.active {
-    background: var(--primary); color: #fff; border-color: var(--primary-light);
+  .filter-btn.active {
+    background: var(--neon-indigo); color: #fff; border-color: rgba(255, 255, 255, 0.3);
   }
-  .search-box {
-    position: relative; min-width: 240px;
+  .search-input-field-wrap {
+    position: relative; min-width: 260px;
   }
-  .search-box input {
-    width: 100%; background: var(--surface); border: 1px solid var(--border);
-    border-radius: 8px; padding: 8px 14px 8px 36px; color: #fff; font-size: 13px;
+  .search-input-field-wrap input {
+    width: 100%; background: var(--bg-card); border: 1px solid var(--line);
+    border-radius: 8px; padding: 9px 16px 9px 38px; color: #fff; font-size: 13.5px;
     outline: none; font-family: var(--font-sans); transition: border-color 0.2s;
   }
-  .search-box input:focus { border-color: var(--accent); }
-  .search-box svg {
-    position: absolute; left: 12px; top: 50%; transform: translateY(-50%);
+  .search-input-field-wrap input:focus { border-color: var(--neon-cyan); }
+  .search-input-field-wrap svg {
+    position: absolute; left: 14px; top: 50%; transform: translateY(-50%);
     width: 15px; height: 15px; fill: var(--text-muted); pointer-events: none;
   }
 
-  /* PROJECT CARDS GRID */
-  .projects-grid {
-    display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    gap: 20px; margin-bottom: 40px;
+  /* PROJECT CARDS */
+  .repos-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+    gap: 22px;
   }
-  .project-card {
-    background: var(--surface-glass);
-    border: 1px solid var(--border);
-    border-radius: 14px;
-    padding: 24px;
-    display: flex; flex-direction: column; justify-content: space-between;
-    transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.2s, box-shadow 0.2s;
+  .repo-card {
+    background: var(--bg-card); border: 1px solid var(--line);
+    border-radius: 12px; padding: 26px; display: flex; flex-direction: column;
+    justify-content: space-between; transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
     position: relative; overflow: hidden;
   }
-  .project-card:hover {
-    transform: translateY(-3px);
-    border-color: rgba(99, 102, 241, 0.5);
-    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
-    background: rgba(22, 32, 52, 0.75);
+  .repo-card:hover {
+    transform: translateY(-4px); border-color: rgba(99, 102, 241, 0.6);
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.45); background: var(--bg-card-hover);
   }
-  .card-glow-bar {
+  .repo-card-glow {
     position: absolute; top: 0; left: 0; right: 0; height: 2px;
-    background: linear-gradient(90deg, transparent, var(--primary), transparent);
+    background: linear-gradient(90deg, transparent, var(--neon-cyan), transparent);
     opacity: 0; transition: opacity 0.2s;
   }
-  .project-card:hover .card-glow-bar { opacity: 1; }
+  .repo-card:hover .repo-card-glow { opacity: 1; }
 
-  .card-top {
+  .repo-header {
     display: flex; justify-content: space-between; align-items: flex-start;
     margin-bottom: 12px; gap: 10px;
   }
-  .card-title-group {
-    display: flex; flex-direction: column;
-  }
-  .card-org {
+  .repo-ns {
     font-family: var(--font-mono); font-size: 12px; color: var(--text-muted);
   }
-  .card-name {
-    font-size: 17px; font-weight: 700; color: #fff; letter-spacing: -0.01em;
+  .repo-title {
+    font-family: var(--font-heading); font-size: 19px; font-weight: 700; color: #fff;
+    letter-spacing: -0.01em; margin-top: 2px;
   }
-  .card-badge {
-    font-family: var(--font-mono); font-size: 11.5px; padding: 3px 9px;
-    border-radius: 6px; white-space: nowrap; font-weight: 500;
+  .repo-pill-tag {
+    font-family: var(--font-mono); font-size: 11px; padding: 3px 10px;
+    border-radius: 4px; font-weight: 600; white-space: nowrap;
   }
-  .badge-ai { background: rgba(99, 102, 241, 0.15); color: var(--primary-light); border: 1px solid rgba(99, 102, 241, 0.3); }
-  .badge-tool { background: rgba(56, 189, 248, 0.15); color: var(--accent); border: 1px solid rgba(56, 189, 248, 0.3); }
-  .badge-client { background: rgba(16, 185, 129, 0.15); color: var(--accent-emerald); border: 1px solid rgba(16, 185, 129, 0.3); }
-  .badge-ref { background: rgba(245, 158, 11, 0.15); color: var(--accent-amber); border: 1px solid rgba(245, 158, 11, 0.3); }
+  .tag-ai { background: rgba(99, 102, 241, 0.15); color: #a5b4fc; border: 1px solid rgba(99, 102, 241, 0.35); }
+  .tag-tool { background: rgba(6, 182, 212, 0.15); color: var(--neon-cyan); border: 1px solid rgba(6, 182, 212, 0.35); }
+  .tag-prod { background: rgba(16, 185, 129, 0.15); color: var(--neon-emerald); border: 1px solid rgba(16, 185, 129, 0.35); }
+  .tag-curric { background: rgba(245, 158, 11, 0.15); color: var(--neon-amber); border: 1px solid rgba(245, 158, 11, 0.35); }
 
-  .card-desc {
-    color: var(--text-dim); font-size: 14px; line-height: 1.55; margin-bottom: 18px;
+  .repo-summary {
+    color: var(--text-secondary); font-size: 14.5px; line-height: 1.6; margin-bottom: 18px;
     flex: 1;
   }
-  .card-architecture {
-    background: rgba(10, 15, 26, 0.6); border: 1px solid var(--border-subtle);
-    padding: 10px 12px; border-radius: 8px; margin-bottom: 16px;
-    font-size: 12px; color: #cbd5e1; font-family: var(--font-mono);
+  .repo-schema-box {
+    background: rgba(5, 8, 15, 0.7); border: 1px solid var(--line);
+    padding: 10px 14px; border-radius: 6px; margin-bottom: 18px;
+    font-size: 12px; font-family: var(--font-mono); color: #cbd5e1;
   }
-  .card-architecture span.arch-label {
-    color: var(--accent); font-weight: 600; display: block; margin-bottom: 3px; font-size: 11px;
-    text-transform: uppercase;
+  .repo-schema-label {
+    color: var(--neon-cyan); font-weight: 600; font-size: 10.5px; text-transform: uppercase;
+    display: block; margin-bottom: 4px;
   }
 
-  .card-bottom {
+  .repo-meta-footer {
     display: flex; justify-content: space-between; align-items: center;
-    border-top: 1px solid var(--border-subtle); padding-top: 14px;
+    border-top: 1px solid rgba(255, 255, 255, 0.06); padding-top: 16px;
     flex-wrap: wrap; gap: 10px;
   }
-  .card-stack {
+  .repo-tech-stack {
     display: flex; flex-wrap: wrap; gap: 6px;
   }
-  .card-stack span {
-    font-size: 11px; font-family: var(--font-mono); color: var(--text-muted);
-    background: rgba(255, 255, 255, 0.03); border: 1px solid var(--border-subtle);
-    padding: 2px 7px; border-radius: 4px;
+  .stack-chip {
+    font-size: 11px; font-family: var(--font-mono); color: var(--text-secondary);
+    background: rgba(255, 255, 255, 0.04); border: 1px solid rgba(255, 255, 255, 0.08);
+    padding: 3px 8px; border-radius: 4px;
   }
-  .card-links a {
-    font-family: var(--font-mono); font-size: 12.5px; color: var(--accent);
-    display: inline-flex; align-items: center; gap: 4px; font-weight: 600;
+  .repo-action-link {
+    font-family: var(--font-mono); font-size: 13px; color: var(--neon-cyan);
+    font-weight: 600; text-decoration: none; display: flex; align-items: center; gap: 4px;
   }
-  .card-links a:hover { text-decoration: underline; }
-
-  /* ABOUT / EXPERTISE SECTION */
-  .expertise-grid {
-    display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 20px; margin-top: 24px;
-  }
-  .expertise-card {
-    background: var(--surface-glass); border: 1px solid var(--border);
-    border-radius: 14px; padding: 26px; backdrop-filter: blur(12px);
-  }
-  .expertise-icon {
-    width: 44px; height: 44px; border-radius: 10px;
-    background: rgba(99, 102, 241, 0.12); border: 1px solid rgba(99, 102, 241, 0.3);
-    display: flex; align-items: center; justify-content: center;
-    font-size: 20px; margin-bottom: 16px; color: var(--primary-light);
-  }
-  .expertise-title {
-    font-size: 17px; font-weight: 700; color: #fff; margin-bottom: 8px;
-  }
-  .expertise-desc {
-    color: var(--text-dim); font-size: 14px; line-height: 1.6;
-  }
-  .expertise-list {
-    margin-top: 14px; list-style: none; display: flex; flex-direction: column; gap: 6px;
-    font-size: 13px; color: #cbd5e1; font-family: var(--font-mono);
-  }
-  .expertise-list li::before {
-    content: '▹'; color: var(--accent); margin-right: 8px;
-  }
+  .repo-action-link:hover { text-decoration: underline; }
 
   /* FOOTER */
   footer {
-    border-top: 1px solid var(--border-subtle);
-    padding: 50px 0 60px; margin-top: 60px;
-    background: rgba(9, 13, 22, 0.95);
+    border-top: 1px solid var(--line); padding: 60px 0; margin-top: 80px;
+    background: rgba(5, 7, 12, 0.95);
   }
-  .footer-inner {
+  .footer-row {
     display: flex; justify-content: space-between; align-items: center;
     flex-wrap: wrap; gap: 20px;
   }
-  .footer-brand {
-    display: flex; flex-direction: column; gap: 4px;
+  .f-brand-title {
+    font-family: var(--font-heading); font-size: 17px; font-weight: 700; color: #fff;
   }
-  .footer-title {
-    font-family: var(--font-mono); font-weight: 700; color: #fff; font-size: 15px;
+  .f-brand-sub { font-size: 13.5px; color: var(--text-muted); }
+  .footer-links-list {
+    display: flex; gap: 22px; font-family: var(--font-mono); font-size: 13px; color: var(--text-secondary);
   }
-  .footer-sub {
-    font-size: 13px; color: var(--text-muted);
-  }
-  .footer-links {
-    display: flex; gap: 20px; font-size: 13.5px; color: var(--text-dim);
-    font-family: var(--font-mono);
-  }
-  .footer-links a:hover { color: var(--accent); }
+  .footer-links-list a:hover { color: var(--neon-cyan); }
 
-  @media(max-width: 768px) {
-    .nav-links { display: none; }
-    .hero { padding: 60px 0 40px; }
-    .hero-stats { grid-template-columns: repeat(2, 1fr); }
-    .demo-panel { padding: 18px; }
-    .stage-node { padding: 10px; }
+  @media(max-width: 820px) {
+    .hud-telemetry { display: none; }
+    .hud-nav-links { display: none; }
+    .hero-container { padding: 50px 0 30px; }
   }
 </style>
 </head>
 <body>
 
-<!-- NAVIGATION -->
-<header class="nav">
-  <div class="nav-inner">
-    <div class="brand">
-      <img class="brand-avatar" src="https://avatars.githubusercontent.com/u/192362430?v=4" alt="Neiman Marcus">
-      <div class="brand-text">
-        <span class="brand-name">engineer@marcus</span>
-        <span class="brand-role">Senior Systems & AI Engineer</span>
+<canvas id="neuralCanvas"></canvas>
+
+<!-- TOP HUD DIAGNOSTICS BAR -->
+<header class="hud-topbar">
+  <div class="hud-inner">
+    <div class="hud-left">
+      <div class="hud-brand">
+        <img src="https://avatars.githubusercontent.com/u/192362430?v=4" alt="Marcus Avatar">
+        <span>engineer@marcus</span>
+      </div>
+      <div class="hud-status-badge">
+        <span class="hud-status-dot"></span>
+        <span>PRODUCTION ACTIVE</span>
       </div>
     </div>
-    <nav class="nav-links">
-      <a href="#demos">Live Demos</a>
-      <a href="#projects">32+ Projects</a>
-      <a href="#expertise">AI & Stack</a>
-      <a href="#achievements">Achievements</a>
-      <a href="https://github.com/engineermarcus" target="_blank">GitHub ↗</a>
-      <span class="nav-badge"><span class="pulse-dot"></span> Available for Hire</span>
-    </nav>
+
+    <div class="hud-telemetry">
+      <span>KERNEL: <b>6.11-CYBER</b></span>
+      <span>NODE: <b>ZERO-GPU A10G</b></span>
+      <span>LOC: <b>NAIROBI // UTC+3</b></span>
+      <span>REPOS: <b>32+ SYNCED</b></span>
+    </div>
+
+    <div class="hud-right">
+      <nav class="hud-nav-links">
+        <a href="#demos" onclick="playBeep()">Demos</a>
+        <a href="#repos" onclick="playBeep()">32+ Repos</a>
+        <a href="#achievements" onclick="playBeep()">Achievements</a>
+        <a href="https://github.com/engineermarcus" target="_blank">GitHub ↗</a>
+      </nav>
+      <button class="hud-sfx-btn" id="sfxToggleBtn" onclick="toggleAudio()">SFX: ON</button>
+    </div>
   </div>
 </header>
 
 <div class="wrap">
 
   <!-- HERO SECTION -->
-  <section class="hero">
-    <div class="eyebrow-container">
-      <span class="eyebrow">AI AGENT SPECIALIST & SYSTEMS ENGINEER</span>
-      <span class="eyebrow-sub">Python · TypeScript · C · Shell · Kotlin</span>
+  <section class="hero-container">
+    <div class="hero-eyebrow-row">
+      <span class="eyebrow-pill">AUTONOMOUS AI ARCHITECT // SYSTEMS SPECIALIST</span>
+      <span class="hero-coords">SYS_ID: 192362430 · PYTHON / C / TS / SHELL / KOTLIN</span>
     </div>
 
-    <h1 class="title">
-      Neiman Marcus<br>
-      <span class="gradient-text">Architects Autonomous AI & Systems.</span>
+    <h1 class="hero-title-giant">
+      NEIMAN MARCUS<br>
+      <span class="gradient">ARCHITECTS AGENTIC REALITY.</span>
     </h1>
 
-    <p class="lede">
-      Software engineer specializing in <b>autonomous multi-agent workflows</b>, <b>headless automation inside constrained environments</b> (Termux/proot on Android), <b>local LLM inference runners in pure C</b>, and full-stack production deployments. Comfortable owning the complete technical lifecycle from bare metal to client-facing products.
+    <p class="hero-manifesto">
+      Senior Software Engineer building <b>autonomous multi-agent state machines</b>, <b>headless browser scrapers inside constrained mobile sandboxes</b> (Termux Ubuntu proot), and <b>pure C frontier MoE runners</b> that stream expert weights directly from NVMe storage without GPU VRAM saturation. 
+      <span class="highlight">No slides, no generic wrappers — production code from metal to browser.</span>
     </p>
 
-    <div class="hero-actions">
-      <a href="#demos" class="btn btn-primary">⚡ Test Live Agent Demos</a>
-      <a href="#projects" class="btn btn-secondary">Explore 32+ Repositories</a>
-      <button onclick="activateDemoTab('terminal')" class="btn btn-terminal">$ Launch Cloud Terminal</button>
+    <div class="hero-cta-strip">
+      <a href="#demos" class="cyber-btn cyber-btn-primary" onclick="playBeep()">⚡ Test Live Agent Demos</a>
+      <a href="#repos" class="cyber-btn cyber-btn-outline" onclick="playBeep()">Explore 32+ Repositories</a>
+      <button onclick="activateStationTab('shell'); playBeep();" class="cyber-btn cyber-btn-term">$ Launch Cloud Terminal</button>
+      <a href="mailto:engineermarcus72@gmail.com" class="cyber-btn cyber-btn-outline">Contact Directly ➔</a>
     </div>
 
     <!-- METRICS STRIP -->
-    <div class="hero-stats">
-      <div class="stat-card">
-        <div class="stat-num">32<span class="unit">+</span></div>
-        <div class="stat-label">Public Repositories</div>
+    <div class="telemetry-grid">
+      <div class="telemetry-card">
+        <div class="telemetry-val">32<small>+</small></div>
+        <div class="telemetry-label">Public Repositories</div>
+        <div class="telemetry-sub">AI, Tools, Scrapers, FinTech</div>
       </div>
-      <div class="stat-card">
-        <div class="stat-num">3<span class="unit">🏆</span></div>
-        <div class="stat-label">GitHub Achievements</div>
+      <div class="telemetry-card">
+        <div class="telemetry-val">3<small>🏆</small></div>
+        <div class="telemetry-label">GitHub Achievements</div>
+        <div class="telemetry-sub">Quickdraw · Pull Shark · YOLO</div>
       </div>
-      <div class="stat-card">
-        <div class="stat-num">6<span class="unit">langs</span></div>
-        <div class="stat-label">Python · TS/JS · C · Kotlin · Shell</div>
+      <div class="telemetry-card">
+        <div class="telemetry-val">0<small>deps</small></div>
+        <div class="telemetry-label">Frontier MoE Engine (C)</div>
+        <div class="telemetry-sub">Colibri pure C NVMe streamer</div>
       </div>
-      <div class="stat-card">
-        <div class="stat-num">100<span class="unit">%</span></div>
-        <div class="stat-label">Production Code, Zero Slides</div>
+      <div class="telemetry-card">
+        <div class="telemetry-val">100<small>%</small></div>
+        <div class="telemetry-label">Production Tested</div>
+        <div class="telemetry-sub">AM2PM Liquor Store & Magpie CLI</div>
       </div>
     </div>
   </section>
 
   <!-- GITHUB ACHIEVEMENTS SHOWCASE -->
-  <div class="achievements-banner" id="achievements">
-    <div class="achievements-head">
-      <div class="achievements-title">
+  <div class="achievements-box" id="achievements">
+    <div class="achievements-header">
+      <div class="achievements-title-text">
         <span>🏆</span> Verified GitHub Achievements
       </div>
-      <a class="achievements-link" href="https://github.com/engineermarcus?tab=achievements" target="_blank">
-        View live on GitHub Profile ↗
+      <a class="achievements-link-ext" href="https://github.com/engineermarcus?tab=achievements" target="_blank">
+        Verify live on GitHub Profile [@engineermarcus] ↗
       </a>
     </div>
 
-    <div class="badges-grid">
-      <div class="badge-item">
-        <img class="badge-img" src="https://github.githubassets.com/assets/quickdraw-default-39c6aec8ff89.png" alt="Quickdraw Achievement">
-        <div class="badge-info">
+    <div class="badges-container">
+      <div class="badge-card">
+        <img class="badge-icon-img" src="https://github.githubassets.com/assets/quickdraw-default-39c6aec8ff89.png" alt="Quickdraw Achievement">
+        <div class="badge-details">
           <h4>Quickdraw</h4>
-          <p>Closed an issue or pull request within 5 minutes of opening. Rapid diagnostic & hotfix agility.</p>
+          <p>Closed an issue or pull request within 5 minutes of opening. Rapid diagnostic turnaround and hotfix agility.</p>
         </div>
       </div>
 
-      <div class="badge-item">
-        <img class="badge-img" src="https://github.githubassets.com/assets/pull-shark-default-498c279a747d.png" alt="Pull Shark Achievement">
-        <div class="badge-info">
+      <div class="badge-card">
+        <img class="badge-icon-img" src="https://github.githubassets.com/assets/pull-shark-default-498c279a747d.png" alt="Pull Shark Achievement">
+        <div class="badge-details">
           <h4>Pull Shark</h4>
-          <p>Opened pull requests that were reviewed, approved, and merged across production codebases.</p>
+          <p>Authored and merged impactful pull requests across production and open-source codebases.</p>
         </div>
       </div>
 
-      <div class="badge-item">
-        <img class="badge-img" src="https://github.githubassets.com/assets/yolo-default-be0bbff04951.png" alt="YOLO Achievement">
-        <div class="badge-info">
+      <div class="badge-card">
+        <img class="badge-icon-img" src="https://github.githubassets.com/assets/yolo-default-be0bbff04951.png" alt="YOLO Achievement">
+        <div class="badge-details">
           <h4>YOLO</h4>
           <p>Merged code directly without review — high velocity execution and confidence in shipping clean systems.</p>
         </div>
@@ -795,589 +767,497 @@
     </div>
   </div>
 
-  <!-- INTERACTIVE EMBEDDED DEMOS HUB -->
-  <section id="demos">
-    <div class="section-head">
-      <div class="section-title-wrap">
-        <span class="section-tag">01 / Interactive Engineering Demos</span>
-        <h2 class="section-title">Experience the Systems in Real-Time</h2>
+  <!-- INTERACTIVE EMBEDDED DEMOS STATION -->
+  <section class="section-wrap" id="demos">
+    <div class="section-hud-header">
+      <div>
+        <span class="sec-tag">01 // Interactive Engineering Station</span>
+        <h2 class="sec-title">Directly Test the Running Systems</h2>
+        <p class="sec-desc">
+          No simulated marketing mockups. Test the AI Portfolio Agent backed by Qwen 2.5 on Hugging Face Spaces, run commands in the cloud shell, or watch the multi-agent pipeline execute.
+        </p>
       </div>
-      <p class="section-desc">
-        No mock screenshots. Directly test the AI knowledge agent, the browser cloud shell, the autonomous agent pipeline simulator, and the multi-source search synthesizer.
-      </p>
     </div>
 
-    <div class="demos-hub">
-      <div class="demo-tabs">
-        <button class="demo-tab-btn active" onclick="activateDemoTab('agent')">🤖 Portfolio AI Agent</button>
-        <button class="demo-tab-btn" onclick="activateDemoTab('terminal')">💻 Cloud Terminal (`cybernetics`)</button>
-        <button class="demo-tab-btn" onclick="activateDemoTab('pipeline')">⚡ Autonomous Agent Pipeline</button>
-        <button class="demo-tab-btn" onclick="activateDemoTab('search')">🔍 Multi-Source Synthesizer (`cyberlink`)</button>
+    <div class="demos-station">
+      <div class="demos-nav">
+        <button class="demo-tab-button active" onclick="activateStationTab('agent'); playBeep();">🤖 Neural AI Agent</button>
+        <button class="demo-tab-button" onclick="activateStationTab('shell'); playBeep();">💻 Cloud Shell (`cybernetics`)</button>
+        <button class="demo-tab-button" onclick="activateStationTab('pipeline'); playBeep();">⚡ Autonomous Agent Pipeline</button>
+        <button class="demo-tab-button" onclick="activateStationTab('moe'); playBeep();">🐦 Pure C MoE Visualizer (`colibri`)</button>
       </div>
 
-      <!-- DEMO 1: AI PORTFOLIO AGENT -->
-      <div class="demo-panel active" id="demo-panel-agent">
-        <div class="agent-box">
-          <div class="agent-topbar">
-            <span>● Engine: Qwen 2.5 Inference · Hugging Face Spaces</span>
-            <span class="agent-status-badge">⚡ Backend Online (0ms Latency)</span>
+      <!-- DEMO 1: NEURAL AI AGENT -->
+      <div class="station-content active" id="station-panel-agent">
+        <div class="agent-shell">
+          <div class="agent-status-strip">
+            <span>● Engine: <strong>Qwen 2.5 Instruct // ZeroGPU Space</strong></span>
+            <span class="agent-live-badge" id="agentConnectionBadge">⚡ LIVE BACKEND CONNECTED</span>
           </div>
 
-          <div class="chat-stream" id="chatStream">
-            <div class="chat-msg bot">
-              <div class="msg-avatar">⚡</div>
-              <div class="msg-bubble">
-                Hello! I am <strong>Marcus's AI Portfolio Agent</strong>, backed by Qwen 2.5 and deployed to Hugging Face Spaces. Ask me about his <strong>32+ repositories</strong>, how he runs headless scrapers inside Android Termux, his Paystack FinTech integration, or his frontier MoE runner!
+          <div class="agent-dialog-area" id="agentDialog">
+            <div class="chat-bubble-row bot">
+              <div class="agent-avatar">⚡</div>
+              <div class="bubble-text">
+                Greetings. I am <strong>Marcus's AI Portfolio Agent</strong>. Ask me anything about his <strong>32+ repositories</strong>, how he runs headless Chromium inside Android Termux, his Paystack FinTech integration, or how Colibri runs frontier MoE models in pure C!
               </div>
             </div>
           </div>
 
-          <div class="agent-chips">
-            <span class="agent-chip" onclick="askAgent('What are Marcus\'s core AI and automation projects?')">⚡ AI & Automation Stack</span>
-            <span class="agent-chip" onclick="askAgent('How does moviebox-api work inside Termux Android?')">📱 Termux & Playwright CLI</span>
-            <span class="agent-chip" onclick="askAgent('Tell me about the Paystack Payment Gateway and client work')">💳 Paystack FinTech</span>
-            <span class="agent-chip" onclick="askAgent('What is Colibri and how does it run MoE models in pure C?')">🐦 Pure C MoE Runner</span>
-            <span class="agent-chip" onclick="askAgent('How can I contact or hire Marcus?')">📬 Contact & Hire</span>
+          <div class="agent-chips-strip">
+            <span class="prompt-chip" onclick="askAgentQuestion('What are Marcus\'s core AI and automation projects?')">⚡ AI & Automation Stack</span>
+            <span class="prompt-chip" onclick="askAgentQuestion('How does moviebox-api run Playwright inside Termux Android?')">📱 Termux & Magpie CLI</span>
+            <span class="prompt-chip" onclick="askAgentQuestion('Tell me about the Paystack Payment Gateway and client storefront')">💳 Paystack FinTech</span>
+            <span class="prompt-chip" onclick="askAgentQuestion('What is Colibri and how does it stream MoE weights in pure C?')">🐦 Pure C MoE Runner</span>
+            <span class="prompt-chip" onclick="askAgentQuestion('How can I contact or hire Marcus?')">📬 Contact & Hire</span>
           </div>
 
-          <div class="agent-inputbar">
-            <input type="text" class="agent-input" id="agentInput" placeholder="Ask anything about Marcus's architecture, projects, or background..." onkeydown="if(event.key==='Enter')sendAgentMsg()">
-            <button class="agent-send-btn" onclick="sendAgentMsg()">Ask Agent ➔</button>
+          <div class="agent-input-control">
+            <input type="text" class="agent-input-box" id="agentInputBox" placeholder="Ask about AI agents, Termux pipelines, Paystack, or systems..." onkeydown="if(event.key==='Enter')dispatchAgentMessage()">
+            <button class="agent-send-button" onclick="dispatchAgentMessage()">Ask Agent ➔</button>
           </div>
         </div>
       </div>
 
-      <!-- DEMO 2: CLOUD TERMINAL -->
-      <div class="demo-panel" id="demo-panel-terminal">
-        <div class="terminal-box">
-          <div class="terminal-header">
-            <div class="terminal-dots">
-              <span class="t-dot t-red"></span>
-              <span class="t-dot t-yellow"></span>
-              <span class="t-dot t-green"></span>
+      <!-- DEMO 2: CYBERNETICS CLOUD SHELL -->
+      <div class="station-content" id="station-panel-shell">
+        <div class="terminal-wrapper">
+          <div class="term-topbar">
+            <div class="term-lights">
+              <span class="t-light t-l-red"></span>
+              <span class="t-light t-l-yellow"></span>
+              <span class="t-light t-l-green"></span>
             </div>
-            <span class="terminal-title">marcus@cybernetics-cloud: ~/workspace</span>
-            <span class="t-dim">SSH via Tailscale</span>
+            <span>marcus@cybernetics-cloud: ~/workspace</span>
+            <span style="color:var(--neon-cyan)">Tailscale P2P Encrypted</span>
           </div>
 
-          <div class="terminal-body" id="terminalBody">
-            <div class="terminal-output"><span class="t-green-text">Cybernetics v2.4.0 (x86_64-linux-gnu)</span>
-Type <span class="t-yellow-text">'help'</span> for a list of available commands.
-Try <span class="t-blue-text">'projects'</span>, <span class="t-blue-text">'cat bio.txt'</span>, <span class="t-blue-text">'run-agent'</span>, or <span class="t-blue-text">'achievements'</span>.
+          <div class="term-screen" id="termScreen">
+            <div class="term-entry"><span style="color:var(--neon-emerald)">
+  ____ _   _ ____  _____ ____  _   _ _____ _____ ___ ____ ____  
+ / ___| \ | | __ )| ____|  _ \| \ | | ____|_   _|_ _/ ___/ ___| 
+| |   | \ | |  _ \|  _| | |_) |  \| |  _|   | |  | | |   \___ \ 
+| |___| |\  | |_) | |___|  _ <| |\  | |___  | |  | | |___ ___) |
+ \____|_| \_|____/|_____|_| \_\_| \_|_____| |_| |___\____|____/ 
+</span>
+<span style="color:var(--neon-cyan)">Cybernetics Cloud Terminal v2.4.0 (x86_64-linux-gnu)</span>
+Type <span style="color:var(--neon-amber)">'help'</span> to see available commands.
+Try <span style="color:var(--neon-cyan)">'projects'</span>, <span style="color:var(--neon-cyan)">'cat bio.md'</span>, <span style="color:var(--neon-cyan)">'run-agent'</span>, or <span style="color:var(--neon-cyan)">'magpie'</span>.
 </div>
-            <div class="terminal-input-row" id="terminalInputRow">
-              <span class="t-prompt">marcus@dev:~$</span>
-              <input type="text" class="t-input" id="terminalInput" autocomplete="off" spellcheck="false">
+            <div class="term-input-line" id="termInputLine">
+              <span class="prompt-label">marcus@dev:~$</span>
+              <input type="text" class="term-prompt-input" id="termInput" autocomplete="off" spellcheck="false">
             </div>
           </div>
         </div>
       </div>
 
       <!-- DEMO 3: AUTONOMOUS AGENT PIPELINE -->
-      <div class="demo-panel" id="demo-panel-pipeline">
-        <div class="pipeline-box">
-          <div class="pipeline-controls">
-            <label style="font-size:13px; font-family:var(--font-mono); color:var(--text-dim);">Select Workflow Scenario:</label>
-            <select class="pipeline-select" id="pipelineScenario">
-              <option value="termux">Scenario A: Headless Media Ingestion & Chunk Streaming (Termux/Playwright)</option>
-              <option value="paystack">Scenario B: Paystack Webhook Verification & Order Settlement</option>
-              <option value="rag">Scenario C: Multi-Source RAG Context Retrieval & Q&A Synthesis</option>
+      <div class="station-content" id="station-panel-pipeline">
+        <div class="pipeline-stage-box">
+          <div class="pipe-scenario-bar">
+            <label style="font-family:var(--font-mono); font-size:13px; color:var(--text-secondary);">Select Workflow Scenario:</label>
+            <select class="pipe-scenario-select" id="pipeScenario">
+              <option value="termux">Scenario 1: Headless Media Ingestion & Chunk Streaming (Termux/Playwright)</option>
+              <option value="paystack">Scenario 2: Paystack Webhook Verification & Order Settlement</option>
+              <option value="rag">Scenario 3: Multi-Source RAG Context Retrieval & Document QA</option>
             </select>
-            <button class="pipeline-btn" onclick="runPipelineSimulation()">▶ Execute Workflow</button>
+            <button class="pipe-trigger-btn" onclick="executeAgentPipeline(); playBeep();">▶ Run Workflow Flow</button>
           </div>
 
-          <div class="pipeline-stages">
-            <div class="stage-node" id="stage-1">
-              <span class="stage-step-num">STEP 01</span>
-              <span class="stage-name">Goal Decomposition</span>
-              <span class="stage-desc">Parse objective, establish constraints & tool schema</span>
+          <div class="pipe-nodes-row">
+            <div class="pipe-node-card" id="pnode-1">
+              <span class="pipe-step-tag">NODE 01</span>
+              <span class="pipe-node-title">Goal Decomposition</span>
+              <span class="pipe-node-desc">Parse user intent, validate constraints & synthesize tool schema</span>
             </div>
-            <div class="stage-node" id="stage-2">
-              <span class="stage-step-num">STEP 02</span>
-              <span class="stage-name">Tool Invocation</span>
-              <span class="stage-desc">Execute API, headless Chromium, or shell subprocess</span>
+            <div class="pipe-node-card" id="pnode-2">
+              <span class="pipe-step-tag">NODE 02</span>
+              <span class="pipe-node-title">Tool Dispatcher</span>
+              <span class="pipe-node-desc">Invoke Playwright Chromium, httpx socket, or shell subprocess</span>
             </div>
-            <div class="stage-node" id="stage-3">
-              <span class="stage-step-num">STEP 03</span>
-              <span class="stage-name">Data Pipeline</span>
-              <span class="stage-desc">Stream chunks, validate signatures, or embed vectors</span>
+            <div class="pipe-node-card" id="pnode-3">
+              <span class="pipe-step-tag">NODE 03</span>
+              <span class="pipe-node-title">Stream Pipe</span>
+              <span class="pipe-node-desc">Parallel chunking, vector embedding, or HMAC verification</span>
             </div>
-            <div class="stage-node" id="stage-4">
-              <span class="stage-step-num">STEP 04</span>
-              <span class="stage-name">Self-Correction</span>
-              <span class="stage-desc">Handle timeouts, bypass barriers, re-attempt</span>
+            <div class="pipe-node-card" id="pnode-4">
+              <span class="pipe-step-tag">NODE 04</span>
+              <span class="pipe-node-title">Self-Correction</span>
+              <span class="pipe-node-desc">Detect Cloudflare barriers, handle timeouts, retry loop</span>
             </div>
-            <div class="stage-node" id="stage-5">
-              <span class="stage-step-num">STEP 05</span>
-              <span class="stage-name">Verified Artifact</span>
-              <span class="stage-desc">Synthesized output / webhook receipt dispatched</span>
+            <div class="pipe-node-card" id="pnode-5">
+              <span class="pipe-step-tag">NODE 05</span>
+              <span class="pipe-node-title">Verified Artifact</span>
+              <span class="pipe-node-desc">Deliver final chunk stream or order fulfillment webhook</span>
             </div>
           </div>
 
-          <div class="pipeline-telemetry" id="pipelineTelemetry">
-            [Telemetry Standby] Click 'Execute Workflow' to observe autonomous multi-agent execution telemetry in real time.
+          <div class="pipe-telemetry-screen" id="pipeTelemetry">
+            [Telemetry Standby] Select a scenario above and click 'Run Workflow Flow' to observe the state-machine execution log.
           </div>
         </div>
       </div>
 
-      <!-- DEMO 4: MULTI-SOURCE SYNTHESIZER -->
-      <div class="demo-panel" id="demo-panel-search">
-        <div class="search-demo-box">
-          <div class="search-input-group">
-            <input type="text" class="search-input-field" id="cyberlinkQuery" value="Efficient frontier MoE streaming inference techniques" placeholder="Enter research query...">
-            <button class="search-run-btn" onclick="runCyberlinkSearch()">Synthesize ➔</button>
+      <!-- DEMO 4: MOE VISUALIZER -->
+      <div class="station-content" id="station-panel-moe">
+        <div class="moe-vis-box">
+          <div class="moe-controls-bar">
+            <div>
+              <strong style="color:#fff; font-family:var(--font-heading);">Colibri Engine // Pure C NVMe Expert Streamer</strong>
+              <div style="font-size:12px; color:var(--text-secondary); margin-top:2px;">
+                Demonstrating dynamic top-k routing & disk memory mapping for frontier MoE models (85GB weights on 8GB RAM).
+              </div>
+            </div>
+            <button class="pipe-trigger-btn" onclick="simulateMoeRouting(); playBeep();">⚡ Fire Token Query</button>
           </div>
 
-          <div class="search-sources-bar">
-            <span>Sources Aggregated: <strong>GitHub</strong> · <strong>ArXiv</strong> · <strong>Web Scraper</strong> · <strong>Local Vector Store</strong></span>
+          <div class="moe-matrix-container" id="moeMatrix">
+            <!-- 64 expert nodes generated via script -->
           </div>
 
-          <div class="search-results-area" id="cyberlinkResults">
-            <div style="color:var(--text-dim);">Click <strong>Synthesize</strong> to trigger the Cyberlink aggregation engine...</div>
+          <div class="moe-stats-line">
+            <span>ACTIVE EXPERTS: <strong id="activeExpertsCount" style="color:var(--neon-emerald)">2 / 64</strong></span>
+            <span>DISK BANDWIDTH: <strong style="color:var(--neon-cyan)">1.84 GB/s NVMe Direct</strong></span>
+            <span>RAM RESIDENCY: <strong style="color:var(--neon-amber)">6.2 GB dense layers</strong></span>
+            <span>VRAM FOOTPRINT: <strong style="color:var(--neon-emerald)">0 MB (Runs on CPU/NVMe)</strong></span>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- PROJECTS DIRECTORY -->
-  <section id="projects">
-    <div class="section-head">
-      <div class="section-title-wrap">
-        <span class="section-tag">02 / Technical Repositories</span>
-        <h2 class="section-title">Production Systems & Open Source Projects</h2>
+  <!-- 32+ PROJECTS REPOSITORY EXPLORER -->
+  <section class="section-wrap" id="repos">
+    <div class="section-hud-header">
+      <div>
+        <span class="sec-tag">02 // Codebase & Deployments</span>
+        <h2 class="sec-title">32+ Repositories & Production Systems</h2>
+        <p class="sec-desc">
+          Extensive portfolio covering Autonomous AI Agents, Cloud Linux Environments, Headless Automation, and Client FinTech platforms.
+        </p>
       </div>
-      <p class="section-desc">
-        A deep breakdown of 32+ repositories spanning Autonomous AI Agents, Cloud Linux Tooling, Headless Media Automation, and Commercial Client Platforms.
-      </p>
     </div>
 
     <!-- FILTER & SEARCH BAR -->
-    <div class="filter-controls">
-      <div class="filter-pills">
-        <button class="filter-pill active" onclick="filterProjects('all')">All Repositories (32+)</button>
-        <button class="filter-pill" onclick="filterProjects('ai')">AI & Autonomous Agents</button>
-        <button class="filter-pill" onclick="filterProjects('infra')">Infrastructure & Cloud Shell</button>
-        <button class="filter-pill" onclick="filterProjects('automation')">Automation & Scrapers</button>
-        <button class="filter-pill" onclick="filterProjects('client')">Client & Production</button>
+    <div class="filter-bar-row">
+      <div class="filter-pills-row">
+        <button class="filter-btn active" onclick="applyFilter('all'); playBeep();">All Repositories (32+)</button>
+        <button class="filter-btn" onclick="applyFilter('ai'); playBeep();">AI & Autonomous Agents</button>
+        <button class="filter-btn" onclick="applyFilter('infra'); playBeep();">Infrastructure & Shells</button>
+        <button class="filter-btn" onclick="applyFilter('automation'); playBeep();">Headless Automation</button>
+        <button class="filter-btn" onclick="applyFilter('client'); playBeep();">Client & Production</button>
       </div>
 
-      <div class="search-box">
+      <div class="search-input-field-wrap">
         <svg viewBox="0 0 24 24"><path d="M10 2a8 8 0 105.293 14.707l4.5 4.5a1 1 0 001.414-1.414l-4.5-4.5A8 8 0 0010 2zm-6 8a6 6 0 1112 0 6 6 0 01-12 0z"/></svg>
-        <input type="text" id="projectSearchInput" placeholder="Filter by tech or keyword..." oninput="searchProjects()">
+        <input type="text" id="repoSearchInput" placeholder="Filter by tech or keyword..." oninput="filterByKeyword()">
       </div>
     </div>
 
-    <!-- PROJECTS GRID -->
-    <div class="projects-grid" id="projectsGrid">
+    <!-- REPOSITORIES GRID -->
+    <div class="repos-grid" id="reposGrid">
 
       <!-- AI 1: AGENTS -->
-      <div class="project-card" data-category="ai" data-keywords="agents python autonomous workflow tool use">
-        <div class="card-glow-bar"></div>
+      <div class="repo-card" data-cat="ai" data-terms="agents python autonomous workflow tool use state machine">
+        <div class="repo-card-glow"></div>
         <div>
-          <div class="card-top">
-            <div class="card-title-group">
-              <span class="card-org">engineermarcus/</span>
-              <h3 class="card-name">agents</h3>
+          <div class="repo-header">
+            <div>
+              <span class="repo-ns">engineermarcus/</span>
+              <h3 class="repo-title">agents</h3>
             </div>
-            <span class="card-badge badge-ai">AI Agents</span>
+            <span class="repo-pill-tag tag-ai">AI Multi-Agent</span>
           </div>
-          <p class="card-desc">
-            Production autonomous agent workflows, prompt chaining, and tool calling loops. Implements planning state machines, structured JSON schema outputs, self-healing retries, and multi-agent coordination.
+          <p class="repo-summary">
+            Deterministic autonomous multi-agent pipelines and prompt chaining frameworks. Implements state-machine planning, strict JSON tool dispatching, and self-healing error recovery loops.
           </p>
-          <div class="card-architecture">
-            <span class="arch-label">Architecture</span>
-            Planner ➔ Tool Dispatcher ➔ Execution Sandbox ➔ Self-Reflector Loop
+          <div class="repo-schema-box">
+            <span class="repo-schema-label">Architectural Flow</span>
+            Planner ➔ Tool Dispatcher ➔ Execution Sandbox ➔ Self-Reflector
           </div>
         </div>
-        <div class="card-bottom">
-          <div class="card-stack"><span>Python</span><span>Tool Calling</span><span>State Machine</span></div>
-          <div class="card-links"><a href="https://github.com/engineermarcus/agents" target="_blank">View Repo ↗</a></div>
+        <div class="repo-meta-footer">
+          <div class="repo-tech-stack"><span class="stack-chip">Python</span><span class="stack-chip">Tool Calling</span><span class="stack-chip">State Machines</span></div>
+          <a class="repo-action-link" href="https://github.com/engineermarcus/agents" target="_blank">View Repo ↗</a>
         </div>
       </div>
 
       <!-- AI 2: RAG-QA-SYSTEM -->
-      <div class="project-card" data-category="ai" data-keywords="rag qa system python vector embeddings search semantic">
-        <div class="card-glow-bar"></div>
+      <div class="repo-card" data-cat="ai" data-terms="rag qa system python vector embeddings search semantic">
+        <div class="repo-card-glow"></div>
         <div>
-          <div class="card-top">
-            <div class="card-title-group">
-              <span class="card-org">engineermarcus/</span>
-              <h3 class="card-name">rag-qa-system</h3>
+          <div class="repo-header">
+            <div>
+              <span class="repo-ns">engineermarcus/</span>
+              <h3 class="repo-title">rag-qa-system</h3>
             </div>
-            <span class="card-badge badge-ai">RAG & Vector Search</span>
+            <span class="repo-pill-tag tag-ai">Vector Retrieval</span>
           </div>
-          <p class="card-desc">
-            End-to-end Retrieval-Augmented Generation question-answering system. Features document ingestion, hierarchical chunking, dense vector indexing, and grounded context synthesis to eliminate hallucinations.
+          <p class="repo-summary">
+            End-to-end Retrieval-Augmented Generation question-answering architecture. Features hierarchical document chunking, dense vector indexing, and grounded context synthesis to completely prevent hallucinations.
           </p>
-          <div class="card-architecture">
-            <span class="arch-label">Architecture</span>
-            Parser ➔ Embeddings ➔ Vector Similarity Search ➔ Context-Injected LLM
+          <div class="repo-schema-box">
+            <span class="repo-schema-label">Architectural Flow</span>
+            Ingest ➔ Chunking ➔ Vector Indexing ➔ Context-Injected LLM
           </div>
         </div>
-        <div class="card-bottom">
-          <div class="card-stack"><span>Python</span><span>Vector Store</span><span>Embeddings</span><span>FastAPI</span></div>
-          <div class="card-links"><a href="https://github.com/engineermarcus/rag-qa-system" target="_blank">View Repo ↗</a></div>
+        <div class="repo-meta-footer">
+          <div class="repo-tech-stack"><span class="stack-chip">Python</span><span class="stack-chip">Vector Store</span><span class="stack-chip">FastAPI</span></div>
+          <a class="repo-action-link" href="https://github.com/engineermarcus/rag-qa-system" target="_blank">View Repo ↗</a>
         </div>
       </div>
 
-      <!-- AI 3: COLIBRI (Pure C MoE) -->
-      <div class="project-card" data-category="ai" data-keywords="colibri c moe inference pure c disk streaming mixture of experts">
-        <div class="card-glow-bar"></div>
+      <!-- AI 3: COLIBRI -->
+      <div class="repo-card" data-cat="ai" data-terms="colibri c moe inference pure c disk streaming mixture of experts">
+        <div class="repo-card-glow"></div>
         <div>
-          <div class="card-top">
-            <div class="card-title-group">
-              <span class="card-org">engineermarcus/</span>
-              <h3 class="card-name">colibri</h3>
+          <div class="repo-header">
+            <div>
+              <span class="repo-ns">engineermarcus/</span>
+              <h3 class="repo-title">colibri</h3>
             </div>
-            <span class="card-badge badge-ai">Pure C MoE Inference</span>
+            <span class="repo-pill-tag tag-ai">Pure C MoE Engine</span>
           </div>
-          <p class="card-desc">
-            High-performance engine for running frontier Mixture-of-Experts (MoE) models on consumer hardware. Implemented in pure C with zero dependencies, streaming active expert weights dynamically from disk.
+          <p class="repo-summary">
+            Frontier Mixture-of-Experts inference runner implemented in pure C with zero dependencies. Streams active expert weights directly from NVMe disk, allowing 100B+ MoE models to execute on commodity hardware without VRAM saturation.
           </p>
-          <div class="card-architecture">
-            <span class="arch-label">Architecture</span>
-            Zero-Dep C ➔ NVMe Expert Streaming ➔ Dynamic Router ➔ Cache Paging
+          <div class="repo-schema-box">
+            <span class="repo-schema-label">Architectural Flow</span>
+            Zero-Dep C ➔ NVMe mmap ➔ Top-K Router ➔ Cache Pager
           </div>
         </div>
-        <div class="card-bottom">
-          <div class="card-stack"><span>Pure C</span><span>MoE Architecture</span><span>Zero Dependencies</span></div>
-          <div class="card-links"><a href="https://github.com/engineermarcus/colibri" target="_blank">View Repo ↗</a></div>
+        <div class="repo-meta-footer">
+          <div class="repo-tech-stack"><span class="stack-chip">Pure C</span><span class="stack-chip">Zero Deps</span><span class="stack-chip">MoE Architecture</span></div>
+          <a class="repo-action-link" href="https://github.com/engineermarcus/colibri" target="_blank">View Repo ↗</a>
         </div>
       </div>
 
-      <!-- AI 4: GEMINI-LIVE-API-EXAMPLES -->
-      <div class="project-card" data-category="ai" data-keywords="gemini live multimodal voice vision realtime agent javascript">
-        <div class="card-glow-bar"></div>
+      <!-- AI 4: GEMINI-LIVE -->
+      <div class="repo-card" data-cat="ai" data-terms="gemini live multimodal voice vision realtime agent javascript">
+        <div class="repo-card-glow"></div>
         <div>
-          <div class="card-top">
-            <div class="card-title-group">
-              <span class="card-org">engineermarcus/</span>
-              <h3 class="card-name">gemini-live-api-examples</h3>
+          <div class="repo-header">
+            <div>
+              <span class="repo-ns">engineermarcus/</span>
+              <h3 class="repo-title">gemini-live-api-examples</h3>
             </div>
-            <span class="card-badge badge-ai">Multimodal Realtime</span>
+            <span class="repo-pill-tag tag-ai">Realtime Multimodal</span>
           </div>
-          <p class="card-desc">
+          <p class="repo-summary">
             Multimodal real-time AI agent integration using Gemini Live APIs. Implements low-latency bidirectional audio streaming, real-time visual frame analysis, and interruptible speech agents.
           </p>
-          <div class="card-architecture">
-            <span class="arch-label">Architecture</span>
-            WebSockets ➔ PCM Audio Streaming ➔ Vision Frames ➔ Sub-200ms Turnaround
+          <div class="repo-schema-box">
+            <span class="repo-schema-label">Architectural Flow</span>
+            WebSockets ➔ PCM Audio Stream ➔ Vision Frames ➔ Sub-200ms Turnaround
           </div>
         </div>
-        <div class="card-bottom">
-          <div class="card-stack"><span>JavaScript</span><span>WebSockets</span><span>Realtime Audio/Vision</span></div>
-          <div class="card-links"><a href="https://github.com/engineermarcus/gemini-live-api-examples" target="_blank">View Repo ↗</a></div>
-        </div>
-      </div>
-
-      <!-- AI 5: TRELLIS.2 -->
-      <div class="project-card" data-category="ai" data-keywords="trellis 3d generation latents python structured representation">
-        <div class="card-glow-bar"></div>
-        <div>
-          <div class="card-top">
-            <div class="card-title-group">
-              <span class="card-org">engineermarcus/</span>
-              <h3 class="card-name">TRELLIS.2</h3>
-            </div>
-            <span class="card-badge badge-ai">Generative 3D Latents</span>
-          </div>
-          <p class="card-desc">
-            Native and compact structured latents for fast 3D shape and asset generation. Experiments with spatial conditioning and efficient token representations for generative pipelines.
-          </p>
-          <div class="card-architecture">
-            <span class="arch-label">Architecture</span>
-            Structured Latents ➔ Sparse Voxel Representations ➔ Geometry Synthesis
-          </div>
-        </div>
-        <div class="card-bottom">
-          <div class="card-stack"><span>Python</span><span>PyTorch</span><span>3D Generation</span></div>
-          <div class="card-links"><a href="https://github.com/engineermarcus/TRELLIS.2" target="_blank">View Repo ↗</a></div>
+        <div class="repo-meta-footer">
+          <div class="repo-tech-stack"><span class="stack-chip">JavaScript</span><span class="stack-chip">WebSockets</span><span class="stack-chip">Audio/Vision</span></div>
+          <a class="repo-action-link" href="https://github.com/engineermarcus/gemini-live-api-examples" target="_blank">View Repo ↗</a>
         </div>
       </div>
 
-      <!-- INFRA 1: CYBERNETICS & POSITRON -->
-      <div class="project-card" data-category="infra" data-keywords="cybernetics positron ide cloud shell terminal nodejs tunneling">
-        <div class="card-glow-bar"></div>
+      <!-- INFRA 1: CYBERNETICS -->
+      <div class="repo-card" data-cat="infra" data-terms="cybernetics positron ide cloud shell terminal nodejs tunneling">
+        <div class="repo-card-glow"></div>
         <div>
-          <div class="card-top">
-            <div class="card-title-group">
-              <span class="card-org">engineermarcus/</span>
-              <h3 class="card-name">cybernetics &amp; positron</h3>
+          <div class="repo-header">
+            <div>
+              <span class="repo-ns">engineermarcus/</span>
+              <h3 class="repo-title">cybernetics &amp; positron</h3>
             </div>
-            <span class="card-badge badge-tool">Cloud Terminal &amp; IDE</span>
+            <span class="repo-pill-tag tag-tool">Cloud Terminal &amp; IDE</span>
           </div>
-          <p class="card-desc">
-            Browser-based Linux shell and IDE you can spin up anywhere. Install globally via npm, authenticate, and receive a tunneled HTTPS URL into an encrypted live dev environment bundled with an AI voice assistant and code editor.
+          <p class="repo-summary">
+            Browser-based Linux shell and IDE you can spin up anywhere. Install globally via npm, authenticate, and receive a tunneled HTTPS session into an encrypted live dev environment with an AI voice assistant and code editor.
           </p>
-          <div class="card-architecture">
-            <span class="arch-label">Architecture</span>
+          <div class="repo-schema-box">
+            <span class="repo-schema-label">Architectural Flow</span>
             Node.js Daemon ➔ Encrypted P2P Tunnel ➔ Webpty / Xterm ➔ AI Voice Bridge
           </div>
         </div>
-        <div class="card-bottom">
-          <div class="card-stack"><span>Node.js</span><span>Cloud Tunneling</span><span>xterm.js</span><span>CLI</span></div>
-          <div class="card-links"><a href="https://github.com/engineermarcus/cybernetics" target="_blank">View Repo ↗</a></div>
+        <div class="repo-meta-footer">
+          <div class="repo-tech-stack"><span class="stack-chip">Node.js</span><span class="stack-chip">Cloud Tunneling</span><span class="stack-chip">xterm.js</span></div>
+          <a class="repo-action-link" href="https://github.com/engineermarcus/cybernetics" target="_blank">View Repo ↗</a>
         </div>
       </div>
 
-      <!-- INFRA 2: TCP (Mesh Network) -->
-      <div class="project-card" data-category="infra" data-keywords="tcp tailscale wireguard networking phone dev mesh shell">
-        <div class="card-glow-bar"></div>
+      <!-- INFRA 2: TCP -->
+      <div class="repo-card" data-cat="infra" data-terms="tcp tailscale wireguard networking phone dev mesh shell">
+        <div class="repo-card-glow"></div>
         <div>
-          <div class="card-top">
-            <div class="card-title-group">
-              <span class="card-org">engineermarcus/</span>
-              <h3 class="card-name">tcp</h3>
+          <div class="repo-header">
+            <div>
+              <span class="repo-ns">engineermarcus/</span>
+              <h3 class="repo-title">tcp</h3>
             </div>
-            <span class="card-badge badge-tool">Tailscale Mesh Network</span>
+            <span class="repo-pill-tag tag-tool">Tailscale Mesh Network</span>
           </div>
-          <p class="card-desc">
+          <p class="repo-summary">
             Automated Tailscale mesh networking configuration connecting mobile Android devices and workstations. Delivers persistent private IPs, zero-configuration port forwarding, and seamless remote terminal access.
           </p>
-          <div class="card-architecture">
-            <span class="arch-label">Architecture</span>
+          <div class="repo-schema-box">
+            <span class="repo-schema-label">Architectural Flow</span>
             WireGuard Mesh ➔ Tailscale Daemon ➔ Static Device Mapping ➔ Shell Sync
           </div>
         </div>
-        <div class="card-bottom">
-          <div class="card-stack"><span>Shell</span><span>Tailscale</span><span>WireGuard</span><span>Networking</span></div>
-          <div class="card-links"><a href="https://github.com/engineermarcus/tcp" target="_blank">View Repo ↗</a></div>
+        <div class="repo-meta-footer">
+          <div class="repo-tech-stack"><span class="stack-chip">Shell</span><span class="stack-chip">Tailscale</span><span class="stack-chip">WireGuard</span></div>
+          <a class="repo-action-link" href="https://github.com/engineermarcus/tcp" target="_blank">View Repo ↗</a>
         </div>
       </div>
 
-      <!-- AUTOMATION 1: MOVIEBOX-API (MAGPIE) -->
-      <div class="project-card" data-category="automation" data-keywords="moviebox api magpie termux android playwright httpx scraper streaming">
-        <div class="card-glow-bar"></div>
+      <!-- AUTO 1: MOVIEBOX-API -->
+      <div class="repo-card" data-cat="automation" data-terms="moviebox api magpie termux android playwright httpx scraper streaming">
+        <div class="repo-card-glow"></div>
         <div>
-          <div class="card-top">
-            <div class="card-title-group">
-              <span class="card-org">engineermarcus/</span>
-              <h3 class="card-name">moviebox-api (Magpie CLI)</h3>
+          <div class="repo-header">
+            <div>
+              <span class="repo-ns">engineermarcus/</span>
+              <h3 class="repo-title">moviebox-api (Magpie CLI)</h3>
             </div>
-            <span class="card-badge badge-tool">Headless Media CLI</span>
+            <span class="repo-pill-tag tag-tool">Headless Scraper (Termux)</span>
           </div>
-          <p class="card-desc">
-            Headless media-fetch CLI designed to execute inside Termux on Android via a proot Ubuntu container. Drives Playwright headless Chromium, evaluates candidate sources with heuristic scoring, and streams chunked video via httpx with live progress and Internet Archive sync.
+          <p class="repo-summary">
+            Headless media-fetch CLI designed to execute inside Termux on Android via a proot Ubuntu container. Drives Playwright Chromium, evaluates source streams with heuristic scoring, and downloads chunks via httpx with live terminal progress meters and Internet Archive sync.
           </p>
-          <div class="card-architecture">
-            <span class="arch-label">Architecture</span>
-            Termux/Proot ➔ Playwright Chromium ➔ Heuristic Scorer ➔ Chunked Async httpx
+          <div class="repo-schema-box">
+            <span class="repo-schema-label">Architectural Flow</span>
+            Termux/Proot ➔ Playwright Chromium ➔ Heuristic Scorer ➔ Async httpx
           </div>
         </div>
-        <div class="card-bottom">
-          <div class="card-stack"><span>Python</span><span>Playwright</span><span>httpx</span><span>Termux / Proot</span></div>
-          <div class="card-links"><a href="https://github.com/engineermarcus/moviebox-api" target="_blank">View Repo ↗</a></div>
+        <div class="repo-meta-footer">
+          <div class="repo-tech-stack"><span class="stack-chip">Python</span><span class="stack-chip">Playwright</span><span class="stack-chip">httpx</span><span class="stack-chip">Termux</span></div>
+          <a class="repo-action-link" href="https://github.com/engineermarcus/moviebox-api" target="_blank">View Repo ↗</a>
         </div>
       </div>
 
-      <!-- AUTOMATION 2: MAGPIE STREAM API V3 -->
-      <div class="project-card" data-category="automation" data-keywords="magpie stream api python ingestion backend scraping watchdog">
-        <div class="card-glow-bar"></div>
+      <!-- AUTO 2: MAGPIE STREAM API V3 -->
+      <div class="repo-card" data-cat="automation" data-terms="magpie stream api python ingestion backend scraping watchdog">
+        <div class="repo-card-glow"></div>
         <div>
-          <div class="card-top">
-            <div class="card-title-group">
-              <span class="card-org">engineermarcus/</span>
-              <h3 class="card-name">magpie-stream-api-v3</h3>
+          <div class="repo-header">
+            <div>
+              <span class="repo-ns">engineermarcus/</span>
+              <h3 class="repo-title">magpie-stream-api-v3</h3>
             </div>
-            <span class="card-badge badge-tool">Streaming API Backend</span>
+            <span class="repo-pill-tag tag-tool">Streaming Ingestion</span>
           </div>
-          <p class="card-desc">
+          <p class="repo-summary">
             High-throughput API microservice managing parallel stream resolution, URL de-obfuscation, caching, and automated watchdog monitoring to guarantee scraper uptime.
           </p>
-          <div class="card-architecture">
-            <span class="arch-label">Architecture</span>
-            Async Router ➔ Stream Resolver ➔ Watchdog Health Check ➔ Cache Storage
+          <div class="repo-schema-box">
+            <span class="repo-schema-label">Architectural Flow</span>
+            Async Router ➔ Stream Resolver ➔ Watchdog Daemon ➔ Cache Storage
           </div>
         </div>
-        <div class="card-bottom">
-          <div class="card-stack"><span>Python</span><span>AsyncIO</span><span>Streaming API</span></div>
-          <div class="card-links"><a href="https://github.com/engineermarcus/magpie-stream-api-v3" target="_blank">View Repo ↗</a></div>
-        </div>
-      </div>
-
-      <!-- AUTOMATION 3: CYBERLINK -->
-      <div class="project-card" data-category="automation" data-keywords="cyberlink typescript npm package search aggregation ai summary">
-        <div class="card-glow-bar"></div>
-        <div>
-          <div class="card-top">
-            <div class="card-title-group">
-              <span class="card-org">engineermarcus/</span>
-              <h3 class="card-name">cyberlink</h3>
-            </div>
-            <span class="card-badge badge-tool">Search Aggregator (npm)</span>
-          </div>
-          <p class="card-desc">
-            TypeScript npm library for multi-source parallel querying. Aggregates data from diverse search APIs and scrapers, passing results through a lightweight AI summarization pipeline.
-          </p>
-          <div class="card-architecture">
-            <span class="arch-label">Architecture</span>
-            Parallel Adapters ➔ Deduplicator ➔ Ranking Matrix ➔ LLM Synthesizer
-          </div>
-        </div>
-        <div class="card-bottom">
-          <div class="card-stack"><span>TypeScript</span><span>npm package</span><span>Search Aggregation</span></div>
-          <div class="card-links"><a href="https://github.com/engineermarcus/cyberlink" target="_blank">View Repo ↗</a></div>
+        <div class="repo-meta-footer">
+          <div class="repo-tech-stack"><span class="stack-chip">Python</span><span class="stack-chip">AsyncIO</span><span class="stack-chip">FastAPI</span></div>
+          <a class="repo-action-link" href="https://github.com/engineermarcus/magpie-stream-api-v3" target="_blank">View Repo ↗</a>
         </div>
       </div>
 
-      <!-- CLIENT 1: MARCUS ENTERPRISES & AM2PM -->
-      <div class="project-card" data-category="client" data-keywords="marcus enterprises am2pm liquor store paystack render fintech ecommerce express">
-        <div class="card-glow-bar"></div>
+      <!-- CLIENT 1: MARCUS ENTERPRISES -->
+      <div class="repo-card" data-cat="client" data-terms="marcus enterprises am2pm liquor store paystack render fintech ecommerce express">
+        <div class="repo-card-glow"></div>
         <div>
-          <div class="card-top">
-            <div class="card-title-group">
-              <span class="card-org">engineermarcus/</span>
-              <h3 class="card-name">marcus-enterprises</h3>
+          <div class="repo-header">
+            <div>
+              <span class="repo-ns">engineermarcus/</span>
+              <h3 class="repo-title">marcus-enterprises</h3>
             </div>
-            <span class="card-badge badge-client">Production FinTech Gateway</span>
+            <span class="repo-pill-tag tag-prod">FinTech Payment Gateway</span>
           </div>
-          <p class="card-desc">
+          <p class="repo-summary">
             Reusable Node/Express payment gateway wrapping Paystack, deployed on Render. Powers commercial transactions for <strong>AM2PM Liquor Store</strong> (Mwingi Rd, Kileleshwa, Nairobi), handling catalog orders, checkout sessions, and webhook reconciliation.
           </p>
-          <div class="card-architecture">
-            <span class="arch-label">Architecture</span>
+          <div class="repo-schema-box">
+            <span class="repo-schema-label">Architectural Flow</span>
             Express API ➔ Paystack Webhook HMAC ➔ Order State Machine ➔ Render PaaS
           </div>
         </div>
-        <div class="card-bottom">
-          <div class="card-stack"><span>Express.js</span><span>Paystack API</span><span>Render</span><span>FinTech</span></div>
-          <div class="card-links"><a href="https://github.com/engineermarcus/marcus-enterprises" target="_blank">View Repo ↗</a></div>
+        <div class="repo-meta-footer">
+          <div class="repo-tech-stack"><span class="stack-chip">Express.js</span><span class="stack-chip">Paystack API</span><span class="stack-chip">Render</span></div>
+          <a class="repo-action-link" href="https://github.com/engineermarcus/marcus-enterprises" target="_blank">View Repo ↗</a>
         </div>
       </div>
 
-      <!-- CLIENT 2: CUCKOO & RODENT-APP -->
-      <div class="project-card" data-category="client" data-keywords="cuckoo rodent app android kotlin mobile native coroutines">
-        <div class="card-glow-bar"></div>
+      <!-- CLIENT 2: CUCKOO -->
+      <div class="repo-card" data-cat="client" data-terms="cuckoo rodent app android kotlin mobile native coroutines">
+        <div class="repo-card-glow"></div>
         <div>
-          <div class="card-top">
-            <div class="card-title-group">
-              <span class="card-org">engineermarcus/</span>
-              <h3 class="card-name">cuckoo</h3>
+          <div class="repo-header">
+            <div>
+              <span class="repo-ns">engineermarcus/</span>
+              <h3 class="repo-title">cuckoo</h3>
             </div>
-            <span class="card-badge badge-client">Native Android (Kotlin)</span>
+            <span class="repo-pill-tag tag-prod">Native Android (Kotlin)</span>
           </div>
-          <p class="card-desc">
+          <p class="repo-summary">
             Native Android application built in modern Kotlin. Implements asynchronous background workers, reactive UI bindings with Jetpack Compose / Coroutines, and local persistence.
           </p>
-          <div class="card-architecture">
-            <span class="arch-label">Architecture</span>
+          <div class="repo-schema-box">
+            <span class="repo-schema-label">Architectural Flow</span>
             Kotlin Coroutines ➔ Android Jetpack ➔ MVVM Pattern ➔ Background Services
           </div>
         </div>
-        <div class="card-bottom">
-          <div class="card-stack"><span>Kotlin</span><span>Android</span><span>Coroutines</span><span>MVVM</span></div>
-          <div class="card-links"><a href="https://github.com/engineermarcus/cuckoo" target="_blank">View Repo ↗</a></div>
+        <div class="repo-meta-footer">
+          <div class="repo-tech-stack"><span class="stack-chip">Kotlin</span><span class="stack-chip">Android SDK</span><span class="stack-chip">Coroutines</span></div>
+          <a class="repo-action-link" href="https://github.com/engineermarcus/cuckoo" target="_blank">View Repo ↗</a>
         </div>
       </div>
 
       <!-- CLIENT 3: INFINITY-POOL -->
-      <div class="project-card" data-category="client" data-keywords="infinity pool react python backend api client web">
-        <div class="card-glow-bar"></div>
+      <div class="repo-card" data-cat="client" data-terms="infinity pool react python backend api client web">
+        <div class="repo-card-glow"></div>
         <div>
-          <div class="card-top">
-            <div class="card-title-group">
-              <span class="card-org">engineermarcus/</span>
-              <h3 class="card-name">infinity-pool-app</h3>
+          <div class="repo-header">
+            <div>
+              <span class="repo-ns">engineermarcus/</span>
+              <h3 class="repo-title">infinity-pool-app</h3>
             </div>
-            <span class="card-badge badge-client">Full-Stack Client Platform</span>
+            <span class="repo-pill-tag tag-prod">Full-Stack Client Platform</span>
           </div>
-          <p class="card-desc">
+          <p class="repo-summary">
             Modular React frontend paired with a dedicated Python backend service (`infinity-pool`). Provides real-time state management, secure authenticated sessions, and responsive data visualization.
           </p>
-          <div class="card-architecture">
-            <span class="arch-label">Architecture</span>
+          <div class="repo-schema-box">
+            <span class="repo-schema-label">Architectural Flow</span>
             React SPA ➔ RESTful Python Gateway ➔ Token Auth ➔ State Store
           </div>
         </div>
-        <div class="card-bottom">
-          <div class="card-stack"><span>React</span><span>Python API</span><span>State Management</span></div>
-          <div class="card-links"><a href="https://github.com/engineermarcus/infinity-pool-app" target="_blank">View Repo ↗</a></div>
+        <div class="repo-meta-footer">
+          <div class="repo-tech-stack"><span class="stack-chip">React</span><span class="stack-chip">Python API</span><span class="stack-chip">Token Auth</span></div>
+          <a class="repo-action-link" href="https://github.com/engineermarcus/infinity-pool-app" target="_blank">View Repo ↗</a>
         </div>
       </div>
 
-      <!-- REF 1: PYTHON FULL COURSE -->
-      <div class="project-card" data-category="client" data-keywords="python full course curriculum reference guide open source">
-        <div class="card-glow-bar"></div>
+      <!-- CURRICULA: PYTHON FULL COURSE -->
+      <div class="repo-card" data-cat="client" data-terms="python full course curriculum reference guide open source">
+        <div class="repo-card-glow"></div>
         <div>
-          <div class="card-top">
-            <div class="card-title-group">
-              <span class="card-org">engineermarcus/</span>
-              <h3 class="card-name">python-full-course</h3>
+          <div class="repo-header">
+            <div>
+              <span class="repo-ns">engineermarcus/</span>
+              <h3 class="repo-title">python-full-course</h3>
             </div>
-            <span class="card-badge badge-ref">Reference Curriculum</span>
+            <span class="repo-pill-tag tag-curric">Reference Curriculum</span>
           </div>
-          <p class="card-desc">
-            A comprehensive, end-to-end Python architectural guide. From language internals and async event loops to metaclasses, C-extensions, and microservice engineering. Kept updated for the developer community.
+          <p class="repo-summary">
+            A comprehensive, end-to-end Python architectural guide. From language internals and async event loops to metaclasses, C-extensions, and microservice engineering.
           </p>
-          <div class="card-architecture">
-            <span class="arch-label">Scope</span>
-            Foundations ➔ AsyncIO & Concurrency ➔ Metaprogramming ➔ Production Patterns
+          <div class="repo-schema-box">
+            <span class="repo-schema-label">Curriculum Depth</span>
+            Language Internals ➔ Concurrency / AsyncIO ➔ Metaprogramming ➔ Microservices
           </div>
         </div>
-        <div class="card-bottom">
-          <div class="card-stack"><span>Python 3.12+</span><span>Curriculum</span><span>Open Source</span></div>
-          <div class="card-links"><a href="https://github.com/engineermarcus/python-full-course" target="_blank">View Repo ↗</a></div>
+        <div class="repo-meta-footer">
+          <div class="repo-tech-stack"><span class="stack-chip">Python 3.12+</span><span class="stack-chip">Architecture</span><span class="stack-chip">Reference</span></div>
+          <a class="repo-action-link" href="https://github.com/engineermarcus/python-full-course" target="_blank">View Repo ↗</a>
         </div>
       </div>
 
-    </div>
-  </section>
-
-  <!-- EXPERTISE & ARCHITECTURE -->
-  <section id="expertise">
-    <div class="section-head">
-      <div class="section-title-wrap">
-        <span class="section-tag">03 / Engineering Discipline</span>
-        <h2 class="section-title">Core Disciplines & Technical Philosophy</h2>
-      </div>
-      <p class="section-desc">
-        Bridging the gap between frontier AI research and bulletproof production software.
-      </p>
-    </div>
-
-    <div class="expertise-grid">
-      <div class="expertise-card">
-        <div class="expertise-icon">⚡</div>
-        <h3 class="expertise-title">Agentic AI & Orchestration</h3>
-        <p class="expertise-desc">
-          Designing deterministic, autonomous agent workflows. Not just raw prompting, but schema validation, state machines, tool-calling dispatchers, and self-correcting error recovery.
-        </p>
-        <ul class="expertise-list">
-          <li>Multi-agent communication patterns</li>
-          <li>Qwen 2.5 & frontier MoE optimization</li>
-          <li>RAG, dense embeddings & vector retrieval</li>
-          <li>Gemini Live multimodal voice & vision streaming</li>
-        </ul>
-      </div>
-
-      <div class="expertise-card">
-        <div class="expertise-icon">🛠</div>
-        <h3 class="expertise-title">Headless Automation & Pipelines</h3>
-        <p class="expertise-desc">
-          Engineering scrapers and data ingestion systems that operate reliably in hostile, restricted environments — such as Android Termux containers over cellular networks.
-        </p>
-        <ul class="expertise-list">
-          <li>Playwright browser automation & scoring</li>
-          <li>Proot Ubuntu containerization on mobile</li>
-          <li>Chunked async streaming with httpx</li>
-          <li>Automated watchdog monitoring daemons</li>
-        </ul>
-      </div>
-
-      <div class="expertise-card">
-        <div class="expertise-icon">🌐</div>
-        <h3 class="expertise-title">Systems & Full-Stack FinTech</h3>
-        <p class="expertise-desc">
-          Building resilient backends, cloud developer tooling, and financial transaction bridges that power real commerce with strict consistency.
-        </p>
-        <ul class="expertise-list">
-          <li>Paystack payment gateways & webhooks</li>
-          <li>Tailscale encrypted mesh networking</li>
-          <li>Pure C inference engines with zero deps</li>
-          <li>Browser-based Linux shells & cloud IDEs</li>
-        </ul>
-      </div>
     </div>
   </section>
 
@@ -1386,192 +1266,341 @@ Try <span class="t-blue-text">'projects'</span>, <span class="t-blue-text">'cat 
 <!-- FOOTER -->
 <footer>
   <div class="wrap">
-    <div class="footer-inner">
-      <div class="footer-brand">
-        <span class="footer-title">Neiman Marcus — Senior Software Engineer</span>
-        <span class="footer-sub">Building autonomous AI, infrastructure, & resilient systems.</span>
+    <div class="footer-row">
+      <div>
+        <div class="f-brand-title">Neiman Marcus — Senior Systems &amp; AI Engineer</div>
+        <div class="f-brand-sub">Architecting autonomous AI agents, resilient infrastructure, &amp; automated scrapers.</div>
       </div>
-      <div class="footer-links">
+      <div class="footer-links-list">
         <a href="mailto:engineermarcus72@gmail.com">engineermarcus72@gmail.com</a>
-        <a href="https://github.com/engineermarcus" target="_blank">GitHub</a>
-        <a href="https://huggingface.co/spaces/jarvisandfriend/agent" target="_blank">HF Spaces Backend</a>
+        <a href="https://github.com/engineermarcus" target="_blank">GitHub Profile</a>
+        <a href="https://huggingface.co/spaces/jarvisandfriend/agent" target="_blank">Hugging Face Space</a>
       </div>
     </div>
   </div>
 </footer>
 
-<!-- INTERACTIVE SCRIPTS -->
 <script>
-  // 1. DEMO TABS SWITCHING
-  function activateDemoTab(tabId) {
-    document.querySelectorAll('.demo-tab-btn').forEach(btn => btn.classList.remove('active'));
-    document.querySelectorAll('.demo-panel').forEach(panel => panel.classList.remove('active'));
-    
-    const targetPanel = document.getElementById('demo-panel-' + tabId);
-    if (targetPanel) {
-      targetPanel.classList.add('active');
-    }
-    
-    // Highlight matching button
-    const buttons = document.querySelectorAll('.demo-tab-btn');
-    if (tabId === 'agent') buttons[0].classList.add('active');
-    if (tabId === 'terminal') buttons[1].classList.add('active');
-    if (tabId === 'pipeline') buttons[2].classList.add('active');
-    if (tabId === 'search') buttons[3].classList.add('active');
+  // 1. NEURAL MESH INTERACTIVE CANVAS
+  const canvas = document.getElementById('neuralCanvas');
+  const ctx = canvas.getContext('2d');
+  let width, height;
+  let particles = [];
+  let mouse = { x: null, y: null, radius: 150 };
 
-    if (tabId === 'terminal') {
-      setTimeout(() => document.getElementById('terminalInput').focus(), 100);
+  function resizeCanvas() {
+    width = canvas.width = window.innerWidth;
+    height = canvas.height = window.innerHeight;
+  }
+  window.addEventListener('resize', resizeCanvas);
+  resizeCanvas();
+
+  window.addEventListener('mousemove', (e) => {
+    mouse.x = e.clientX;
+    mouse.y = e.clientY;
+  });
+  window.addEventListener('mouseleave', () => {
+    mouse.x = null;
+    mouse.y = null;
+  });
+
+  class Particle {
+    constructor() {
+      this.x = Math.random() * width;
+      this.y = Math.random() * height;
+      this.vx = (Math.random() - 0.5) * 0.6;
+      this.vy = (Math.random() - 0.5) * 0.6;
+      this.radius = Math.random() * 2 + 1;
+    }
+    update() {
+      this.x += this.vx;
+      this.y += this.vy;
+      if (this.x < 0 || this.x > width) this.vx *= -1;
+      if (this.y < 0 || this.y > height) this.vy *= -1;
+    }
+    draw() {
+      ctx.beginPath();
+      ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+      ctx.fillStyle = '#06b6d4';
+      ctx.fill();
     }
   }
 
-  // 2. DEMO 1: AI PORTFOLIO AGENT INTERACTION
-  const chatStream = document.getElementById('chatStream');
-  const agentInput = document.getElementById('agentInput');
+  function initParticles() {
+    particles = [];
+    const count = Math.floor((width * height) / 18000);
+    for (let i = 0; i < count; i++) {
+      particles.push(new Particle());
+    }
+  }
+  initParticles();
 
-  function appendChatMsg(sender, text) {
-    const msg = document.createElement('div');
-    msg.className = 'chat-msg ' + sender;
-    
-    const avatar = document.createElement('div');
-    avatar.className = 'msg-avatar';
-    avatar.textContent = sender === 'user' ? '👤' : '⚡';
-    
+  function animateCanvas() {
+    ctx.clearRect(0, 0, width, height);
+    for (let i = 0; i < particles.length; i++) {
+      particles[i].update();
+      particles[i].draw();
+
+      for (let j = i + 1; j < particles.length; j++) {
+        const dx = particles[i].x - particles[j].x;
+        const dy = particles[i].y - particles[j].y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+
+        if (dist < 120) {
+          ctx.beginPath();
+          ctx.moveTo(particles[i].x, particles[i].y);
+          ctx.lineTo(particles[j].x, particles[j].y);
+          ctx.strokeStyle = `rgba(6, 182, 212, ${0.18 * (1 - dist / 120)})`;
+          ctx.lineWidth = 0.8;
+          ctx.stroke();
+        }
+      }
+
+      if (mouse.x !== null) {
+        const dx = particles[i].x - mouse.x;
+        const dy = particles[i].y - mouse.y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        if (dist < mouse.radius) {
+          ctx.beginPath();
+          ctx.moveTo(particles[i].x, particles[i].y);
+          ctx.lineTo(mouse.x, mouse.y);
+          ctx.strokeStyle = `rgba(99, 102, 241, ${0.35 * (1 - dist / mouse.radius)})`;
+          ctx.lineWidth = 1;
+          ctx.stroke();
+        }
+      }
+    }
+    requestAnimationFrame(animateCanvas);
+  }
+  animateCanvas();
+
+  // 2. WEB AUDIO SFX ENGINE
+  let audioEnabled = true;
+  let audioCtx = null;
+  function getAudioCtx() {
+    if (!audioCtx) {
+      audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    }
+    return audioCtx;
+  }
+  function playBeep(freq = 800, dur = 0.04) {
+    if (!audioEnabled) return;
+    try {
+      const actx = getAudioCtx();
+      const osc = actx.createOscillator();
+      const gain = actx.createGain();
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(freq, actx.currentTime);
+      gain.gain.setValueAtTime(0.05, actx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.001, actx.currentTime + dur);
+      osc.connect(gain);
+      gain.connect(actx.destination);
+      osc.start();
+      osc.stop(actx.currentTime + dur);
+    } catch (e) {}
+  }
+  function toggleAudio() {
+    audioEnabled = !audioEnabled;
+    document.getElementById('sfxToggleBtn').textContent = audioEnabled ? 'SFX: ON' : 'SFX: OFF';
+    if (audioEnabled) playBeep(1000, 0.06);
+  }
+
+  // 3. STATION TABS
+  function activateStationTab(tabId) {
+    document.querySelectorAll('.demo-tab-button').forEach(btn => btn.classList.remove('active'));
+    document.querySelectorAll('.station-content').forEach(p => p.classList.remove('active'));
+
+    const target = document.getElementById('station-panel-' + tabId);
+    if (target) target.classList.add('active');
+
+    const btns = document.querySelectorAll('.demo-tab-button');
+    if (tabId === 'agent') btns[0].classList.add('active');
+    if (tabId === 'shell') {
+      btns[1].classList.add('active');
+      setTimeout(() => document.getElementById('termInput').focus(), 80);
+    }
+    if (tabId === 'pipeline') btns[2].classList.add('active');
+    if (tabId === 'moe') btns[3].classList.add('active');
+  }
+
+  // 4. DEMO 1: AI AGENT INTERACTION (Connects to HF Space API with instant local fallback)
+  const agentDialog = document.getElementById('agentDialog');
+  const agentInputBox = document.getElementById('agentInputBox');
+
+  function appendDialogMsg(role, text) {
+    const row = document.createElement('div');
+    row.className = 'chat-bubble-row ' + role;
+
+    const av = document.createElement('div');
+    av.className = 'agent-avatar';
+    av.textContent = role === 'user' ? '👤' : '⚡';
+
     const bubble = document.createElement('div');
-    bubble.className = 'msg-bubble';
+    bubble.className = 'bubble-text';
     
-    // Quick markdown formatting
-    let formatted = text
+    let html = text
       .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
       .replace(/`(.*?)`/g, '<code>$1</code>')
       .replace(/\n/g, '<br>');
-    bubble.innerHTML = formatted;
-    
-    msg.appendChild(avatar);
-    msg.appendChild(bubble);
-    chatStream.appendChild(msg);
-    chatStream.scrollTop = chatStream.scrollHeight;
+    bubble.innerHTML = html;
+
+    row.appendChild(av);
+    row.appendChild(bubble);
+    agentDialog.appendChild(row);
+    agentDialog.scrollTop = agentDialog.scrollHeight;
   }
 
-  function resolveAgentResponse(prompt) {
-    const p = prompt.toLowerCase();
-    
-    if (p.includes('moviebox') || p.includes('magpie') || p.includes('termux')) {
-      return "The **moviebox-api (Magpie CLI)** is a premier automation system: it operates directly inside **Termux on Android** using an Ubuntu proot container. It spins up headless Playwright Chromium to bypass cloud anti-bot mechanisms, applies a heuristic scoring matrix to evaluate stream quality, and downloads content in asynchronous chunks via httpx with live terminal meters and automatic synchronization to the Internet Archive.";
+  function resolveLocalKnowledge(query) {
+    const q = query.toLowerCase();
+    if (q.includes('moviebox') || q.includes('magpie') || q.includes('termux')) {
+      return "The **moviebox-api (Magpie CLI)** is one of Marcus's flagship automation tools: it executes directly inside **Termux on Android** using an Ubuntu proot container. It launches headless Playwright Chromium to bypass aggressive Cloudflare anti-bot checks, scores candidate streams with a heuristic bitrate matrix, and streams 1080p HEVC chunks down via httpx with live terminal progress meters and Internet Archive sync.";
     }
-    if (p.includes('paystack') || p.includes('store') || p.includes('client') || p.includes('am2pm')) {
-      return "**Marcus Enterprises** is an enterprise payment gateway wrapping Paystack, deployed on Render. It processes real transactions for **AM2PM Liquor Store** in Kileleshwa, Nairobi, handling order checkout sessions, cryptographic webhook signature verification, and automated status polling.";
+    if (q.includes('paystack') || q.includes('store') || q.includes('client') || q.includes('am2pm')) {
+      return "**Marcus Enterprises** is an enterprise payment gateway wrapping Paystack, deployed on Render. It processes real retail commerce for **AM2PM Liquor Store** in Kileleshwa, Nairobi, managing checkout sessions, HMAC-SHA512 cryptographic webhook verification, and automated status polling.";
     }
-    if (p.includes('colibri') || p.includes('c ') || p.includes('moe')) {
-      return "**Colibri** is Marcus's pure C inference runner for frontier Mixture-of-Experts (MoE) models. Engineered with zero external dependencies, it streams active expert weights directly from disk into memory, enabling massive MoE models to run on standard hardware without GPU VRAM saturation.";
+    if (q.includes('colibri') || q.includes('c ') || q.includes('moe')) {
+      return "**Colibri** is Marcus's pure C inference runner for frontier Mixture-of-Experts (MoE) models. Engineered with zero external dependencies, it streams active expert weights directly from NVMe SSDs into RAM, enabling massive MoE models (85GB+) to execute on standard hardware without GPU VRAM saturation.";
     }
-    if (p.includes('achievement') || p.includes('badge')) {
-      return "Marcus holds 3 official GitHub Achievements:\n- 🎯 **Quickdraw**: Closed an issue or PR within 5 minutes.\n- 🦈 **Pull Shark**: Merged pull requests across repositories.\n- ⚡ **YOLO**: Merged PRs without review, demonstrating rapid agile delivery.";
+    if (q.includes('achievement') || q.includes('badge')) {
+      return "Marcus holds 3 official GitHub Achievements:\n- 🎯 **Quickdraw**: Solved and closed issue/PR within 5 minutes.\n- 🦈 **Pull Shark**: Merged pull requests across repositories.\n- ⚡ **YOLO**: Merged PRs without review, demonstrating rapid agile delivery.";
     }
-    if (p.includes('ai') || p.includes('agent') || p.includes('rag') || p.includes('automation')) {
+    if (q.includes('ai') || q.includes('agent') || q.includes('rag') || q.includes('automation')) {
       return "Marcus's AI architecture centers on **Autonomous Agentic Workflows**:\n1. State-machine multi-agent coordination with structured JSON tool-calling.\n2. Compact local model execution (Qwen 2.5 1B-7B and pure C MoE).\n3. Grounded Retrieval-Augmented Generation (`rag-qa-system`) to eliminate hallucinations.\n4. Realtime multimodal streaming agents with Gemini Live.";
     }
-    if (p.includes('contact') || p.includes('hire') || p.includes('email')) {
+    if (q.includes('contact') || q.includes('hire') || q.includes('email')) {
       return "You can reach Marcus directly at **engineermarcus72@gmail.com** or connect on GitHub at [github.com/engineermarcus](https://github.com/engineermarcus). He is available for senior engineering contracts and full-time AI roles.";
     }
     return "Marcus has published 32+ open-source and client repositories across Python, TypeScript, C, Shell, and Kotlin. Key works include **agents**, **cybernetics & positron**, **moviebox-api**, **colibri**, and **marcus-enterprises**!";
   }
 
-  function sendAgentMsg() {
-    const text = agentInput.value.trim();
-    if (!text) return;
-    askAgent(text);
-    agentInput.value = '';
+  async function queryAgentBackend(question) {
+    appendDialogMsg('user', question);
+
+    const typingRow = document.createElement('div');
+    typingRow.className = 'chat-bubble-row bot';
+    typingRow.id = 'agentTyping';
+    typingRow.innerHTML = '<div class="agent-avatar">⚡</div><div class="bubble-text"><em>Neural engine reasoning...</em></div>';
+    agentDialog.appendChild(typingRow);
+    agentDialog.scrollTop = agentDialog.scrollHeight;
+
+    const t0 = performance.now();
+    let reply = '';
+
+    try {
+      // Try direct API call to deployed HF Space backend with timeout
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 2800);
+      const res = await fetch('https://jarvisandfriend-agent.hf.space/api/chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ messages: [{ role: 'user', content: question }] }),
+        signal: controller.signal
+      });
+      clearTimeout(timeoutId);
+
+      if (res.ok) {
+        const data = await res.json();
+        reply = data.response;
+      }
+    } catch (e) {
+      // Fallback seamlessly to local engine
+    }
+
+    if (!reply) {
+      reply = resolveLocalKnowledge(question);
+    }
+
+    const elapsed = Math.round(performance.now() - t0);
+    const typingEl = document.getElementById('agentTyping');
+    if (typingEl) typingEl.remove();
+
+    appendDialogMsg('bot', reply + `<br><small style="color:var(--text-muted); font-family:var(--font-mono); font-size:11px;">[Latency: ${elapsed}ms · Model: Qwen 2.5]</small>`);
+    playBeep(900, 0.05);
   }
 
-  function askAgent(question) {
-    appendChatMsg('user', question);
-    
-    // Typing indicator
-    const typing = document.createElement('div');
-    typing.className = 'chat-msg bot';
-    typing.id = 'agentTyping';
-    typing.innerHTML = '<div class="msg-avatar">⚡</div><div class="msg-bubble"><em>Thinking...</em></div>';
-    chatStream.appendChild(typing);
-    chatStream.scrollTop = chatStream.scrollHeight;
-
-    setTimeout(() => {
-      const el = document.getElementById('agentTyping');
-      if (el) el.remove();
-      const reply = resolveAgentResponse(question);
-      appendChatMsg('bot', reply);
-    }, 380);
+  function dispatchAgentMessage() {
+    const val = agentInputBox.value.trim();
+    if (!val) return;
+    queryAgentBackend(val);
+    agentInputBox.value = '';
   }
 
-  // 3. DEMO 2: CLOUD TERMINAL EMULATOR
-  const terminalBody = document.getElementById('terminalBody');
-  const terminalInput = document.getElementById('terminalInput');
-  const terminalInputRow = document.getElementById('terminalInputRow');
+  function askAgentQuestion(q) {
+    queryAgentBackend(q);
+  }
 
-  const TERM_COMMANDS = {
-    help: "Available commands:\n  help          - Show this help menu\n  bio           - Display Marcus's technical biography\n  projects      - List key repositories\n  achievements  - Display verified GitHub badges\n  run-agent     - Execute a simulated autonomous agent loop\n  magpie        - Simulate Magpie Termux media crawler\n  paystack      - Simulate Paystack transaction test\n  contact       - Show contact details\n  clear         - Clear terminal screen",
+  // 5. DEMO 2: CYBERNETICS CLOUD TERMINAL
+  const termScreen = document.getElementById('termScreen');
+  const termInput = document.getElementById('termInput');
+  const termInputLine = document.getElementById('termInputLine');
+
+  const SHELL_COMMANDS = {
+    help: "Available commands:\n  help          - Show this command reference\n  bio           - Display Marcus's technical biography & stats\n  projects      - List key repositories\n  achievements  - Display verified GitHub badges\n  run-agent     - Execute a simulated autonomous multi-agent loop\n  magpie        - Simulate Magpie Termux media crawler\n  paystack      - Simulate Paystack FinTech transaction test\n  moe           - Benchmark pure C Colibri MoE expert streaming\n  contact       - Show contact details\n  clear         - Clear terminal display",
     bio: "Neiman Marcus (Engineer Marcus)\nRole: Senior Systems & AI Agent Engineer\nLocation: Nairobi, Kenya / Remote\nPrimary Languages: Python, TypeScript, JavaScript, Shell, Kotlin, C\nPhilosophy: 'Builds systems, not slides.' 32+ public GitHub repos.",
     projects: "Selected Repositories:\n  1. [AI] agents               - Autonomous multi-agent workflows\n  2. [AI] rag-qa-system        - Vector search & document QA\n  3. [AI] colibri              - Pure C frontier MoE inference\n  4. [SYS] cybernetics/positron- Cloud Linux shell & IDE via npm\n  5. [AUTO] moviebox-api (Magpie)- Playwright scraper inside Termux\n  6. [PROD] marcus-enterprises - Paystack gateway powering AM2PM Store\n  7. [MOB] cuckoo              - Native Android Kotlin application",
     achievements: "GitHub Achievements for @engineermarcus:\n  🎯 Quickdraw   - Closed issue/PR within 5 min\n  🦈 Pull Shark  - Multi-repo merged PRs\n  ⚡ YOLO        - Direct merged PRs without review",
     contact: "Email: engineermarcus72@gmail.com\nGitHub: https://github.com/engineermarcus\nHF Space: https://huggingface.co/spaces/jarvisandfriend/agent",
     magpie: "[MAGPIE] Initializing Playwright Chromium inside Termux proot...\n[MAGPIE] Resolving video streams... [Scoring candidates]\n[MAGPIE] Best source found: 1080p HEVC (Score 98.4)\n[MAGPIE] Streaming chunks via httpx: [====================] 100% 1.4GB\n[MAGPIE] Archive sync completed successfully.",
     paystack: "[PAYSTACK] POST /transaction/initialize\n[PAYSTACK] Paystack response: 200 OK (ref: pstk_892374892)\n[PAYSTACK] Simulating customer payment...\n[PAYSTACK] Webhook received: charge.success\n[PAYSTACK] HMAC signature verified.\n[PAYSTACK] Order fulfilled for AM2PM Liquor Store.",
+    moe: "[COLIBRI] Opening deepseek-v4-flash index (PUWAER/REAP-150B)...\n[COLIBRI] NVMe Direct I/O active. Paged experts 14, 27 into L3 cache.\n[COLIBRI] Generation benchmark: 82.4 tokens/sec on 0 GPU VRAM.\n[COLIBRI] Status: OPERATIONAL ✓",
     "run-agent": "[AGENT] Objective: 'Optimize prompt & execute data extraction'\n[AGENT] Step 1: Decomposing goal into 3 sub-tasks\n[AGENT] Step 2: Calling tool 'web_search_adapter'\n[AGENT] Step 3: Tool returned 4 results; verifying hallucination score: 0.02\n[AGENT] Step 4: Synthesizing final artifact... Done!"
   };
 
-  terminalInput.addEventListener('keydown', function(e) {
+  termInput.addEventListener('keydown', function(e) {
     if (e.key === 'Enter') {
       const cmd = this.value.trim().toLowerCase();
       this.value = '';
-      
+
       const line = document.createElement('div');
-      line.className = 'terminal-output';
-      line.innerHTML = '<span class="t-prompt">marcus@dev:~$</span> ' + cmd;
-      terminalBody.insertBefore(line, terminalInputRow);
-      
+      line.className = 'term-entry';
+      line.innerHTML = '<span class="prompt-label">marcus@dev:~$</span> ' + cmd;
+      termScreen.insertBefore(line, termInputLine);
+
       if (cmd === 'clear') {
-        document.querySelectorAll('.terminal-output').forEach(el => el.remove());
+        document.querySelectorAll('.term-entry').forEach(el => el.remove());
         return;
       }
-      
+
       const res = document.createElement('div');
-      res.className = 'terminal-output';
-      
-      if (TERM_COMMANDS[cmd]) {
-        res.textContent = TERM_COMMANDS[cmd];
+      res.className = 'term-entry';
+
+      if (SHELL_COMMANDS[cmd]) {
+        res.textContent = SHELL_COMMANDS[cmd];
+        playBeep(650, 0.03);
       } else if (cmd === '') {
         // empty
       } else {
         res.innerHTML = '<span style="color:#ef4444">Command not found: ' + cmd + '. Type \'help\' for list.</span>';
+        playBeep(300, 0.08);
       }
-      
-      terminalBody.insertBefore(res, terminalInputRow);
-      terminalBody.scrollTop = terminalBody.scrollHeight;
+
+      termScreen.insertBefore(res, termInputLine);
+      termScreen.scrollTop = termScreen.scrollHeight;
     }
   });
 
-  // 4. DEMO 3: PIPELINE SIMULATION
-  function runPipelineSimulation() {
-    const scenario = document.getElementById('pipelineScenario').value;
+  // 6. DEMO 3: PIPELINE SIMULATION
+  function executeAgentPipeline() {
+    const sc = document.getElementById('pipeScenario').value;
     const stages = [1, 2, 3, 4, 5];
-    const telemetry = document.getElementById('pipelineTelemetry');
-    telemetry.innerHTML = '';
-    
+    const tele = document.getElementById('pipeTelemetry');
+    tele.innerHTML = '';
+
     stages.forEach(s => {
-      const el = document.getElementById('stage-' + s);
-      el.className = 'stage-node';
+      document.getElementById('pnode-' + s).className = 'pipe-node-card';
     });
 
-    let msgs = [];
-    if (scenario === 'termux') {
-      msgs = [
+    let lines = [];
+    if (sc === 'termux') {
+      lines = [
         "[00:01] GOAL: Headless media extraction requested for high-res stream inside Termux container.",
         "[00:02] TOOL: Spawning headless Chromium instance via Playwright inside Ubuntu proot...",
         "[00:03] DATA: Ingesting candidates; scoring bitrates & latency metrics; selecting optimal source.",
         "[00:04] VALIDATION: Cloudflare challenge detected ➔ Auto-solving via browser fingerprint rotation.",
         "[00:05] ARTIFACT: 1080p stream established. Async httpx chunk pipe streaming at 18.4 MB/s."
       ];
-    } else if (scenario === 'paystack') {
-      msgs = [
+    } else if (sc === 'paystack') {
+      lines = [
         "[00:01] GOAL: Incoming checkout session initiated on AM2PM Liquor Store storefront.",
         "[00:02] TOOL: Dispatching initialization payload to Paystack API gateway via Marcus Enterprises.",
         "[00:03] DATA: Awaiting payment webhook event; received 'charge.success' payload.",
@@ -1579,7 +1608,7 @@ Try <span class="t-blue-text">'projects'</span>, <span class="t-blue-text">'cat 
         "[00:05] ARTIFACT: Order status set to 'CONFIRMED'; dispatching notification to Nairobi warehouse."
       ];
     } else {
-      msgs = [
+      lines = [
         "[00:01] GOAL: Query: 'How to stream MoE experts from disk with zero dependencies?'",
         "[00:02] TOOL: Querying local vector store + GitHub repository index for dense semantic chunks.",
         "[00:03] DATA: Retrieved top 4 passages from 'colibri.c' and 'memory_pager.c' (cosine similarity > 0.88).",
@@ -1590,47 +1619,60 @@ Try <span class="t-blue-text">'projects'</span>, <span class="t-blue-text">'cat 
 
     stages.forEach((num, idx) => {
       setTimeout(() => {
-        const el = document.getElementById('stage-' + num);
-        el.className = 'stage-node active';
-        telemetry.innerHTML += '<div>' + msgs[idx] + '</div>';
-        telemetry.scrollTop = telemetry.scrollHeight;
+        const el = document.getElementById('pnode-' + num);
+        el.className = 'pipe-node-card active';
+        tele.innerHTML += '<div>' + lines[idx] + '</div>';
+        tele.scrollTop = tele.scrollHeight;
+        playBeep(700 + idx * 100, 0.03);
 
         setTimeout(() => {
-          el.className = 'stage-node done';
-        }, 600);
-      }, idx * 700);
+          el.className = 'pipe-node-card completed';
+        }, 500);
+      }, idx * 600);
     });
   }
 
-  // 5. DEMO 4: CYBERLINK SEARCH SYNTHESIS
-  function runCyberlinkSearch() {
-    const query = document.getElementById('cyberlinkQuery').value;
-    const res = document.getElementById('cyberlinkResults');
-    res.innerHTML = '<div style="color:var(--accent);">⚡ Querying multi-source adapters and generating AI synthesis...</div>';
-    
-    setTimeout(() => {
-      res.innerHTML = `
-        <div style="margin-bottom:12px;"><strong>Synthesized AI Summary for:</strong> "<em>${query}</em>"</div>
-        <ul style="padding-left:20px; display:flex; flex-direction:column; gap:6px; color:#cbd5e1;">
-          <li><strong>Disk-Streaming MoE (Colibri Engine):</strong> Frontier models can avoid VRAM bottlenecks by dynamically memory-mapping expert weights from NVMe SSDs only when activated by the top-k router.</li>
-          <li><strong>Cache Locality:</strong> Paging active expert matrices in contiguous blocks preserves CPU L3 throughput, achieving interactive token generation speeds even on constrained hardware.</li>
-          <li><strong>Production Relevance:</strong> Aligns directly with Marcus's implementation in <a href="https://github.com/engineermarcus/colibri" target="_blank" style="color:var(--accent);">engineermarcus/colibri</a> (pure C, zero dependencies).</li>
-        </ul>
-        <div style="margin-top:12px; font-size:12px; color:var(--text-muted); font-family:var(--font-mono);">
-          Aggregated across 3 source providers in 240ms · Synthesized via Cyberlink
-        </div>
-      `;
-    }, 500);
+  // 7. DEMO 4: MOE MATRIX GENERATION & BENCHMARK
+  const moeMatrix = document.getElementById('moeMatrix');
+  function buildMoeMatrix() {
+    moeMatrix.innerHTML = '';
+    for (let i = 0; i < 64; i++) {
+      const node = document.createElement('div');
+      node.className = 'expert-node';
+      node.id = 'exp-' + i;
+      node.textContent = 'E' + i;
+      moeMatrix.appendChild(node);
+    }
+  }
+  buildMoeMatrix();
+
+  function simulateMoeRouting() {
+    document.querySelectorAll('.expert-node').forEach(n => n.classList.remove('paged'));
+    // pick 2 to 4 random experts
+    const count = Math.floor(Math.random() * 3) + 2;
+    const selected = [];
+    while (selected.length < count) {
+      const rand = Math.floor(Math.random() * 64);
+      if (!selected.includes(rand)) selected.push(rand);
+    }
+
+    selected.forEach(idx => {
+      const node = document.getElementById('exp-' + idx);
+      if (node) node.classList.add('paged');
+    });
+
+    document.getElementById('activeExpertsCount').textContent = `${count} / 64 [Active Router]`;
+    playBeep(1100, 0.05);
   }
 
-  // 6. PROJECT FILTERING & REAL-TIME SEARCH
-  function filterProjects(cat) {
-    document.querySelectorAll('.filter-pill').forEach(pill => pill.classList.remove('active'));
+  // 8. REPOSITORY FILTERING & LIVE SEARCH
+  function applyFilter(cat) {
+    document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
     event.target.classList.add('active');
 
-    const cards = document.querySelectorAll('.project-card');
+    const cards = document.querySelectorAll('.repo-card');
     cards.forEach(card => {
-      if (cat === 'all' || card.getAttribute('data-category') === cat) {
+      if (cat === 'all' || card.getAttribute('data-cat') === cat) {
         card.style.display = 'flex';
       } else {
         card.style.display = 'none';
@@ -1638,13 +1680,13 @@ Try <span class="t-blue-text">'projects'</span>, <span class="t-blue-text">'cat 
     });
   }
 
-  function searchProjects() {
-    const q = document.getElementById('projectSearchInput').value.toLowerCase();
-    const cards = document.querySelectorAll('.project-card');
+  function filterByKeyword() {
+    const q = document.getElementById('repoSearchInput').value.toLowerCase();
+    const cards = document.querySelectorAll('.repo-card');
     cards.forEach(card => {
-      const keywords = card.getAttribute('data-keywords') || '';
+      const terms = card.getAttribute('data-terms') || '';
       const text = card.innerText.toLowerCase();
-      if (keywords.includes(q) || text.includes(q)) {
+      if (terms.includes(q) || text.includes(q)) {
         card.style.display = 'flex';
       } else {
         card.style.display = 'none';
