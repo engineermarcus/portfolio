@@ -1485,36 +1485,52 @@ Try <span style="color:var(--neon-cyan)">'projects'</span>, <span style="color:v
 
     const t0 = performance.now();
     let reply = '';
+    let modelName = 'Qwen 2.5 Coder (Hugging Face Space)';
 
     try {
-      // Try direct API call to deployed HF Space backend with timeout
-      const controller = new AbortController();
-      const timeoutId = setTimeout(() => controller.abort(), 2800);
-      const res = await fetch('https://jarvisandfriend-agent.hf.space/api/chat', {
+      // Direct call to Hugging Face Space Gradio 5 API
+      const postRes = await fetch('https://jarvisandfriend-agent.hf.space/gradio_api/call/predict', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ messages: [{ role: 'user', content: question }] }),
-        signal: controller.signal
+        body: JSON.stringify({ data: [question] })
       });
-      clearTimeout(timeoutId);
 
-      if (res.ok) {
-        const data = await res.json();
-        reply = data.response;
+      if (postRes.ok) {
+        const postData = await postRes.json();
+        const eventId = postData.event_id;
+
+        if (eventId) {
+          const streamRes = await fetch(`https://jarvisandfriend-agent.hf.space/gradio_api/call/predict/${eventId}`);
+          if (streamRes.ok) {
+            const streamText = await streamRes.text();
+            for (const line of streamText.split('\n')) {
+              if (line.startsWith('data:')) {
+                try {
+                  const parsed = JSON.parse(line.slice(5).trim());
+                  if (Array.isArray(parsed) && parsed[0]) {
+                    reply = parsed[0];
+                    break;
+                  }
+                } catch (pe) {}
+              }
+            }
+          }
+        }
       }
     } catch (e) {
-      // Fallback seamlessly to local engine
+      console.warn('Live HF space fetch error:', e);
     }
 
     if (!reply) {
       reply = resolveLocalKnowledge(question);
+      modelName = 'Local Fallback Engine';
     }
 
     const elapsed = Math.round(performance.now() - t0);
     const typingEl = document.getElementById('agentTyping');
     if (typingEl) typingEl.remove();
 
-    appendDialogMsg('bot', reply + `<br><small style="color:var(--text-muted); font-family:var(--font-mono); font-size:11px;">[Latency: ${elapsed}ms · Model: Qwen 2.5]</small>`);
+    appendDialogMsg('bot', reply + `<br><small style="color:var(--neon-cyan); font-family:var(--font-mono); font-size:11px;">[Latency: ${elapsed}ms · Model: ${modelName} · ZeroGPU]</small>`);
     playBeep(900, 0.05);
   }
 
